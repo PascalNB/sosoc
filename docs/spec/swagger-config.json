@@ -1,0 +1,7 @@
+{
+  "urls": [
+    { "name": "Log Collection API", "url": "/spec/services/log-monitoring/openapi.yaml" },
+    { "name": "Threat Intelligence API", "url": "/spec/services/threat-intelligence/openapi.yaml" },
+    { "name": "Automated Response API", "url": "/spec/services/automated-response/openapi.yaml" }
+  ]
+}

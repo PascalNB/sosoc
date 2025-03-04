@@ -1,0 +1,9 @@
+openapi: 3.1.0
+info:
+  title: Cyber Threat Intelligence Service
+  description: CTI manages the collection of intelligence covering existing threads and attacks, as well as previous incidents.
+  version: 1.0.0
+servers:
+  - url: 'https'
+paths:
+  

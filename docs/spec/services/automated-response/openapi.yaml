@@ -1,0 +1,10 @@
+openapi: 3.1.0
+info:
+  title: Automated Response Service
+  description: Takes automated actions when threats are detected.
+    For example, disabling accounts, blocking network sources, or quarantining endpoint devices.
+  version: 1.0.0
+servers:
+  - url: 'https'
+paths:
+  

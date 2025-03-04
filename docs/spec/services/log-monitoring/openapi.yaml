@@ -1,0 +1,9 @@
+openapi: 3.1.0
+info:
+  title: Log Collection & Monitoring Service
+  description: Receives logs from endpoints and responds based on automated detection rules.
+  version: 1.0.0
+servers:
+  - url: 'https'
+paths:
+  
