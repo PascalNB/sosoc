@@ -1,0 +1,21 @@
+components:
+  schemas:
+    Rule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        query:
+          type: string
+        interval:
+          type: string
+        fields:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              type:
+                type: string

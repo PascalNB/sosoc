@@ -1,0 +1,16 @@
+components:
+  schemas:
+    Workflow:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        alarm:
+          $ref: './alarms.yaml#/components/schemas/Alarm'
+        playbook:
+          $ref: './playbooks.yaml#/components/schemas/Playbook'
+        nextStep:
+          type: string
+          format: uuid
+          nullable: true

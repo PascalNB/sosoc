@@ -6,6 +6,9 @@ components:
         id:
           type: string
           format: uuid
+        timestamp:
+          type: string
+          format: date-time
         endpoint:
           $ref: './endpoints.yaml#/components/schemas/Endpoint'
         user:
@@ -14,6 +17,3 @@ components:
         data:
           type: object
           additionalProperties: true
-        timestamp:
-          type: string
-          format: date-time

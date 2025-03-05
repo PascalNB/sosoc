@@ -4,14 +4,61 @@ info:
   description: CTI manages the collection of intelligence covering existing threads and attacks, as well as previous incidents.
   version: 1.0.0
 servers:
-  - url: 'https'
+  - url: 'localhost'
 paths:
   /alarms:
     post:
-      summary: 'Send an alarm for correlation identification'
+      summary: Send an alarm for correlation identification
       requestBody:
         content:
           application/json:
             schema:
               $ref: '../../common-schemas/alarms.yaml#/components/schemas/Alarm'
+
+  /iocs:
+    get:
+      summary: Get all IOCs
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '../../common-schemas/iocs.yaml#/components/schemas/IOC'
+    post:
+      summary: Create a new IOC entry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '../../common-schemas/iocs.yaml#/components/schemas/IOC'
+  /iocs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
         required: true
+        description: Alarm ID
+    get:
+      summary: Get an IOC entry
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '../../common-schemas/iocs.yaml#/components/schemas/IOC'
+    put:
+      summary: Modify an existing IOC entry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '../../common-schemas/rules.yaml#/components/schemas/Rule'
+        required: true
+    delete:
+      summary: Delete an existing IOC entry

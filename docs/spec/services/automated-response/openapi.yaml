@@ -5,28 +5,31 @@ info:
     For example, disabling accounts, blocking network sources, or quarantining endpoint devices.
   version: 1.0.0
 servers:
-  - url: 'https'
+  - url: 'localhost'
 paths:
-  /responses:
+  /workflows:
     post:
-      summary: Trigger a new response
+      summary: Create a new workflow
       requestBody:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                action:
-                  type: object
-                  properties:
-                    step:
-                      type: string
-                      format: uuid
-                    workflow:
-                      type: string
-                      format: uuid
-                    action:
-                      type: string
-                alarm:
-                  $ref: '../../common-schemas/alarms.yaml#/components/schemas/Alarm'
+              $ref: '../../common-schemas/workflows.yaml#/components/schemas/Workflow'
+        required: true
+  /workflows/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+        description: Playbook ID
+    put:
+      summary: Update an existing workflow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '../../common-schemas/workflows.yaml#/components/schemas/Workflow'
         required: true

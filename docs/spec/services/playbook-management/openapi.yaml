@@ -4,7 +4,7 @@ info:
   description: Manages the collection of incident response workflows for different kinds of incidents.
   version: 1.0.0
 servers:
-  - url: 'https'
+  - url: 'localhost'
 paths:
   /alarms:
     post:
@@ -35,7 +35,7 @@ paths:
             schema:
               $ref: '../../common-schemas/playbooks.yaml#/components/schemas/Playbook'
         required: true
-  /playbooks{id}:
+  /playbooks/{id}:
     parameters:
       - in: path
         name: id
@@ -43,7 +43,7 @@ paths:
           type: string
           format: uuid
         required: true
-        description:
+        description: Playbook ID
     get:
       summary: Get an existing playbook
       responses:

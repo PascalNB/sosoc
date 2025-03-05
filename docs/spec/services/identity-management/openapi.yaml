@@ -4,7 +4,7 @@ info:
   description: Manages user access, authentication, and privileges, as well as end-point devices.
   version: 1.0.0
 servers:
-  - url: 'https'
+  - url: 'localhost'
 paths:
   /users:
     get:
@@ -26,7 +26,7 @@ paths:
             schema:
               $ref: '../../common-schemas/users.yaml#/components/schemas/User'
         required: true
-  /users{id}:
+  /users/{id}:
     parameters:
       - in: path
         name: id
@@ -54,8 +54,29 @@ paths:
         required: true
     delete:
       summary: Delete a user
+  /users/{id}/permissions:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+        description: User ID
+    get:
+      summary: Get the permissions of a user
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '../../common-schemas/permissions.yaml#/components/schemas/Permissions'
+    put:
+      summary: Modify the permissions of a user
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '../../common-schemas/users.yaml#/components/schemas/User'
+              $ref: '../../common-schemas/permissions.yaml#/components/schemas/Permissions'
+        required: true

@@ -17,8 +17,8 @@ components:
             - medium
             - high
             - critical
-        message:
-          type: string
+        rule:
+          $ref: './rules.yaml#/components/schemas/Rule'
         data:
           type: object
           additionalProperties: true

@@ -4,9 +4,18 @@ info:
   description: Generates alerts for detected threats and notifies SOC analysts or IT admins via email, SMS, etc.
   version: 1.0.0
 servers:
-  - url: 'https'
+  - url: 'localhost'
 paths:
-  /alarms{id}:
+  /workflows:
+    post:
+      summary: Create a new workflow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '../../common-schemas/workflows.yaml#/components/schemas/Workflow'
+        required: true
+  /workflows/{id}:
     parameters:
       - in: path
         name: id
@@ -14,16 +23,12 @@ paths:
           type: string
           format: uuid
         required: true
-        description: Alarm ID
+        description: Playbook ID
     put:
-      summary: Create or modify an alarm
+      summary: Update an existing workflow
       requestBody:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                alarm:
-                  $ref: '../../common-schemas/alarms.yaml#/components/schemas/Alarm'
-                playbook:
-                  $ref: '../../common-schemas/playbooks.yaml#/components/schemas/Playbook'
+              $ref: '../../common-schemas/workflows.yaml#/components/schemas/Workflow'
+        required: true

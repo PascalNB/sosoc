@@ -44,3 +44,4 @@ components:
               minItems: 2
             - type: string
               format: uuid
+              nullable: true

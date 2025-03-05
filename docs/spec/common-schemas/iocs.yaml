@@ -1,0 +1,9 @@
+components:
+  schemas:
+    IOC:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      additionalProperties: true

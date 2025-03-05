@@ -4,7 +4,7 @@ info:
   description: Receives logs from endpoints and responds based on automated detection rules.
   version: 1.0.0
 servers:
-  - url: 'https'
+  - url: 'localhost'
 paths:
   /logs:
     get:
@@ -26,7 +26,7 @@ paths:
             schema:
               $ref: '../../common-schemas/logs.yaml#/components/schemas/LogEntry'
         required: true
-  /logs{id}:
+  /logs/{id}:
     parameters:
       - in: path
         name: id
@@ -44,7 +44,7 @@ paths:
             application/json:
               schema:
                 $ref: '../../common-schemas/logs.yaml#/components/schemas/LogEntry'
-  /alarms{id}:
+  /alarms/{id}:
     parameters:
       - in: path
         name: id
@@ -61,3 +61,51 @@ paths:
             schema:
               $ref: '../../common-schemas/alarms.yaml#/components/schemas/Alarm'
         required: true
+  /rules:
+    get:
+      summary: Get all rules
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '../../common-schemas/rules.yaml#/components/schemas/Rule'
+    post:
+      summary: create a new rule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '../../common-schemas/rules.yaml#/components/schemas/Rule'
+        required: true
+  /rules/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+        description: Alarm ID
+    get:
+      summary: Get a rule
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '../../common-schemas/rules.yaml#/components/schemas/Rule'
+    put:
+      summary: Modify a rule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '../../common-schemas/rules.yaml#/components/schemas/Rule'
+        required: true
+    delete:
+      summary: Delete a rule
