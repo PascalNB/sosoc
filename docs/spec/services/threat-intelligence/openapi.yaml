@@ -6,4 +6,12 @@ info:
 servers:
   - url: 'https'
 paths:
-  
+  /alarms:
+    post:
+      summary: 'Send an alarm for correlation identification'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '../../common-schemas/alarms.yaml#/components/schemas/Alarm'
+        required: true

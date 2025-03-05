@@ -6,4 +6,53 @@ info:
 servers:
   - url: 'https'
 paths:
-  
+  /alarms:
+    post:
+      summary: Send an alarm to identify incident response workflow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '../../common-schemas/alarms.yaml#/components/schemas/Alarm'
+        required: true
+  /workflows:
+    get:
+      summary: Get all workflows
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '../../common-schemas/workflows.yaml#/components/schemas/Workflow'
+    post:
+      summary: Create a new workflow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '../../common-schemas/workflows.yaml#/components/schemas/Workflow'
+        required: true
+  /workflows{id}:
+    get:
+      summary: Get an existing workflow
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '../../common-schemas/workflows.yaml#/components/schemas/Workflow'
+    put:
+      summary: Update an existing workflow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '../../common-schemas/workflows.yaml#/components/schemas/Workflow'
+        required: true
+    delete:
+      summary: Delete an existing workflow
+

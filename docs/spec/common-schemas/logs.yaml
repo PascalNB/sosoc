@@ -1,0 +1,13 @@
+components:
+  schemas:
+    LogEntry:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        source:
+          $ref: './endpoints.yaml#/components/schemas/Endpoint'
+        timestamp:
+          type: string
+          format: date-time

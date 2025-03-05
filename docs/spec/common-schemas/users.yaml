@@ -1,0 +1,19 @@
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        role:
+          type: string
+        sources:
+          type: array
+          items:
+            $ref: './endpoints.yaml#/components/schemas/Endpoint'

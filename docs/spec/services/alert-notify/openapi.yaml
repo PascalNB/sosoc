@@ -6,4 +6,11 @@ info:
 servers:
   - url: 'https'
 paths:
-  
+  /alarms:
+    put:
+      summary: Create or modify an alarm
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '../../common-schemas/alarms.yaml#/components/schemas/Alarm'

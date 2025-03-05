@@ -1,0 +1,22 @@
+components:
+  schemas:
+    Alarm:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        source:
+          $ref: './endpoints.yaml#/components/schemas/Endpoint'
+        severity:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - critical
+        message:
+          type: string
+        workflow:
+          $ref: './workflows.yaml#/components/schemas/Workflow'
+          nullable: true

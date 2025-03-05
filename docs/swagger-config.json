@@ -1,7 +1,10 @@
 {
   "urls": [
-    { "name": "Log Collection API", "url": "soa-project/docs/spec/services/log-monitoring/openapi.yaml" },
+    { "name": "Playbook Management API", "url": "soa-project/docs/spec/services/playbook-management/openapi.yaml" },
     { "name": "Threat Intelligence API", "url": "soa-project/docs/spec/services/threat-intelligence/openapi.yaml" },
-    { "name": "Automated Response API", "url": "soa-project/docs/spec/services/automated-response/openapi.yaml" }
+    { "name": "Log Collection API", "url": "soa-project/docs/spec/services/log-monitoring/openapi.yaml" },
+    { "name": "Automated Response API", "url": "soa-project/docs/spec/services/automated-response/openapi.yaml" },
+    { "name": "Alert and Notify API", "url": "soa-project/docs/spec/services/alert-notify/openapi.yaml" },
+    { "name": "Identity Management API", "url": "soa-project/docs/spec/services/identity-management/openapi.yaml" }
   ]
 }

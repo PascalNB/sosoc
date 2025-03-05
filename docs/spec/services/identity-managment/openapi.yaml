@@ -1,0 +1,53 @@
+openapi: 3.1.0
+info:
+  title: Identity Management Service
+  description: Manages user access, authentication, and privileges, as well as end-point devices.
+  version: 1.0.0
+servers:
+  - url: 'https'
+paths:
+  /users:
+    get:
+      summary: Get all users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '../../common-schemas/users.yaml#/components/schemas/User'
+    post:
+      summary: Create a new user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '../../common-schemas/users.yaml#/components/schemas/User'
+        required: true
+  /users{id}:
+    get:
+      summary: Get a user
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '../../common-schemas/users.yaml#/components/schemas/User'
+    put:
+      summary: Update a user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '../../common-schemas/users.yaml#/components/schemas/User'
+        required: true
+    delete:
+      summary: Delete a user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '../../common-schemas/users.yaml#/components/schemas/User'

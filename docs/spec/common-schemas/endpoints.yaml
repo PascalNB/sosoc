@@ -1,0 +1,15 @@
+components:
+  schemas:
+    Endpoint:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        ip:
+          type: string
+        ipVersion:
+          type: integer
+          enum: [4, 6]
+        name:
+          type: string

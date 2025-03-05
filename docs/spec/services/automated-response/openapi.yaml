@@ -7,4 +7,17 @@ info:
 servers:
   - url: 'https'
 paths:
-  
+  /responses:
+    post:
+      summary: Create a new response
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                workflow:
+                  $ref: '../../common-schemas/workflows.yaml#/components/schemas/Workflow'
+                alarm:
+                  $ref: '../../common-schemas/alarms.yaml#/components/schemas/Alarm'
+        required: true

@@ -6,4 +6,42 @@ info:
 servers:
   - url: 'https'
 paths:
-  
+  /logs:
+    get:
+      summary: Get all log entries
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '../../common-schemas/logs.yaml#/components/schemas/LogEntry'
+    post:
+      summary: Create a new log entry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '../../common-schemas/logs.yaml#/components/schemas/LogEntry'
+        required: true
+  /logs{id}:
+    get:
+      summary: Get a log entry
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '../../common-schemas/logs.yaml#/components/schemas/LogEntry'
+  /alarms{id}:
+    put:
+      summary: Update an alarm
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '../../common-schemas/alarms.yaml#/components/schemas/Alarm'
+        required: true
