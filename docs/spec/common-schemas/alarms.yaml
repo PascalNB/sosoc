@@ -19,6 +19,6 @@ components:
             - critical
         message:
           type: string
-        workflow:
-          $ref: './workflows.yaml#/components/schemas/Workflow'
-          nullable: true
+        data:
+          type: object
+          additionalProperties: true

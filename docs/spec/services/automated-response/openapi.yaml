@@ -9,15 +9,24 @@ servers:
 paths:
   /responses:
     post:
-      summary: Create a new response
+      summary: Trigger a new response
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                step:
-                  $ref: '../../common-schemas/workflows.yaml#/components/schemas/Step'
+                action:
+                  type: object
+                  properties:
+                    step:
+                      type: string
+                      format: uuid
+                    workflow:
+                      type: string
+                      format: uuid
+                    action:
+                      type: string
                 alarm:
                   $ref: '../../common-schemas/alarms.yaml#/components/schemas/Alarm'
         required: true

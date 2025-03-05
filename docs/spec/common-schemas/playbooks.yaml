@@ -1,6 +1,6 @@
 components:
   schemas:
-    Workflow:
+    Playbook:
       type: object
       properties:
         id:

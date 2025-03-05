@@ -21,4 +21,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '../../common-schemas/alarms.yaml#/components/schemas/Alarm'
+              type: object
+              properties:
+                alarm:
+                  $ref: '../../common-schemas/alarms.yaml#/components/schemas/Alarm'
+                playbook:
+                  $ref: '../../common-schemas/playbooks.yaml#/components/schemas/Playbook'

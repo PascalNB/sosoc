@@ -15,9 +15,9 @@ paths:
             schema:
               $ref: '../../common-schemas/alarms.yaml#/components/schemas/Alarm'
         required: true
-  /workflows:
+  /playbooks:
     get:
-      summary: Get all workflows
+      summary: Get all playbooks
       responses:
         '200':
           description: OK
@@ -26,16 +26,16 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '../../common-schemas/workflows.yaml#/components/schemas/Workflow'
+                  $ref: '../../common-schemas/playbooks.yaml#/components/schemas/Playbook'
     post:
-      summary: Create a new workflow
+      summary: Create a new playbook
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '../../common-schemas/workflows.yaml#/components/schemas/Workflow'
+              $ref: '../../common-schemas/playbooks.yaml#/components/schemas/Playbook'
         required: true
-  /workflows{id}:
+  /playbooks{id}:
     parameters:
       - in: path
         name: id
@@ -43,24 +43,23 @@ paths:
           type: string
           format: uuid
         required: true
-        description: Workflow ID
+        description:
     get:
-      summary: Get an existing workflow
+      summary: Get an existing playbook
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '../../common-schemas/workflows.yaml#/components/schemas/Workflow'
+                $ref: '../../common-schemas/playbooks.yaml#/components/schemas/Playbook'
     put:
-      summary: Update an existing workflow
+      summary: Update an existing playbook
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '../../common-schemas/workflows.yaml#/components/schemas/Workflow'
+              $ref: '../../common-schemas/playbooks.yaml#/components/schemas/Playbook'
         required: true
     delete:
-      summary: Delete an existing workflow
-
+      summary: Delete an existing playbook
