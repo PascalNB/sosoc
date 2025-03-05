@@ -6,8 +6,10 @@ components:
         id:
           type: string
           format: uuid
-        source:
+        endpoint:
           $ref: './endpoints.yaml#/components/schemas/Endpoint'
+        user:
+          $ref: './users.yaml#/components/schemas/User'
         severity:
           type: string
           enum:

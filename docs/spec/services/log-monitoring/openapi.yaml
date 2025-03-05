@@ -27,6 +27,14 @@ paths:
               $ref: '../../common-schemas/logs.yaml#/components/schemas/LogEntry'
         required: true
   /logs{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+        description: Log entry ID
     get:
       summary: Get a log entry
       responses:
@@ -37,6 +45,14 @@ paths:
               schema:
                 $ref: '../../common-schemas/logs.yaml#/components/schemas/LogEntry'
   /alarms{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+        description: Alarm ID
     put:
       summary: Update an alarm
       requestBody:

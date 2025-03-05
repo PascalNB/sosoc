@@ -36,6 +36,14 @@ paths:
               $ref: '../../common-schemas/workflows.yaml#/components/schemas/Workflow'
         required: true
   /workflows{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+        description: Workflow ID
     get:
       summary: Get an existing workflow
       responses:

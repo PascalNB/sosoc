@@ -6,8 +6,11 @@ components:
         id:
           type: string
           format: uuid
-        source:
+        endpoint:
           $ref: './endpoints.yaml#/components/schemas/Endpoint'
+        user:
+          $ref: './users.yaml#/components/schemas/User'
+          nullable: true
         timestamp:
           type: string
           format: date-time

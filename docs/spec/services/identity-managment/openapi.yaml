@@ -27,6 +27,14 @@ paths:
               $ref: '../../common-schemas/users.yaml#/components/schemas/User'
         required: true
   /users{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+        description: User ID
     get:
       summary: Get a user
       responses:

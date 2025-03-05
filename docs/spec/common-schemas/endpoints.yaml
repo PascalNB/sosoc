@@ -6,10 +6,14 @@ components:
         id:
           type: string
           format: uuid
-        ip:
-          type: string
-        ipVersion:
-          type: integer
-          enum: [4, 6]
         name:
           type: string
+        ip:
+          oneOf:
+            - type: string
+              format: ipv4
+            - type: string
+              format: ipv6
+        host:
+          type: string
+          nullable: true

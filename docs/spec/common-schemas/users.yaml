@@ -13,7 +13,7 @@ components:
           format: email
         role:
           type: string
-        sources:
+        endpoints:
           type: array
           items:
             $ref: './endpoints.yaml#/components/schemas/Endpoint'

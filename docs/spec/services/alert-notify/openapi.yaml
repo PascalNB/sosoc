@@ -6,7 +6,15 @@ info:
 servers:
   - url: 'https'
 paths:
-  /alarms:
+  /alarms{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+        description: Alarm ID
     put:
       summary: Create or modify an alarm
       requestBody:

@@ -8,6 +8,8 @@ components:
           enum:
             - human
             - auto
+        action:
+          type: string
     Workflow:
       type: object
       properties:
