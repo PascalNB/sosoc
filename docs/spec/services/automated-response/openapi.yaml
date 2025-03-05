@@ -16,8 +16,8 @@ paths:
             schema:
               type: object
               properties:
-                workflow:
-                  $ref: '../../common-schemas/workflows.yaml#/components/schemas/Workflow'
+                step:
+                  $ref: '../../common-schemas/workflows.yaml#/components/schemas/Step'
                 alarm:
                   $ref: '../../common-schemas/alarms.yaml#/components/schemas/Alarm'
         required: true

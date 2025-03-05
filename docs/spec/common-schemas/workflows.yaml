@@ -1,15 +1,5 @@
 components:
   schemas:
-    Step:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-            - human
-            - auto
-        action:
-          type: string
     Workflow:
       type: object
       properties:
@@ -24,3 +14,33 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Step'
+          minItems: 1
+    Step:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+          enum:
+            - human
+            - auto
+        name:
+          type: string
+        action:
+          type: string
+        next:
+          oneOf:
+            - type: array
+              items:
+                type: object
+                properties:
+                  condition:
+                    type: string
+                  next:
+                    type: string
+                    format: uuid
+              minItems: 2
+            - type: string
+              format: uuid
