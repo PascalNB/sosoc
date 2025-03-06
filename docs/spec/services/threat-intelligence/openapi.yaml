@@ -14,7 +14,14 @@ paths:
           application/json:
             schema:
               $ref: '../../common-schemas/alarms.yaml#/components/schemas/Alarm'
-
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '../../common-schemas/iocs.yaml#/components/schemas/IOC'
   /iocs:
     get:
       summary: Get all IOCs

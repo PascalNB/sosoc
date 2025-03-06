@@ -44,23 +44,6 @@ paths:
             application/json:
               schema:
                 $ref: '../../common-schemas/logs.yaml#/components/schemas/LogEntry'
-  /alarms/{id}:
-    parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        required: true
-        description: Alarm ID
-    put:
-      summary: Update an alarm
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '../../common-schemas/alarms.yaml#/components/schemas/Alarm'
-        required: true
   /rules:
     get:
       summary: Get all rules

@@ -6,19 +6,39 @@ components:
         id:
           type: string
           format: uuid
+        threat:
+          $ref: '#/components/schemas/Threat'
         endpoint:
           $ref: './endpoints.yaml#/components/schemas/Endpoint'
         user:
           $ref: './users.yaml#/components/schemas/User'
-        severity:
-          type: string
-          enum:
-            - low
-            - medium
-            - high
-            - critical
         rule:
           $ref: './rules.yaml#/components/schemas/Rule'
         data:
           type: object
           additionalProperties: true
+        ioc:
+          type: object
+          $ref: './iocs.yaml#/components/schemas/IOC'
+          nullable: true
+    Severity:
+      type: string
+      enum:
+        - high
+        - medium
+        - low
+        - no
+    Threat:
+      type: object
+      properties:
+        code:
+          type: string
+          example: phishing
+        severity:
+          $ref: '#/components/schemas/Severity'
+        tactic:
+          type: string
+          example: ta0001
+        technique:
+          type: string
+          example: t1566.001

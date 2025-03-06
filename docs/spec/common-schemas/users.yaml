@@ -8,11 +8,13 @@ components:
           format: uuid
         name:
           type: string
+          example: Firstname Lastname
         email:
           type: string
           format: email
         role:
           type: string
+          example: analyst
         endpoints:
           type: array
           items:

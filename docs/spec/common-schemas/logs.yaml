@@ -9,6 +9,9 @@ components:
         timestamp:
           type: string
           format: date-time
+        event:
+          type: string
+          example: email-received
         endpoint:
           $ref: './endpoints.yaml#/components/schemas/Endpoint'
         user:

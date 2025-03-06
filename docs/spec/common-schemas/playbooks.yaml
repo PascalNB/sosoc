@@ -8,8 +8,23 @@ components:
           format: uuid
         name:
           type: string
+          example: phishing email
         description:
           type: string
+          example: quarantines endpoint
+        trigger:
+          oneOf:
+            - type: object
+              properties:
+                match:
+                  type: string
+                  format: SpEL
+                  example: Threat.Code == 'phishing'
+            - type: object
+              properties:
+                rule:
+                  type: string
+                  format: uuid
         steps:
           type: array
           items:
@@ -28,6 +43,7 @@ components:
             - auto
         name:
           type: string
+          example: await analyst confirmation
         action:
           type: string
         next:
@@ -38,6 +54,9 @@ components:
                 properties:
                   condition:
                     type: string
+                    examples:
+                      - no threat
+                      - high threat
                   next:
                     type: string
                     format: uuid

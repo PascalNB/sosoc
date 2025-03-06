@@ -6,4 +6,8 @@ components:
         id:
           type: string
           format: uuid
-      additionalProperties: true
+        threat:
+          $ref: './alarms.yaml#/components/schemas/Threat'
+        indicators:
+          type: object
+          additionalProperties: true

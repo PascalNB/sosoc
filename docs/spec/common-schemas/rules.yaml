@@ -6,10 +6,26 @@ components:
         id:
           type: string
           format: uuid
-        query:
+        name:
           type: string
+          example: external email
         interval:
           type: string
+          format: cron-expression
+          example: '*/5 * * * *'
+        query:
+          type: string
+          format: sql
+          example: >
+            SELECT * FROM logs
+            WHERE type='email-received'
+            AND data->'email'->>'source' NOT LIKE %example.com
+            AND timestamp >= NOW() - INTERVAL '5 minutes';
+        threshold:
+          type: number
+          minimum: 1
+        threat:
+          $ref: './alarms.yaml#/components/schemas/Threat'
         fields:
           type: array
           items:
