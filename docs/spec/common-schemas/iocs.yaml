@@ -8,6 +8,7 @@ components:
           format: uuid
         threat:
           $ref: './alarms.yaml#/components/schemas/Threat'
-        indicators:
-          type: object
-          additionalProperties: true
+        match:
+          type: string
+          format: SpEL
+          example: Data['email']['source'] == malicious.com
