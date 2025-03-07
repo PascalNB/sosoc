@@ -1,0 +1,15 @@
+components:
+  schemas:
+    Action:
+      type: object
+      properties:
+        user:
+          $ref: './users.yaml#/components/schemas/User'
+        action:
+          type: object
+          properties:
+            code:
+              type: string
+            data:
+              type: object
+              additionalProperties: true

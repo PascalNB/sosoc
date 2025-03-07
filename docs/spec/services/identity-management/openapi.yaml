@@ -54,29 +54,12 @@ paths:
         required: true
     delete:
       summary: Delete a user
-  /users/{id}/permissions:
-    parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        required: true
-        description: User ID
-    get:
-      summary: Get the permissions of a user
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '../../common-schemas/permissions.yaml#/components/schemas/Permissions'
-    put:
-      summary: Modify the permissions of a user
+  /actions:
+    post:
+      summary: Create a new action
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '../../common-schemas/permissions.yaml#/components/schemas/Permissions'
+              $ref: '../../common-schemas/actions.yaml#/components/schemas/Action'
         required: true
