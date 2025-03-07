@@ -25,6 +25,9 @@ components:
                 rule:
                   type: string
                   format: uuid
+        firstStep:
+          type: string
+          format: uuid
         steps:
           type: array
           items:
