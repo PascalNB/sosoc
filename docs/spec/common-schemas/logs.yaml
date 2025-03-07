@@ -14,9 +14,6 @@ components:
           example: email-received
         endpoint:
           $ref: './endpoints.yaml#/components/schemas/Endpoint'
-        user:
-          $ref: './users.yaml#/components/schemas/User'
-          nullable: true
         data:
           type: object
           additionalProperties: true

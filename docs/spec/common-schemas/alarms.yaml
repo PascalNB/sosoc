@@ -6,12 +6,11 @@ components:
         id:
           type: string
           format: uuid
+        timestamp:
+          type: string
+          format: date-time
         threat:
           $ref: '#/components/schemas/Threat'
-        endpoint:
-          $ref: './endpoints.yaml#/components/schemas/Endpoint'
-        user:
-          $ref: './users.yaml#/components/schemas/User'
         rule:
           $ref: './rules.yaml#/components/schemas/Rule'
         data:
