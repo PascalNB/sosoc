@@ -1,0 +1,18 @@
+#!/bin/bash
+rm -rf "./services/alertnotify/generated-sources"
+python3 ./generate-sources.py ./docs/spec/services/alert-notify/openapi.yaml alertnotify
+
+rm -rf "./services/automatedresponse/generated-sources"
+python3 ./generate-sources.py ./docs/spec/services/automated-response/openapi.yaml automatedresponse
+
+rm -rf "./services/identitymanagement/generated-sources"
+python3 ./generate-sources.py ./docs/spec/services/identity-management/openapi.yaml identitymanagement
+
+rm -rf "./services/logmonitor/generated-sources"
+python3 ./generate-sources.py ./docs/spec/services/log-monitoring/openapi.yaml logmonitor
+
+rm -rf "./services/playbookmanagement/generated-sources"
+python3 ./generate-sources.py ./docs/spec/services/playbook-management/openapi.yaml playbookmanagement
+
+rm -rf "./services/threatintelligence/generated-sources"
+python3 ./generate-sources.py ./docs/spec/services/threat-intelligence/openapi.yaml threatintelligence
