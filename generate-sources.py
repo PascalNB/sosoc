@@ -10,17 +10,20 @@ import openapi_generator_cli
 
 def get_generation_command(input_path, output_name) -> list[str]:
     return [
-        'generate', '-g', 'spring', '-i', input_path,
-        '-o', f'services/{output_name}', '--additional-properties='
-                           'useSpringBoot3=true,'
-                           f'artifactId={output_name},'
-                           f'groupId=nl.utwente.sosoc,'
-                           f'basePackage=nl.utwente.sosoc.{output_name},'
-                           f'modelPackage=nl.utwente.sosoc.{output_name}.model,'
-                           f'apiPackage=nl.utwente.sosoc.{output_name}.api,'
-                           f'configPackage=nl.utwente.sosoc.{output_name}.configuration,'
-                           'useTags=true,'
-                           'javaVersion=21'
+        'generate', '-g', 'spring', '-i', input_path, '-o', f'services/{output_name}/generated-sources',
+        '--additional-properties='
+        f'title={output_name},'
+        'useSpringBoot3=true,'
+        'sourceFolder=./,'
+        f'artifactId={output_name},'
+        f'groupId=nl.utwente.sosoc,'
+        f'basePackage=nl.utwente.sosoc.{output_name},'
+        f'modelPackage=nl.utwente.sosoc.{output_name}.model,'
+        f'apiPackage=nl.utwente.sosoc.{output_name}.api,'
+        f'configPackage=nl.utwente.sosoc.{output_name}.configuration,'
+        'interfaceOnly=true,'
+        'useTags=true,'
+        'generateSupportingFiles=true'
     ]
 
 
@@ -80,7 +83,7 @@ def resolve_references(node, components, base_path, resolved_cache):
 
 
 def execute_source_generation(openapi_spec, output_name):
-    output_path = posixpath.normpath(posixpath.join('services', output_name))
+    output_path = posixpath.normpath(posixpath.join('services', output_name, 'generated-sources'))
     os.makedirs(output_path, exist_ok=True)
     file_path = posixpath.normpath(posixpath.join(output_path, 'spec.yml'))
     try:
