@@ -14,17 +14,8 @@ components:
           example: quarantines endpoint
         trigger:
           oneOf:
-            - type: object
-              properties:
-                match:
-                  type: string
-                  format: SpEL
-                  example: Threat.Code == 'phishing'
-            - type: object
-              properties:
-                rule:
-                  type: string
-                  format: uuid
+            - $ref: '#/components/schemas/MatchTrigger'
+            - $ref: '#/components/schemas/RuleTrigger'
         firstStep:
           type: string
           format: uuid
@@ -53,17 +44,32 @@ components:
           oneOf:
             - type: array
               items:
-                type: object
-                properties:
-                  condition:
-                    type: string
-                    examples:
-                      - no threat
-                      - high threat
-                  next:
-                    type: string
-                    format: uuid
+                $ref: '#/components/schemas/ConditionalNext'
               minItems: 2
             - type: string
               format: uuid
               nullable: true
+    MatchTrigger:
+      type: object
+      properties:
+        match:
+          type: string
+          format: SpEL
+          example: Threat.Code == 'phishing'
+    RuleTrigger:
+      type: object
+      properties:
+        rule:
+          type: string
+          format: uuid
+    ConditionalNext:
+      type: object
+      properties:
+        condition:
+          type: string
+          examples:
+            - no threat
+            - high threat
+        next:
+          type: string
+          format: uuid
