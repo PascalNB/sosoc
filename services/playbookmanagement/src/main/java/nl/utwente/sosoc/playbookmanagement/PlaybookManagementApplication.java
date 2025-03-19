@@ -12,7 +12,7 @@ import org.springframework.context.annotation.FullyQualifiedAnnotationBeanNameGe
     nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class
 )
 @ComponentScan(
-    basePackages = {"nl.utwente.sosoc.playbookmanagement", "nl.utwente.sosoc.playbookmanagement.api" , "nl.utwente.sosoc.playbookmanagement.configuration"},
+    basePackages = {"nl.utwente.sosoc.playbookmanagement", "nl.utwente.sosoc.playbookmanagement.api"},
     nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class
 )
 public class PlaybookManagementApplication {

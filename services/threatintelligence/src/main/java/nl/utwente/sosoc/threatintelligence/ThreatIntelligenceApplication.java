@@ -12,7 +12,7 @@ import org.springframework.context.annotation.FullyQualifiedAnnotationBeanNameGe
     nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class
 )
 @ComponentScan(
-    basePackages = {"nl.utwente.sosoc.threatintelligence", "nl.utwente.sosoc.threatintelligence.api" , "nl.utwente.sosoc.threatintelligence.configuration"},
+    basePackages = {"nl.utwente.sosoc.threatintelligence", "nl.utwente.sosoc.threatintelligence.api"},
     nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class
 )
 public class ThreatIntelligenceApplication {

@@ -12,7 +12,7 @@ import org.springframework.context.annotation.FullyQualifiedAnnotationBeanNameGe
     nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class
 )
 @ComponentScan(
-    basePackages = {"nl.utwente.sosoc.automatedresponse", "nl.utwente.sosoc.automatedresponse.api" , "nl.utwente.sosoc.automatedresponse.configuration"},
+    basePackages = {"nl.utwente.sosoc.automatedresponse", "nl.utwente.sosoc.automatedresponse.api"},
     nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class
 )
 public class AutomatedResponseApplication {

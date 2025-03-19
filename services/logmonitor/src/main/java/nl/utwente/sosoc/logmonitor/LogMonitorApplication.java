@@ -12,7 +12,7 @@ import org.springframework.context.annotation.FullyQualifiedAnnotationBeanNameGe
     nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class
 )
 @ComponentScan(
-    basePackages = {"nl.utwente.sosoc.logmonitor", "nl.utwente.sosoc.logmonitor.api" , "nl.utwente.sosoc.logmonitor.configuration"},
+    basePackages = {"nl.utwente.sosoc.logmonitor", "nl.utwente.sosoc.logmonitor.api"},
     nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class
 )
 public class LogMonitorApplication {

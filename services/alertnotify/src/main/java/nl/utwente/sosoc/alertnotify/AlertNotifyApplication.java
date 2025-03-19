@@ -12,7 +12,7 @@ import org.springframework.context.annotation.FullyQualifiedAnnotationBeanNameGe
     nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class
 )
 @ComponentScan(
-    basePackages = {"nl.utwente.sosoc.alertnotify", "nl.utwente.sosoc.alertnotify.api" , "nl.utwente.sosoc.alertnotify.configuration"},
+    basePackages = {"nl.utwente.sosoc.alertnotify", "nl.utwente.sosoc.alertnotify.api"},
     nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class
 )
 public class AlertNotifyApplication {
