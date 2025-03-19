@@ -8,6 +8,9 @@ servers:
 paths:
   /alarms:
     post:
+      operationId: postAlarm
+      tags:
+        - alarms
       summary: Send an alarm to identify incident response workflow
       requestBody:
         content:
@@ -15,8 +18,14 @@ paths:
             schema:
               $ref: '../../common-schemas/alarms.yaml#/components/schemas/Alarm'
         required: true
+      responses:
+        '200':
+          description: OK
   /playbooks:
     get:
+      operationId: getPlaybooks
+      tags:
+        - playbooks
       summary: Get all playbooks
       responses:
         '200':
@@ -28,6 +37,9 @@ paths:
                 items:
                   $ref: '../../common-schemas/playbooks.yaml#/components/schemas/Playbook'
     post:
+      operationId: postPlaybook
+      tags:
+        - playbooks
       summary: Create a new playbook
       requestBody:
         content:
@@ -35,6 +47,9 @@ paths:
             schema:
               $ref: '../../common-schemas/playbooks.yaml#/components/schemas/Playbook'
         required: true
+      responses:
+        '200':
+          description: OK
   /playbooks/{id}:
     parameters:
       - in: path
@@ -45,6 +60,9 @@ paths:
         required: true
         description: Playbook ID
     get:
+      operationId: getPlaybook
+      tags:
+        - playbooks
       summary: Get an existing playbook
       responses:
         '200':
@@ -54,6 +72,9 @@ paths:
               schema:
                 $ref: '../../common-schemas/playbooks.yaml#/components/schemas/Playbook'
     put:
+      operationId: putPlaybook
+      tags:
+        - playbooks
       summary: Update an existing playbook
       requestBody:
         content:
@@ -61,5 +82,14 @@ paths:
             schema:
               $ref: '../../common-schemas/playbooks.yaml#/components/schemas/Playbook'
         required: true
+      responses:
+        '200':
+          description: OK
     delete:
+      operationId: deletePlaybook
+      tags:
+        - playbooks
       summary: Delete an existing playbook
+      responses:
+        '200':
+          description: OK

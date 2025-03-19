@@ -8,6 +8,9 @@ servers:
 paths:
   /workflows:
     post:
+      operationId: postWorkflow
+      tags:
+        - workflows
       summary: Create a new workflow
       requestBody:
         content:
@@ -28,6 +31,9 @@ paths:
         required: true
         description: Playbook ID
     put:
+      operationId: putWorkflow
+      tags:
+        - workflows
       summary: Update an existing workflow
       requestBody:
         content:

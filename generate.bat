@@ -1,9 +1,17 @@
-rd /s /q "./logmonitor"
-openapi-generator-cli generate -g spring -i ./docs/spec/services/log-monitoring/openapi.yaml -o ./logmonitor ^
---additional-properties=^
-useSpringBoot3=true,^
-basePackage=nl.utwente.sosoc.logmonitor,^
-modelPackage=nl.utwente.sosoc.logmonitor.model,^
-apiPackage=nl.utwente.sosoc.logmonitor.api,^
-configPackage=nl.utwente.sosoc.logmonitor.configuration,^
-generateModels=true
+rd /s /q "./services/alertnotify"
+python ./generate-sources.py ./docs/spec/services/alert-notify/openapi.yaml alertnotify
+
+rd /s /q "./services/automatedresponse"
+python ./generate-sources.py ./docs/spec/services/automated-response/openapi.yaml automatedresponse
+
+rd /s /q "./services/identitymanagement"
+python ./generate-sources.py ./docs/spec/services/identity-management/openapi.yaml identitymanagement
+
+rd /s /q "./services/logmonitor"
+python ./generate-sources.py ./docs/spec/services/log-monitoring/openapi.yaml logmonitor
+
+rd /s /q "./services/playbookmanagement"
+python ./generate-sources.py ./docs/spec/services/playbook-management/openapi.yaml playbookmanagement
+
+rd /s /q "./services/threatintelligence"
+python ./generate-sources.py ./docs/spec/services/threat-intelligence/openapi.yaml threatintelligence

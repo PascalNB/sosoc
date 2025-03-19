@@ -8,6 +8,9 @@ servers:
 paths:
   /alarms:
     post:
+      operationId: postAlarm
+      tags:
+        - alarms
       summary: Send an alarm for correlation identification
       requestBody:
         content:
@@ -24,6 +27,9 @@ paths:
                 $ref: '../../common-schemas/iocs.yaml#/components/schemas/IOC'
   /iocs:
     get:
+      operationId: getIOCs
+      tags:
+        - iocs
       summary: Get all IOCs
       responses:
         '200':
@@ -35,12 +41,18 @@ paths:
                 items:
                   $ref: '../../common-schemas/iocs.yaml#/components/schemas/IOC'
     post:
+      operationId: postIOC
+      tags:
+        - iocs
       summary: Create a new IOC entry
       requestBody:
         content:
           application/json:
             schema:
               $ref: '../../common-schemas/iocs.yaml#/components/schemas/IOC'
+      responses:
+        '200':
+          description: OK
   /iocs/{id}:
     parameters:
       - in: path
@@ -51,6 +63,9 @@ paths:
         required: true
         description: Alarm ID
     get:
+      operationId: getIOC
+      tags:
+        - iocs
       summary: Get an IOC entry
       responses:
         '200':
@@ -60,6 +75,9 @@ paths:
               schema:
                 $ref: '../../common-schemas/iocs.yaml#/components/schemas/IOC'
     put:
+      operationId: putIOC
+      tags:
+        - iocs
       summary: Modify an existing IOC entry
       requestBody:
         content:
@@ -67,5 +85,14 @@ paths:
             schema:
               $ref: '../../common-schemas/rules.yaml#/components/schemas/Rule'
         required: true
+      responses:
+        '200':
+          description: OK
     delete:
+      operationId: deleteIOC
+      tags:
+        - iocs
       summary: Delete an existing IOC entry
+      responses:
+        '200':
+          description: OK

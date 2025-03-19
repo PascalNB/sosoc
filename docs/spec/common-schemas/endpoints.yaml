@@ -10,11 +10,8 @@ components:
           type: string
           example: client-1
         ip:
-          oneOf:
-            - type: string
-              format: ipv4
-            - type: string
-              format: ipv6
+          type: string
+          format: ipv4
         host:
           type: string
           format: hostname

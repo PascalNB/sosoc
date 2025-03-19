@@ -9,6 +9,8 @@ paths:
   /logs:
     get:
       operationId: getLogs
+      tags:
+        - logs
       summary: Get all log entries
       responses:
         '200':
@@ -21,6 +23,8 @@ paths:
                   $ref: '../../common-schemas/logs.yaml#/components/schemas/LogEntry'
     post:
       operationId: postLog
+      tags:
+        - logs
       summary: Create a new log entry
       requestBody:
         content:
@@ -42,6 +46,8 @@ paths:
         description: Log entry ID
     get:
       operationId: getLog
+      tags:
+        - logs
       summary: Get a log entry
       responses:
         '200':
@@ -53,6 +59,8 @@ paths:
   /rules:
     get:
       operationId: getRules
+      tags:
+        - rules
       summary: Get all rules
       responses:
         '200':
@@ -65,6 +73,8 @@ paths:
                   $ref: '../../common-schemas/rules.yaml#/components/schemas/Rule'
     post:
       operationId: postRule
+      tags:
+        - rules
       summary: create a new rule
       requestBody:
         content:
@@ -86,6 +96,8 @@ paths:
         description: Alarm ID
     get:
       operationId: getRule
+      tags:
+        - rules
       summary: Get a rule
       responses:
         '200':
@@ -96,6 +108,8 @@ paths:
                 $ref: '../../common-schemas/rules.yaml#/components/schemas/Rule'
     put:
       operationId: putRule
+      tags:
+        - rules
       summary: Modify a rule
       requestBody:
         content:
@@ -108,9 +122,9 @@ paths:
           description: OK
     delete:
       operationId: deleteRule
+      tags:
+        - rules
       summary: Delete a rule
       responses:
         '200':
           description: OK
-components:
-  schemas: null

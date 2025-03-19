@@ -1,0 +1,408 @@
+openapi: 3.1.0
+info:
+  description: "Takes automated actions when threats are detected. For example, disabling\
+    \ accounts, blocking network sources, or quarantining endpoint devices."
+  title: Automated Response Service
+  version: 1.0.0
+servers:
+- url: localhost
+paths:
+  /workflows:
+    post:
+      operationId: postWorkflow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Workflow'
+        required: true
+      responses:
+        "200":
+          description: OK
+      summary: Create a new workflow
+      tags:
+      - workflows
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      x-tags:
+      - tag: workflows
+  /workflows/{id}:
+    parameters:
+    - description: Playbook ID
+      explode: false
+      in: path
+      name: id
+      required: true
+      schema:
+        format: uuid
+        type: string
+      style: simple
+    put:
+      operationId: putWorkflow
+      parameters:
+      - description: Playbook ID
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Workflow'
+        required: true
+      responses:
+        "200":
+          description: OK
+      summary: Update an existing workflow
+      tags:
+      - workflows
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      x-tags:
+      - tag: workflows
+components:
+  schemas:
+    Alarm:
+      example:
+        data:
+          key: ""
+        rule:
+          query: |
+            SELECT * FROM logs WHERE type='email-received' AND data->'email'->>'source' NOT LIKE %example.com AND timestamp >= NOW() - INTERVAL '5 minutes';
+          name: external email
+          interval: '*/5 * * * *'
+          threshold: 1.0800828190461012
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          threat:
+            severity: high
+            code: phishing
+            technique: t1566.001
+            tactic: ta0001
+          fields:
+          - field: field
+            type: type
+          - field: field
+            type: type
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        threat:
+          severity: high
+          code: phishing
+          technique: t1566.001
+          tactic: ta0001
+        ioc:
+          match: "Data['email']['source'] == malicious.com"
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          threat:
+            severity: high
+            code: phishing
+            technique: t1566.001
+            tactic: ta0001
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        data:
+          additionalProperties: true
+          type: object
+        id:
+          format: uuid
+          type: string
+        ioc:
+          $ref: '#/components/schemas/IOC'
+        rule:
+          $ref: '#/components/schemas/Rule'
+        threat:
+          $ref: '#/components/schemas/Threat'
+        timestamp:
+          format: date-time
+          type: string
+    IOC:
+      example:
+        match: "Data['email']['source'] == malicious.com"
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        threat:
+          severity: high
+          code: phishing
+          technique: t1566.001
+          tactic: ta0001
+      properties:
+        id:
+          format: uuid
+          type: string
+        match:
+          example: "Data['email']['source'] == malicious.com"
+          format: SpEL
+          type: string
+        threat:
+          $ref: '#/components/schemas/Threat'
+    Playbook:
+      example:
+        firstStep: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: phishing email
+        description: quarantines endpoint
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        trigger:
+          match: Threat.Code == 'phishing'
+        steps:
+        - next:
+          - next: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            condition: condition
+          - next: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            condition: condition
+          name: await analyst confirmation
+          action: action
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          type: human
+        - next:
+          - next: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            condition: condition
+          - next: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            condition: condition
+          name: await analyst confirmation
+          action: action
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          type: human
+      properties:
+        description:
+          example: quarantines endpoint
+          type: string
+        firstStep:
+          format: uuid
+          type: string
+        id:
+          format: uuid
+          type: string
+        name:
+          example: phishing email
+          type: string
+        steps:
+          items:
+            $ref: '#/components/schemas/Step'
+          minItems: 1
+          type: array
+        trigger:
+          $ref: '#/components/schemas/Playbook_trigger'
+    Rule:
+      example:
+        query: |
+          SELECT * FROM logs WHERE type='email-received' AND data->'email'->>'source' NOT LIKE %example.com AND timestamp >= NOW() - INTERVAL '5 minutes';
+        name: external email
+        interval: '*/5 * * * *'
+        threshold: 1.0800828190461012
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        threat:
+          severity: high
+          code: phishing
+          technique: t1566.001
+          tactic: ta0001
+        fields:
+        - field: field
+          type: type
+        - field: field
+          type: type
+      properties:
+        fields:
+          items:
+            $ref: '#/components/schemas/Rule_fields_inner'
+          type: array
+        id:
+          format: uuid
+          type: string
+        interval:
+          example: '*/5 * * * *'
+          format: cron-expression
+          type: string
+        name:
+          example: external email
+          type: string
+        query:
+          example: |
+            SELECT * FROM logs WHERE type='email-received' AND data->'email'->>'source' NOT LIKE %example.com AND timestamp >= NOW() - INTERVAL '5 minutes';
+          format: sql
+          type: string
+        threat:
+          $ref: '#/components/schemas/Threat'
+        threshold:
+          minimum: 1
+          type: number
+    Severity:
+      enum:
+      - high
+      - medium
+      - low
+      - false
+      type: string
+    Step:
+      example:
+        next:
+        - next: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          condition: condition
+        - next: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          condition: condition
+        name: await analyst confirmation
+        action: action
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        type: human
+      properties:
+        action:
+          type: string
+        id:
+          format: uuid
+          type: string
+        name:
+          example: await analyst confirmation
+          type: string
+        next:
+          $ref: '#/components/schemas/Step_next'
+        type:
+          enum:
+          - human
+          - auto
+          type: string
+    Threat:
+      example:
+        severity: high
+        code: phishing
+        technique: t1566.001
+        tactic: ta0001
+      properties:
+        code:
+          example: phishing
+          type: string
+        severity:
+          $ref: '#/components/schemas/Severity'
+        tactic:
+          example: ta0001
+          type: string
+        technique:
+          example: t1566.001
+          type: string
+    Workflow:
+      example:
+        alarm:
+          data:
+            key: ""
+          rule:
+            query: |
+              SELECT * FROM logs WHERE type='email-received' AND data->'email'->>'source' NOT LIKE %example.com AND timestamp >= NOW() - INTERVAL '5 minutes';
+            name: external email
+            interval: '*/5 * * * *'
+            threshold: 1.0800828190461012
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            threat:
+              severity: high
+              code: phishing
+              technique: t1566.001
+              tactic: ta0001
+            fields:
+            - field: field
+              type: type
+            - field: field
+              type: type
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          threat:
+            severity: high
+            code: phishing
+            technique: t1566.001
+            tactic: ta0001
+          ioc:
+            match: "Data['email']['source'] == malicious.com"
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            threat:
+              severity: high
+              code: phishing
+              technique: t1566.001
+              tactic: ta0001
+          timestamp: 2000-01-23T04:56:07.000+00:00
+        nextStep: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        playbook:
+          firstStep: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: phishing email
+          description: quarantines endpoint
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          trigger:
+            match: Threat.Code == 'phishing'
+          steps:
+          - next:
+            - next: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              condition: condition
+            - next: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              condition: condition
+            name: await analyst confirmation
+            action: action
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            type: human
+          - next:
+            - next: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              condition: condition
+            - next: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              condition: condition
+            name: await analyst confirmation
+            action: action
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            type: human
+      properties:
+        alarm:
+          $ref: '#/components/schemas/Alarm'
+        id:
+          format: uuid
+          type: string
+        nextStep:
+          format: uuid
+          type: string
+          nullable: true
+        playbook:
+          $ref: '#/components/schemas/Playbook'
+    Playbook_trigger_oneOf:
+      example:
+        match: Threat.Code == 'phishing'
+      properties:
+        match:
+          example: Threat.Code == 'phishing'
+          format: SpEL
+          type: string
+    Playbook_trigger_oneOf_1:
+      properties:
+        rule:
+          format: uuid
+          type: string
+    Playbook_trigger:
+      oneOf:
+      - $ref: '#/components/schemas/Playbook_trigger_oneOf'
+      - $ref: '#/components/schemas/Playbook_trigger_oneOf_1'
+      x-one-of-name: PlaybookTrigger
+    Rule_fields_inner:
+      example:
+        field: field
+        type: type
+      properties:
+        field:
+          type: string
+        type:
+          type: string
+    Step_next_oneOf_inner:
+      example:
+        next: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        condition: condition
+      properties:
+        condition:
+          type: string
+        next:
+          format: uuid
+          type: string
+    Step_next:
+      oneOf:
+      - items:
+          $ref: '#/components/schemas/Step_next_oneOf_inner'
+        minItems: 2
+        type: array
+      - format: uuid
+        type: string
+        nullable: true
+      x-one-of-name: StepNext

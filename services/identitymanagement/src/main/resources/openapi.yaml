@@ -1,0 +1,245 @@
+openapi: 3.1.0
+info:
+  description: "Manages user access, authentication, and privileges, as well as end-point\
+    \ devices."
+  title: Identity Management Service
+  version: 1.0.0
+servers:
+- url: localhost
+paths:
+  /actions:
+    post:
+      operationId: postAction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Action'
+        required: true
+      responses:
+        "200":
+          description: OK
+      summary: Create a new action
+      tags:
+      - actions
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      x-tags:
+      - tag: actions
+  /users:
+    get:
+      operationId: getUsers
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/User'
+                type: array
+          description: OK
+      summary: Get all users
+      tags:
+      - users
+      x-accepts:
+      - application/json
+      x-tags:
+      - tag: users
+    post:
+      operationId: postUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        "200":
+          description: OK
+      summary: Create a new user
+      tags:
+      - users
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      x-tags:
+      - tag: users
+  /users/{id}:
+    delete:
+      operationId: deleteUser
+      parameters:
+      - description: User ID
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: OK
+      summary: Delete a user
+      tags:
+      - users
+      x-accepts:
+      - application/json
+      x-tags:
+      - tag: users
+    get:
+      operationId: getUser
+      parameters:
+      - description: User ID
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: OK
+      summary: Get a user
+      tags:
+      - users
+      x-accepts:
+      - application/json
+      x-tags:
+      - tag: users
+    parameters:
+    - description: User ID
+      explode: false
+      in: path
+      name: id
+      required: true
+      schema:
+        format: uuid
+        type: string
+      style: simple
+    put:
+      operationId: putUser
+      parameters:
+      - description: User ID
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        "200":
+          description: OK
+      summary: Update a user
+      tags:
+      - users
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      x-tags:
+      - tag: users
+components:
+  schemas:
+    Action:
+      example:
+        action:
+          code: code
+          data:
+            key: ""
+        user:
+          endpoints:
+          - ip: ip
+            host: host
+            name: client-1
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - ip: ip
+            host: host
+            name: client-1
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          role: analyst
+          name: Firstname Lastname
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          email: email
+      properties:
+        action:
+          $ref: '#/components/schemas/Action_action'
+        user:
+          $ref: '#/components/schemas/User'
+    Endpoint:
+      example:
+        ip: ip
+        host: host
+        name: client-1
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        host:
+          format: hostname
+          type: string
+          nullable: true
+        id:
+          format: uuid
+          type: string
+        ip:
+          format: ipv4
+          type: string
+        name:
+          example: client-1
+          type: string
+    User:
+      example:
+        endpoints:
+        - ip: ip
+          host: host
+          name: client-1
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - ip: ip
+          host: host
+          name: client-1
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        role: analyst
+        name: Firstname Lastname
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        email: email
+      properties:
+        email:
+          format: email
+          type: string
+        endpoints:
+          items:
+            $ref: '#/components/schemas/Endpoint'
+          type: array
+        id:
+          format: uuid
+          type: string
+        name:
+          example: Firstname Lastname
+          type: string
+        role:
+          example: analyst
+          type: string
+    Action_action:
+      example:
+        code: code
+        data:
+          key: ""
+      properties:
+        code:
+          type: string
+        data:
+          additionalProperties: true
+          type: object

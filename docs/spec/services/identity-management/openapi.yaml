@@ -8,6 +8,9 @@ servers:
 paths:
   /users:
     get:
+      operationId: getUsers
+      tags:
+        - users
       summary: Get all users
       responses:
         '200':
@@ -19,6 +22,9 @@ paths:
                 items:
                   $ref: '../../common-schemas/users.yaml#/components/schemas/User'
     post:
+      operationId: postUser
+      tags:
+        - users
       summary: Create a new user
       requestBody:
         content:
@@ -26,6 +32,9 @@ paths:
             schema:
               $ref: '../../common-schemas/users.yaml#/components/schemas/User'
         required: true
+      responses:
+        '200':
+          description: OK
   /users/{id}:
     parameters:
       - in: path
@@ -36,6 +45,9 @@ paths:
         required: true
         description: User ID
     get:
+      operationId: getUser
+      tags:
+        - users
       summary: Get a user
       responses:
         '200':
@@ -45,6 +57,9 @@ paths:
               schema:
                 $ref: '../../common-schemas/users.yaml#/components/schemas/User'
     put:
+      operationId: putUser
+      tags:
+        - users
       summary: Update a user
       requestBody:
         content:
@@ -52,10 +67,22 @@ paths:
             schema:
               $ref: '../../common-schemas/users.yaml#/components/schemas/User'
         required: true
+      responses:
+        '200':
+          description: OK
     delete:
+      operationId: deleteUser
+      tags:
+        - users
       summary: Delete a user
+      responses:
+        '200':
+          description: OK
   /actions:
     post:
+      operationId: postAction
+      tags:
+        - actions
       summary: Create a new action
       requestBody:
         content:
@@ -63,3 +90,6 @@ paths:
             schema:
               $ref: '../../common-schemas/actions.yaml#/components/schemas/Action'
         required: true
+      responses:
+        '200':
+          description: OK

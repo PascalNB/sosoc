@@ -9,6 +9,9 @@ servers:
 paths:
   /workflows:
     post:
+      operationId: postWorkflow
+      tags:
+        - workflows
       summary: Create a new workflow
       requestBody:
         content:
@@ -16,6 +19,9 @@ paths:
             schema:
               $ref: '../../common-schemas/workflows.yaml#/components/schemas/Workflow'
         required: true
+      responses:
+        '200':
+          description: OK
   /workflows/{id}:
     parameters:
       - in: path
@@ -26,6 +32,9 @@ paths:
         required: true
         description: Playbook ID
     put:
+      operationId: putWorkflow
+      tags:
+        - workflows
       summary: Update an existing workflow
       requestBody:
         content:
@@ -33,3 +42,6 @@ paths:
             schema:
               $ref: '../../common-schemas/workflows.yaml#/components/schemas/Workflow'
         required: true
+      responses:
+        '200':
+          description: OK
