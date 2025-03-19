@@ -8,6 +8,7 @@ servers:
 paths:
   /logs:
     get:
+      operationId: getLogs
       summary: Get all log entries
       responses:
         '200':
@@ -19,6 +20,7 @@ paths:
                 items:
                   $ref: '../../common-schemas/logs.yaml#/components/schemas/LogEntry'
     post:
+      operationId: postLog
       summary: Create a new log entry
       requestBody:
         content:
@@ -26,6 +28,9 @@ paths:
             schema:
               $ref: '../../common-schemas/logs.yaml#/components/schemas/LogEntry'
         required: true
+      responses:
+        '200':
+          description: OK
   /logs/{id}:
     parameters:
       - in: path
@@ -36,6 +41,7 @@ paths:
         required: true
         description: Log entry ID
     get:
+      operationId: getLog
       summary: Get a log entry
       responses:
         '200':
@@ -46,6 +52,7 @@ paths:
                 $ref: '../../common-schemas/logs.yaml#/components/schemas/LogEntry'
   /rules:
     get:
+      operationId: getRules
       summary: Get all rules
       responses:
         '200':
@@ -57,6 +64,7 @@ paths:
                 items:
                   $ref: '../../common-schemas/rules.yaml#/components/schemas/Rule'
     post:
+      operationId: postRule
       summary: create a new rule
       requestBody:
         content:
@@ -64,6 +72,9 @@ paths:
             schema:
               $ref: '../../common-schemas/rules.yaml#/components/schemas/Rule'
         required: true
+      responses:
+        '200':
+          description: OK
   /rules/{id}:
     parameters:
       - in: path
@@ -74,6 +85,7 @@ paths:
         required: true
         description: Alarm ID
     get:
+      operationId: getRule
       summary: Get a rule
       responses:
         '200':
@@ -83,6 +95,7 @@ paths:
               schema:
                 $ref: '../../common-schemas/rules.yaml#/components/schemas/Rule'
     put:
+      operationId: putRule
       summary: Modify a rule
       requestBody:
         content:
@@ -90,5 +103,14 @@ paths:
             schema:
               $ref: '../../common-schemas/rules.yaml#/components/schemas/Rule'
         required: true
+      responses:
+        '200':
+          description: OK
     delete:
+      operationId: deleteRule
       summary: Delete a rule
+      responses:
+        '200':
+          description: OK
+components:
+  schemas: null
