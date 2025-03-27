@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/services/alertnotify/alertnotify.iml" filepath="$PROJECT_DIR$/services/alertnotify/alertnotify.iml" />
+      <module fileurl="file://$PROJECT_DIR$/services/automatedresponse/automatedresponse.iml" filepath="$PROJECT_DIR$/services/automatedresponse/automatedresponse.iml" />
+      <module fileurl="file://$PROJECT_DIR$/services/identitymanagement/identitymanagement.iml" filepath="$PROJECT_DIR$/services/identitymanagement/identitymanagement.iml" />
+      <module fileurl="file://$PROJECT_DIR$/services/logmonitor/logmonitor.iml" filepath="$PROJECT_DIR$/services/logmonitor/logmonitor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/services/playbookmanagement/playbookmanagement.iml" filepath="$PROJECT_DIR$/services/playbookmanagement/playbookmanagement.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/soa-project.iml" filepath="$PROJECT_DIR$/.idea/soa-project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/services/threatintelligence/threatintelligence.iml" filepath="$PROJECT_DIR$/services/threatintelligence/threatintelligence.iml" />
+    </modules>
+  </component>
+</project>
