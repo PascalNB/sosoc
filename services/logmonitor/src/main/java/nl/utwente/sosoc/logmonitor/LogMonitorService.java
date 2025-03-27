@@ -1,15 +1,31 @@
 package nl.utwente.sosoc.logmonitor;
 
+import jakarta.annotation.PostConstruct;
 import nl.utwente.sosoc.logmonitor.model.LogEntry;
 import nl.utwente.sosoc.logmonitor.model.Rule;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class LogMonitorService {
-    private static Map<UUID, LogEntry> logEntries = new HashMap<>();
-    private static Map<UUID, Rule> rules = new HashMap<>();
+
+    private final RuleSchedulerService ruleSchedulerService;
+    private static Map<UUID, LogEntry> logEntries = new ConcurrentHashMap<>();
+    private static Map<UUID, Rule> rules = new ConcurrentHashMap<>();
+
+    public LogMonitorService(ThreadPoolTaskScheduler scheduler) {
+        this.ruleSchedulerService = new RuleSchedulerService(scheduler, this);
+    }
+
+    @PostConstruct
+    public void init() {
+        this.ruleSchedulerService.init();
+    }
 
     /**
      * Get a log entry by its id.
@@ -61,8 +77,8 @@ public class LogMonitorService {
      */
     public void saveRule(Rule rule) {
         UUID newId = UUID.randomUUID();
-        rule.setId(newId);
-        rules.put(newId, rule);
+        rules.put(newId, rule.id(newId));
+        ruleSchedulerService.scheduleRule(rule);
     }
 
     /**
@@ -71,5 +87,6 @@ public class LogMonitorService {
      */
     public void deleteRule(UUID id) {
         rules.remove(id);
+        ruleSchedulerService.cancelTask(id.toString());
     }
 }

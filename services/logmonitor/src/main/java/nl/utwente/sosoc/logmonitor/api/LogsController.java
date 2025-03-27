@@ -11,8 +11,8 @@ import java.util.UUID;
 
 @Controller
 public class LogsController implements LogsApi {
-    @Autowired
-    private LogMonitorService logMonitorService;
+
+    @Autowired private LogMonitorService logMonitorService;
 
     @Override
     public ResponseEntity<LogEntry> getLog(UUID id) {
