@@ -56,7 +56,7 @@ public class LogMonitorService {
     }
 
     /**
-     * Save a rule.
+     * Save a rule with a random id.
      * @param rule The rule to save.
      */
     public void saveRule(Rule rule) {
@@ -65,6 +65,10 @@ public class LogMonitorService {
         rules.put(newId, rule);
     }
 
+    /**
+     * Delete a rule by its id.
+     * @param id of the rule to be deleted.
+     */
     public void deleteRule(UUID id) {
         rules.remove(id);
     }
