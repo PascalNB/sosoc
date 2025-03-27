@@ -6,21 +6,6 @@ info:
 servers:
   - url: 'localhost'
 paths:
-  /alarms:
-    post:
-      operationId: postAlarm
-      tags:
-        - alarms
-      summary: Send an alarm to identify incident response workflow
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '../../common-schemas/alarms.yaml#/components/schemas/Alarm'
-        required: true
-      responses:
-        '200':
-          description: OK
   /playbooks:
     get:
       operationId: getPlaybooks
@@ -93,3 +78,9 @@ paths:
       responses:
         '200':
           description: OK
+components:
+  schemas:
+    WorkflowInstance:
+      $ref: '../../common-schemas/workflows.yaml#/components/schemas/Workflow'
+    AlarmInstance:
+      $ref: '../../common-schemas/alarms.yaml#/components/schemas/Alarm'

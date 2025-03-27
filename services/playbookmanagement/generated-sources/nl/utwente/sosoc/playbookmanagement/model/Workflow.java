@@ -1,12 +1,12 @@
-package nl.utwente.sosoc.alertnotify.model;
+package nl.utwente.sosoc.playbookmanagement.model;
 
 import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.UUID;
-import nl.utwente.sosoc.alertnotify.model.Alarm;
-import nl.utwente.sosoc.alertnotify.model.Playbook;
+import nl.utwente.sosoc.playbookmanagement.model.Alarm;
+import nl.utwente.sosoc.playbookmanagement.model.Playbook;
 import org.springframework.lang.Nullable;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
@@ -22,7 +22,7 @@ import jakarta.annotation.Generated;
  * Workflow
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-27T16:17:36.231574700+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-27T16:17:45.549472700+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
 public class Workflow {
 
   private @Nullable Alarm alarm;

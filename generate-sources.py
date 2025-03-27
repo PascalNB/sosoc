@@ -23,7 +23,8 @@ def get_generation_command(input_path, output_name) -> list[str]:
         f'configPackage=nl.utwente.sosoc.{output_name}.configuration,'
         'interfaceOnly=true,'
         'useTags=true,'
-        'generateSupportingFiles=true'
+        'generateSupportingFiles=true,'
+        'dateLibrary=java8'
     ]
 
 
@@ -53,7 +54,7 @@ def flatten_openapi_spec(input_path) -> Any:
 def resolve_references(node, components, base_path, resolved_cache):
     """Recursively resolve external $ref references and replace them with internal schema references."""
     if isinstance(node, dict):
-        for key, value in node.items():
+        for key, value in list(node.items()):
             if isinstance(value, dict) and '$ref' in value:
                 ref_path: str = value['$ref']
                 if ref_path.startswith('#'):
@@ -68,7 +69,7 @@ def resolve_references(node, components, base_path, resolved_cache):
                     schema_yaml = load_yaml(ref_file_path)
                     resolved_cache[ref_file_path] = schema_yaml  # Store to avoid reloading
 
-                for schema_name, schema_content in schema_yaml["components"]["schemas"].items():
+                for schema_name, schema_content in list(schema_yaml["components"]["schemas"].items()):
                     if schema_name not in components:  # Avoid overwriting if already included
                         components[schema_name] = schema_content
                         # Recursively resolve references in each schema

@@ -26,7 +26,7 @@ import jakarta.annotation.Generated;
  * Rule
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-27T12:41:18.804285600+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-27T16:17:47.945843800+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
 public class Rule {
 
   @Valid

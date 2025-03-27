@@ -1,16 +1,15 @@
 .openapi-generator-ignore
 README.md
-nl/utwente/sosoc/playbookmanagement/api/AlarmsApi.java
 nl/utwente/sosoc/playbookmanagement/api/ApiUtil.java
 nl/utwente/sosoc/playbookmanagement/api/PlaybooksApi.java
 nl/utwente/sosoc/playbookmanagement/model/Alarm.java
 nl/utwente/sosoc/playbookmanagement/model/ConditionalNext.java
 nl/utwente/sosoc/playbookmanagement/model/IOC.java
-nl/utwente/sosoc/playbookmanagement/model/MatchTrigger.java
 nl/utwente/sosoc/playbookmanagement/model/Playbook.java
 nl/utwente/sosoc/playbookmanagement/model/Rule.java
 nl/utwente/sosoc/playbookmanagement/model/RuleFieldsInner.java
 nl/utwente/sosoc/playbookmanagement/model/Severity.java
 nl/utwente/sosoc/playbookmanagement/model/Step.java
 nl/utwente/sosoc/playbookmanagement/model/Threat.java
+nl/utwente/sosoc/playbookmanagement/model/Workflow.java
 pom.xml
