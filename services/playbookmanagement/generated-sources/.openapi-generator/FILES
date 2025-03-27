@@ -8,12 +8,9 @@ nl/utwente/sosoc/playbookmanagement/model/ConditionalNext.java
 nl/utwente/sosoc/playbookmanagement/model/IOC.java
 nl/utwente/sosoc/playbookmanagement/model/MatchTrigger.java
 nl/utwente/sosoc/playbookmanagement/model/Playbook.java
-nl/utwente/sosoc/playbookmanagement/model/PlaybookTrigger.java
 nl/utwente/sosoc/playbookmanagement/model/Rule.java
 nl/utwente/sosoc/playbookmanagement/model/RuleFieldsInner.java
-nl/utwente/sosoc/playbookmanagement/model/RuleTrigger.java
 nl/utwente/sosoc/playbookmanagement/model/Severity.java
 nl/utwente/sosoc/playbookmanagement/model/Step.java
-nl/utwente/sosoc/playbookmanagement/model/StepNext.java
 nl/utwente/sosoc/playbookmanagement/model/Threat.java
 pom.xml

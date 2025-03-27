@@ -5,8 +5,6 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import org.springframework.lang.Nullable;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import java.util.UUID;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
@@ -21,8 +19,8 @@ import jakarta.annotation.Generated;
  * MatchTrigger
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-20T00:08:19.327828997+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
-public class MatchTrigger implements PlaybookTrigger {
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-27T12:41:03.727282200+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
+public class MatchTrigger {
 
   private @Nullable String match;
 

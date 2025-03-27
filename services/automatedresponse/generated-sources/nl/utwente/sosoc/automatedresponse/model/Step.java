@@ -5,8 +5,11 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
-import nl.utwente.sosoc.automatedresponse.model.StepNext;
+import nl.utwente.sosoc.automatedresponse.model.ConditionalNext;
 import org.springframework.lang.Nullable;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
@@ -22,7 +25,7 @@ import jakarta.annotation.Generated;
  * Step
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-20T00:08:22.550255208+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-27T12:41:06.970250400+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
 public class Step {
 
   private @Nullable String action;
@@ -31,7 +34,8 @@ public class Step {
 
   private @Nullable String name;
 
-  private @Nullable StepNext next;
+  @Valid
+  private List<@Valid ConditionalNext> next = new ArrayList<>();
 
   /**
    * Gets or Sets type
@@ -130,8 +134,16 @@ public class Step {
     this.name = name;
   }
 
-  public Step next(StepNext next) {
+  public Step next(List<@Valid ConditionalNext> next) {
     this.next = next;
+    return this;
+  }
+
+  public Step addNextItem(ConditionalNext nextItem) {
+    if (this.next == null) {
+      this.next = new ArrayList<>();
+    }
+    this.next.add(nextItem);
     return this;
   }
 
@@ -142,11 +154,11 @@ public class Step {
   @Valid 
   @Schema(name = "next", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("next")
-  public StepNext getNext() {
+  public List<@Valid ConditionalNext> getNext() {
     return next;
   }
 
-  public void setNext(StepNext next) {
+  public void setNext(List<@Valid ConditionalNext> next) {
     this.next = next;
   }
 

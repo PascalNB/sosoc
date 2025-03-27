@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-import nl.utwente.sosoc.alertnotify.model.PlaybookTrigger;
+import nl.utwente.sosoc.alertnotify.model.MatchTrigger;
 import nl.utwente.sosoc.alertnotify.model.Step;
 import org.springframework.lang.Nullable;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -25,7 +25,7 @@ import jakarta.annotation.Generated;
  * Playbook
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-20T00:08:19.327828997+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-27T12:41:03.727282200+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
 public class Playbook {
 
   private @Nullable String description;
@@ -39,7 +39,7 @@ public class Playbook {
   @Valid
   private List<@Valid Step> steps = new ArrayList<>();
 
-  private @Nullable PlaybookTrigger trigger;
+  private @Nullable MatchTrigger trigger;
 
   public Playbook description(String description) {
     this.description = description;
@@ -149,7 +149,7 @@ public class Playbook {
     this.steps = steps;
   }
 
-  public Playbook trigger(PlaybookTrigger trigger) {
+  public Playbook trigger(MatchTrigger trigger) {
     this.trigger = trigger;
     return this;
   }
@@ -161,11 +161,11 @@ public class Playbook {
   @Valid 
   @Schema(name = "trigger", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("trigger")
-  public PlaybookTrigger getTrigger() {
+  public MatchTrigger getTrigger() {
     return trigger;
   }
 
-  public void setTrigger(PlaybookTrigger trigger) {
+  public void setTrigger(MatchTrigger trigger) {
     this.trigger = trigger;
   }
 
