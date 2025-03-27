@@ -15,7 +15,6 @@ public class RulesController implements RulesApi {
     @Autowired
     LogMonitorService logMonitorService;
 
-
     @Override
     public ResponseEntity<List<Rule>> getRules() {
         if (logMonitorService.getRules().isEmpty()) {
@@ -38,6 +37,13 @@ public class RulesController implements RulesApi {
         return ResponseEntity.ok().build();
     }
 
+    /**
+     * Update a rule.
+     * ToDO: Merge the rule into the existing rule.
+     * @param id Alarm ID (required)
+     * @param rule  (required)
+     * @return OK (status code 200)
+     */
     @Override
     public ResponseEntity<Void> putRule(UUID id, Rule rule) {
         logMonitorService.saveRule(rule);
