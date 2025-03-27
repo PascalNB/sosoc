@@ -14,7 +14,6 @@ public class LogMonitorService {
     /**
      * Get a log entry by its id.
      * @param id The id of the log entry
-     * ToDo: adjust name in controller.
      * @return The log entry.
      */
     public LogEntry getLogById(UUID id) {
@@ -44,7 +43,7 @@ public class LogMonitorService {
      * @param id The id of the rule.
      * @return The rule.
      */
-    public Rule getRule(UUID id) {
+    public Rule getRuleById(UUID id) {
         return rules.get(id);
     }
 

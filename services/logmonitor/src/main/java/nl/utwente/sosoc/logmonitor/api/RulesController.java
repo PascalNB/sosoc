@@ -16,10 +16,10 @@ public class RulesController implements RulesApi {
 
     @Override
     public ResponseEntity<Rule> getRule(UUID id) {
-        if (logMonitorService.getRule(id) == null) {
+        if (logMonitorService.getRuleById(id) == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(logMonitorService.getRule(id));
+        return ResponseEntity.ok(logMonitorService.getRuleById(id));
     }
 
     @Override
@@ -46,12 +46,18 @@ public class RulesController implements RulesApi {
      */
     @Override
     public ResponseEntity<Void> putRule(UUID id, Rule rule) {
+        if (logMonitorService.getRuleById(id) == null) {
+            return ResponseEntity.notFound().build();
+        }
         logMonitorService.saveRule(rule);
         return ResponseEntity.ok().build();
     }
 
     @Override
     public ResponseEntity<Void> deleteRule(UUID id) {
+        if (logMonitorService.getRuleById(id) == null) {
+            return ResponseEntity.notFound().build();
+        }
         logMonitorService.deleteRule(id);
         return ResponseEntity.ok().build();
     }

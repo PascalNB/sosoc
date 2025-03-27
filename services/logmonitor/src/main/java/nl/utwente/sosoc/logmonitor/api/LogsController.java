@@ -16,11 +16,10 @@ public class LogsController implements LogsApi {
 
     @Override
     public ResponseEntity<LogEntry> getLog(UUID id) {
-        LogEntry entry = logMonitorService.getLog(id);
-        if (entry == null) {
+        if (logMonitorService.getLogById(id) == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(logMonitorService.getLog(id));
+        return ResponseEntity.ok(logMonitorService.getLogById(id));
     }
 
     @Override
