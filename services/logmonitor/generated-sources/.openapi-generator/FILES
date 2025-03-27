@@ -1,0 +1,14 @@
+.openapi-generator-ignore
+README.md
+nl/utwente/sosoc/logmonitor/api/ApiUtil.java
+nl/utwente/sosoc/logmonitor/api/LogsApi.java
+nl/utwente/sosoc/logmonitor/api/RulesApi.java
+nl/utwente/sosoc/logmonitor/model/Alarm.java
+nl/utwente/sosoc/logmonitor/model/Endpoint.java
+nl/utwente/sosoc/logmonitor/model/IOC.java
+nl/utwente/sosoc/logmonitor/model/LogEntry.java
+nl/utwente/sosoc/logmonitor/model/Rule.java
+nl/utwente/sosoc/logmonitor/model/RuleFieldsInner.java
+nl/utwente/sosoc/logmonitor/model/Severity.java
+nl/utwente/sosoc/logmonitor/model/Threat.java
+pom.xml

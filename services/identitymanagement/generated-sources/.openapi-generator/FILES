@@ -1,0 +1,10 @@
+.openapi-generator-ignore
+README.md
+nl/utwente/sosoc/identitymanagement/api/ActionsApi.java
+nl/utwente/sosoc/identitymanagement/api/ApiUtil.java
+nl/utwente/sosoc/identitymanagement/api/UsersApi.java
+nl/utwente/sosoc/identitymanagement/model/Action.java
+nl/utwente/sosoc/identitymanagement/model/ActionAction.java
+nl/utwente/sosoc/identitymanagement/model/Endpoint.java
+nl/utwente/sosoc/identitymanagement/model/User.java
+pom.xml

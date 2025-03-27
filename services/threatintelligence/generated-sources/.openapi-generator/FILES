@@ -1,0 +1,12 @@
+.openapi-generator-ignore
+README.md
+nl/utwente/sosoc/threatintelligence/api/AlarmsApi.java
+nl/utwente/sosoc/threatintelligence/api/ApiUtil.java
+nl/utwente/sosoc/threatintelligence/api/IocsApi.java
+nl/utwente/sosoc/threatintelligence/model/Alarm.java
+nl/utwente/sosoc/threatintelligence/model/IOC.java
+nl/utwente/sosoc/threatintelligence/model/Rule.java
+nl/utwente/sosoc/threatintelligence/model/RuleFieldsInner.java
+nl/utwente/sosoc/threatintelligence/model/Severity.java
+nl/utwente/sosoc/threatintelligence/model/Threat.java
+pom.xml
