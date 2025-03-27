@@ -1,6 +1,12 @@
 package nl.utwente.sosoc.playbookmanagement;
 
-import nl.utwente.sosoc.playbookmanagement.model.Playbook;
+import jakarta.annotation.PostConstruct;
+import nl.utwente.sosoc.playbookmanagement.model.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.EvaluationException;
+import org.springframework.expression.Expression;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -9,6 +15,82 @@ import java.util.*;
 public class PlaybookManagementService {
     private static Map<UUID, Playbook> playbooks = new HashMap<>();
 
+    @Autowired private WorkflowsProducer workflowsProducer;
+
+    private Optional<Step> getStep(Playbook playbook, UUID stepId) {
+        return Objects.requireNonNull(playbook)
+                .getSteps().stream()
+                .filter(step -> Objects.equals(stepId, step.getId()))
+                .findFirst();
+    }
+
+    @PostConstruct
+    public void init() {
+        UUID uuid = UUID.randomUUID();
+        UUID firstStepId = UUID.randomUUID();
+        UUID nextStepId = UUID.randomUUID();
+        Playbook playbook = new Playbook()
+                .id(uuid)
+                .name("Phishing Email Playbook")
+                .firstStep(firstStepId)
+                .steps(List.of(
+                        new Step()
+                                .id(firstStepId)
+                                .name("Block Email")
+                                .action("block email")
+                                .type(Step.TypeEnum.AUTO)
+                                .next(List.of(
+                                        new ConditionalNext()
+                                                .condition(Severity.HIGH.getValue())
+                                                .next(nextStepId)
+                                )),
+                        new Step()
+                                .id(nextStepId)
+                                .name("Notify User")
+                                .action("notify user")
+                                .type(Step.TypeEnum.HUMAN)
+                ))
+                .trigger("Threat.Code == 'phishing'");
+        playbooks.put(uuid, playbook);
+    }
+
+    public Playbook detectPlaybook(Alarm alarm) {
+        ExpressionParser parser = new SpelExpressionParser();
+        for (Playbook playbook : playbooks.values()) {
+            String trigger = playbook.getTrigger();
+            if (trigger == null) {
+                continue;
+            }
+            Expression expression = parser.parseExpression(trigger);
+            try {
+                Boolean result = expression.getValue(alarm, Boolean.class);
+                if (result != null && result) {
+                    return playbook;
+                }
+            } catch (EvaluationException ignored) {
+            }
+        }
+        return null;
+    }
+
+    public void consumeAlarm(Alarm alarm) {
+        Playbook playbook = detectPlaybook(alarm);
+        if (playbook != null) {
+            System.out.println("Triggering playbook: " + playbook.getName());
+            Workflow workflow = new Workflow()
+                    .id(UUID.randomUUID())
+                    .playbook(playbook)
+                    .alarm(alarm)
+                    .nextStep(playbook.getFirstStep());
+            Step nextStep = getStep(playbook, playbook.getFirstStep()).orElseThrow();
+            if (Step.TypeEnum.AUTO.equals(nextStep.getType())) {
+                workflowsProducer.send("workflow.auto", workflow);
+
+            } else if (Step.TypeEnum.HUMAN.equals(nextStep.getType())) {
+                workflowsProducer.send("workflow.human", workflow);
+            }
+        }
+    }
     /**
      * Get a playbook by its ID.
      * @param id the ID of the playbook
