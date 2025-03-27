@@ -36,7 +36,15 @@ public class IocsController implements IocsApi {
 
     @Override
     public ResponseEntity<Void> putIOC(UUID id, IOC ioc) {
-        if(threatIntelligenceService.updateIoc(id, ioc)) {
+        if (threatIntelligenceService.updateIoc(id, ioc)) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteIOC(UUID id) {
+        if (threatIntelligenceService.deleteIoc(id)) {
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();

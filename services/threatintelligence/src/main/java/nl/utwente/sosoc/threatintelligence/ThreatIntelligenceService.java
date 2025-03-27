@@ -46,11 +46,14 @@ public class ThreatIntelligenceService {
      */
     public IOC detectIoc(Alarm alarm) {
         ExpressionParser parser = new SpelExpressionParser();
+
         for (IOC ioc : iocs.values()) {
             String matchString = ioc.getMatch();
+
             if (matchString == null) {
                 continue;
             }
+
             Expression expression = parser.parseExpression(matchString);
             try {
                 Boolean result = expression.getValue(alarm, Boolean.class);
@@ -60,6 +63,7 @@ public class ThreatIntelligenceService {
             } catch (EvaluationException ignored) {
             }
         }
+
         return null;
     }
 
@@ -104,6 +108,16 @@ public class ThreatIntelligenceService {
         // TODO: properly update
         iocs.put(uuid, ioc);
         return true;
+    }
+
+    /**
+     * Delete an existing IOC entry by ID.
+     *
+     * @param uuid the ID
+     * @return whether the IOC for the given ID was found and deleted
+     */
+    public boolean deleteIoc(UUID uuid) {
+        return iocs.remove(uuid) != null;
     }
 
 }
