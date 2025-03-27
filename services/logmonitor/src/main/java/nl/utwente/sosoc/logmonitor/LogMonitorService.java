@@ -14,9 +14,10 @@ public class LogMonitorService {
     /**
      * Get a log entry by its id.
      * @param id The id of the log entry
+     * ToDo: adjust name in controller.
      * @return The log entry.
      */
-    public LogEntry getLog(UUID id) {
+    public LogEntry getLogById(UUID id) {
         return logEntries.get(id);
     }
 

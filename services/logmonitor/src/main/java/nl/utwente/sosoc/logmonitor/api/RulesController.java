@@ -12,8 +12,15 @@ import java.util.UUID;
 
 @Controller
 public class RulesController implements RulesApi {
-    @Autowired
-    LogMonitorService logMonitorService;
+    @Autowired private LogMonitorService logMonitorService;
+
+    @Override
+    public ResponseEntity<Rule> getRule(UUID id) {
+        if (logMonitorService.getRule(id) == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(logMonitorService.getRule(id));
+    }
 
     @Override
     public ResponseEntity<List<Rule>> getRules() {
@@ -23,13 +30,6 @@ public class RulesController implements RulesApi {
         return ResponseEntity.ok(logMonitorService.getRules());
     }
 
-    @Override
-    public ResponseEntity<Rule> getRule(@PathVariable("id") UUID id) {
-        if (logMonitorService.getRule(id) == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(logMonitorService.getRule(id));
-    }
 
     @Override
     public ResponseEntity<Void> postRule(Rule rule) {
