@@ -11,4 +11,4 @@ components:
         match:
           type: string
           format: SpEL
-          example: Data['email']['source'] == malicious.com
+          example: Data['email']['source'].contains('malicious.com')

@@ -25,7 +25,7 @@ import jakarta.annotation.Generated;
  * LogEntry
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-27T16:17:42.979090500+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-27T17:40:40.665444700+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
 public class LogEntry {
 
   @Valid

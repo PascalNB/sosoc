@@ -20,7 +20,7 @@ import jakarta.annotation.Generated;
  * Endpoint
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-27T16:17:40.733403100+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-27T17:40:38.351823500+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
 public class Endpoint {
 
   private @Nullable String host;

@@ -21,7 +21,7 @@ import jakarta.annotation.Generated;
  * IOC
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-27T16:17:42.979090500+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-27T17:40:40.665444700+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
 public class IOC {
 
   private @Nullable UUID id;
@@ -60,7 +60,7 @@ public class IOC {
    * @return match
    */
   
-  @Schema(name = "match", example = "Data['email']['source'] == malicious.com", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @Schema(name = "match", example = "Data['email']['source'].contains('malicious.com')", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("match")
   public String getMatch() {
     return match;

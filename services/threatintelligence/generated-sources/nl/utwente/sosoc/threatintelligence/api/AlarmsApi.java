@@ -33,7 +33,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-27T16:17:47.945843800+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-27T17:40:45.413861+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
 @Validated
 @Tag(name = "alarms", description = "the alarms API")
 public interface AlarmsApi {
@@ -71,7 +71,7 @@ public interface AlarmsApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"match\" : \"Data['email']['source'] == malicious.com\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"threat\" : { \"severity\" : \"high\", \"code\" : \"phishing\", \"technique\" : \"t1566.001\", \"tactic\" : \"ta0001\" } }";
+                    String exampleString = "{ \"match\" : \"Data['email']['source'].contains('malicious.com')\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"threat\" : { \"severity\" : \"high\", \"code\" : \"phishing\", \"technique\" : \"t1566.001\", \"tactic\" : \"ta0001\" } }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

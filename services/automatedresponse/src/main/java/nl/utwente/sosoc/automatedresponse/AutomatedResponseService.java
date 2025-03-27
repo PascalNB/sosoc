@@ -3,13 +3,14 @@ package nl.utwente.sosoc.automatedresponse;
 import nl.utwente.sosoc.automatedresponse.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
-@Component
+@Service
 public class AutomatedResponseService {
 
     @Autowired private WorkflowsProducer workflowsProducer;
@@ -60,6 +61,7 @@ public class AutomatedResponseService {
 
         if (Step.TypeEnum.AUTO.equals(nextStep.getType())) {
             workflowsProducer.send("workflow.auto", workflow);
+
         } else if (Step.TypeEnum.HUMAN.equals(nextStep.getType())) {
             workflowsProducer.send("workflow.human", workflow);
         }

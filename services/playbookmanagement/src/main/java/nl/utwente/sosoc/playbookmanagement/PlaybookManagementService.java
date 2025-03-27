@@ -1,6 +1,5 @@
 package nl.utwente.sosoc.playbookmanagement;
 
-import nl.utwente.sosoc.playbookmanagement.model.Alarm;
 import nl.utwente.sosoc.playbookmanagement.model.Playbook;
 import org.springframework.stereotype.Service;
 

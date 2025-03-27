@@ -83,7 +83,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '../../common-schemas/rules.yaml#/components/schemas/Rule'
+              $ref: '../../common-schemas/iocs.yaml#/components/schemas/IOC'
         required: true
       responses:
         '200':

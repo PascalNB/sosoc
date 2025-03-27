@@ -5,13 +5,14 @@ import nl.utwente.sosoc.alertnotify.model.Step;
 import nl.utwente.sosoc.alertnotify.model.Workflow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
-@Component
+@Service
 public class AlertNotifyService {
 
     @Autowired private WorkflowsProducer workflowsProducer;
@@ -53,6 +54,7 @@ public class AlertNotifyService {
 
         if (Step.TypeEnum.AUTO.equals(nextStep.getType())) {
             workflowsProducer.send("workflow.auto", workflow);
+
         } else if (Step.TypeEnum.HUMAN.equals(nextStep.getType())) {
             workflowsProducer.send("workflow.human", workflow);
         }

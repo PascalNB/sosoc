@@ -22,7 +22,7 @@ import jakarta.annotation.Generated;
  * Workflow
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-27T16:17:36.231574700+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-27T17:40:33.812130600+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
 public class Workflow {
 
   private @Nullable Alarm alarm;

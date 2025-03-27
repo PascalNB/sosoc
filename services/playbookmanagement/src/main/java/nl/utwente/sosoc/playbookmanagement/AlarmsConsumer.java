@@ -11,7 +11,7 @@ public class AlarmsConsumer {
     /**
      * Receives an alarm from the {@code alarms} message queue and processes it.
      *
-     * @param alarm the workflow instance
+     * @param alarm the alarm instance
      */
     @JmsListener(destination = "alarms")
     public void receiveMessage(Alarm alarm) {
