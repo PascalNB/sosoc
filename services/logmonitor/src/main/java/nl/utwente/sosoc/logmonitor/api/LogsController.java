@@ -2,37 +2,44 @@ package nl.utwente.sosoc.logmonitor.api;
 
 import nl.utwente.sosoc.logmonitor.LogMonitorService;
 import nl.utwente.sosoc.logmonitor.model.LogEntry;
+import nl.utwente.sosoc.logmonitor.repository.DbLogEntry;
+import nl.utwente.sosoc.logmonitor.repository.LogMapper;
+import nl.utwente.sosoc.logmonitor.repository.LogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
-@Controller
+@RestController
 public class LogsController implements LogsApi {
 
-    @Autowired private LogMonitorService logMonitorService;
+    @Autowired private LogRepository logRepository;
 
     @Override
     public ResponseEntity<LogEntry> getLog(UUID id) {
-        if (logMonitorService.getLogById(id) == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(logMonitorService.getLogById(id));
+        return logRepository.findById(id)
+            .map(LogMapper::fromDb)
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
     }
 
     @Override
     public ResponseEntity<List<LogEntry>> getLogs() {
-        if (logMonitorService.getLogs().isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(logMonitorService.getLogs());
+        List<LogEntry> logEntries = StreamSupport.stream(logRepository.findAll().spliterator(), false)
+            .map(LogMapper::fromDb)
+            .toList();
+        return ResponseEntity.ok(logEntries);
     }
 
     @Override
     public ResponseEntity<Void> postLog(LogEntry logEntry) {
-        logMonitorService.saveLogEntry(logEntry);
+        logRepository.save(LogMapper.toDb(logEntry));
         return ResponseEntity.ok().build();
     }
 }
