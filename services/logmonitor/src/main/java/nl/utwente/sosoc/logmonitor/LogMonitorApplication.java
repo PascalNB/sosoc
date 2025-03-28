@@ -14,7 +14,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
     nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class
 )
 @ComponentScan(
-    basePackages = {"nl.utwente.sosoc.logmonitor", "nl.utwente.sosoc.logmonitor.api"},
+    basePackages = {
+        "nl.utwente.sosoc.logmonitor", "nl.utwente.sosoc.logmonitor.api",
+        "nl.utwente.sosoc.logmonitor.repository"},
     nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class
 )
 @EntityScan("nl.utwente.sosoc.logmonitor.repository")

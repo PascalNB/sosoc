@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,11 +25,13 @@ import jakarta.annotation.Generated;
  * Rule
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-27T17:40:40.665444700+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-28T18:16:34.865512200+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
 public class Rule {
 
   @Valid
   private List<@Valid RuleFieldsInner> fields = new ArrayList<>();
+
+  private Integer group = null;
 
   private @Nullable UUID id;
 
@@ -42,7 +43,7 @@ public class Rule {
 
   private @Nullable Threat threat;
 
-  private @Nullable BigDecimal threshold;
+  private Integer threshold = null;
 
   public Rule fields(List<@Valid RuleFieldsInner> fields) {
     this.fields = fields;
@@ -70,6 +71,26 @@ public class Rule {
 
   public void setFields(List<@Valid RuleFieldsInner> fields) {
     this.fields = fields;
+  }
+
+  public Rule group(Integer group) {
+    this.group = group;
+    return this;
+  }
+
+  /**
+   * Get group
+   * @return group
+   */
+  
+  @Schema(name = "group", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("group")
+  public Integer getGroup() {
+    return group;
+  }
+
+  public void setGroup(Integer group) {
+    this.group = group;
   }
 
   public Rule id(UUID id) {
@@ -142,7 +163,7 @@ public class Rule {
    * @return query
    */
   
-  @Schema(name = "query", example = "SELECT * FROM logs WHERE type='email-received' AND data->'email'->>'source' NOT LIKE %example.com AND timestamp >= NOW() - INTERVAL '5 minutes'; ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @Schema(name = "query", example = "SELECT * FROM logs WHERE type='email-received' AND data->'email'->>'source' NOT LIKE '%example.com' AND timestamp >= NOW() - INTERVAL '5 minutes'; ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("query")
   public String getQuery() {
     return query;
@@ -172,24 +193,23 @@ public class Rule {
     this.threat = threat;
   }
 
-  public Rule threshold(BigDecimal threshold) {
+  public Rule threshold(Integer threshold) {
     this.threshold = threshold;
     return this;
   }
 
   /**
    * Get threshold
-   * minimum: 1
    * @return threshold
    */
-  @Valid @DecimalMin("1") 
+  
   @Schema(name = "threshold", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("threshold")
-  public BigDecimal getThreshold() {
+  public Integer getThreshold() {
     return threshold;
   }
 
-  public void setThreshold(BigDecimal threshold) {
+  public void setThreshold(Integer threshold) {
     this.threshold = threshold;
   }
 
@@ -203,6 +223,7 @@ public class Rule {
     }
     Rule rule = (Rule) o;
     return Objects.equals(this.fields, rule.fields) &&
+        Objects.equals(this.group, rule.group) &&
         Objects.equals(this.id, rule.id) &&
         Objects.equals(this.interval, rule.interval) &&
         Objects.equals(this.name, rule.name) &&
@@ -213,7 +234,7 @@ public class Rule {
 
   @Override
   public int hashCode() {
-    return Objects.hash(fields, id, interval, name, query, threat, threshold);
+    return Objects.hash(fields, group, id, interval, name, query, threat, threshold);
   }
 
   @Override
@@ -221,6 +242,7 @@ public class Rule {
     StringBuilder sb = new StringBuilder();
     sb.append("class Rule {\n");
     sb.append("    fields: ").append(toIndentedString(fields)).append("\n");
+    sb.append("    group: ").append(toIndentedString(group)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    interval: ").append(toIndentedString(interval)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");

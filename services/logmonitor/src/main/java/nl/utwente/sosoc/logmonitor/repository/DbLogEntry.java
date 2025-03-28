@@ -1,8 +1,12 @@
 package nl.utwente.sosoc.logmonitor.repository;
 
 import jakarta.persistence.*;
+import nl.utwente.sosoc.logmonitor.model.Endpoint;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.OffsetDateTime;
+import java.util.Map;
 import java.util.UUID;
 
 @Entity
@@ -17,14 +21,16 @@ public class DbLogEntry {
 
     private String event;
 
-    private String endpoint;
+    @JdbcTypeCode(SqlTypes.JSON)
+    private Endpoint endpoint;
 
-    private String data;
+    @JdbcTypeCode(SqlTypes.JSON)
+    private Map<String, Object> data;
 
     public DbLogEntry() {
     }
 
-    public DbLogEntry(OffsetDateTime timestamp, String event, String endpoint, String data) {
+    public DbLogEntry(OffsetDateTime timestamp, String event, Endpoint endpoint, Map<String, Object> data) {
         this.timestamp = timestamp;
         this.event = event;
         this.endpoint = endpoint;
@@ -43,11 +49,11 @@ public class DbLogEntry {
         return event;
     }
 
-    public String getEndpoint() {
+    public Endpoint getEndpoint() {
         return endpoint;
     }
 
-    public String getData() {
+    public Map<String, Object> getData() {
         return data;
     }
 

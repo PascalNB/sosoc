@@ -1,11 +1,9 @@
 package nl.utwente.sosoc.logmonitor;
 
 import jakarta.annotation.PostConstruct;
-import nl.utwente.sosoc.logmonitor.model.LogEntry;
-import nl.utwente.sosoc.logmonitor.model.Rule;
+import nl.utwente.sosoc.logmonitor.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.TaskScheduler;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -14,45 +12,36 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class LogMonitorService {
 
-    private final RuleSchedulerService ruleSchedulerService;
-    private static Map<UUID, LogEntry> logEntries = new ConcurrentHashMap<>();
+    @Autowired private ApplicationContext context;
     private static Map<UUID, Rule> rules = new ConcurrentHashMap<>();
-
-    public LogMonitorService(ThreadPoolTaskScheduler scheduler) {
-        this.ruleSchedulerService = new RuleSchedulerService(scheduler, this);
-    }
 
     @PostConstruct
     public void init() {
-        this.ruleSchedulerService.init();
+        saveRule(new Rule()
+            .id(UUID.randomUUID())
+            .name("External email")
+            .interval("0 */1 * * * *")
+            // Aware of possible SQL injection, but out of scope. We wanted a similar functionality as KQL in Azure
+            .query("SELECT endpoint, data->'email' as email FROM logs WHERE event='email-received' " +
+                "AND data->'email'->>'source' NOT LIKE '%example.com' " +
+                "AND timestamp >= NOW() - INTERVAL '1 minutes'")
+            .threshold(1)
+            .group(1)
+            .threat(new Threat()
+                .code("external email")
+                .severity(Severity.MEDIUM)
+            )
+            .fields(List.of(
+                new RuleFieldsInner()
+                    .field("endpoint")
+                    .type("object"),
+                new RuleFieldsInner()
+                    .field("email")
+                    .type("object")
+            ))
+        );
     }
 
-    /**
-     * Get a log entry by its id.
-     * @param id The id of the log entry
-     * @return The log entry.
-     */
-    public LogEntry getLogById(UUID id) {
-        return logEntries.get(id);
-    }
-
-    /**
-     * Get all log entries.
-     * @return A list of all log entries.
-     */
-    public List<LogEntry> getLogs() {
-        return logEntries.values().stream().toList();
-    }
-
-    /**
-     * Save a log entry with a random id.
-     * @param logEntry The log entry to save.
-     */
-    public void saveLogEntry(LogEntry logEntry) {
-        UUID newId = UUID.randomUUID();
-        logEntry.setId(newId);
-        logEntries.put(newId, logEntry);
-    }
 
     /**
      * Get a rule by its id.
@@ -78,7 +67,7 @@ public class LogMonitorService {
     public void saveRule(Rule rule) {
         UUID newId = UUID.randomUUID();
         rules.put(newId, rule.id(newId));
-        ruleSchedulerService.scheduleRule(rule);
+        context.getBean(RuleSchedulerService.class).scheduleRule(rule);
     }
 
     /**
@@ -87,6 +76,6 @@ public class LogMonitorService {
      */
     public void deleteRule(UUID id) {
         rules.remove(id);
-        ruleSchedulerService.cancelTask(id.toString());
+        context.getBean(RuleSchedulerService.class).cancelTask(id);
     }
 }

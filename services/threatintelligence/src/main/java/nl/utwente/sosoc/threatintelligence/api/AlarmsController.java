@@ -14,8 +14,10 @@ public class AlarmsController implements AlarmsApi {
 
     @Override
     public ResponseEntity<IOC> postAlarm(Alarm alarm) {
+        System.out.println("Received alarm: " + alarm.getRule().getName());
         IOC ioc = threatIntelligenceService.detectIoc(alarm);
         if (ioc != null) {
+            System.out.println("Found IOC: " + ioc.getThreat().getCode());
             return ResponseEntity.ok(ioc);
         }
         return ResponseEntity.notFound().build();

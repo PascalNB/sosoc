@@ -21,7 +21,7 @@ import jakarta.annotation.Generated;
  * Action
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-27T17:40:38.351823500+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-28T18:16:32.443035500+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
 public class Action {
 
   private @Nullable ActionAction action;

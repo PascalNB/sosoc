@@ -33,7 +33,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-27T17:40:40.665444700+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-28T18:16:34.865512200+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
 @Validated
 @Tag(name = "rules", description = "the rules API")
 public interface RulesApi {
@@ -97,7 +97,7 @@ public interface RulesApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"query\" : \"SELECT * FROM logs WHERE type='email-received' AND data->'email'->>'source' NOT LIKE %example.com AND timestamp >= NOW() - INTERVAL '5 minutes';\n\", \"name\" : \"external email\", \"interval\" : \"*/5 * * * *\", \"threshold\" : 1.0800828190461012, \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"threat\" : { \"severity\" : \"high\", \"code\" : \"phishing\", \"technique\" : \"t1566.001\", \"tactic\" : \"ta0001\" }, \"fields\" : [ { \"field\" : \"field\", \"type\" : \"type\" }, { \"field\" : \"field\", \"type\" : \"type\" } ] }";
+                    String exampleString = "{ \"query\" : \"SELECT * FROM logs WHERE type='email-received' AND data->'email'->>'source' NOT LIKE '%example.com' AND timestamp >= NOW() - INTERVAL '5 minutes';\n\", \"name\" : \"external email\", \"interval\" : \"*/5 * * * *\", \"threshold\" : \"\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"threat\" : { \"severity\" : \"high\", \"code\" : \"phishing\", \"technique\" : \"t1566.001\", \"tactic\" : \"ta0001\" }, \"fields\" : [ { \"field\" : \"field\", \"type\" : \"type\" }, { \"field\" : \"field\", \"type\" : \"type\" } ], \"group\" : \"\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -135,7 +135,7 @@ public interface RulesApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "[ { \"query\" : \"SELECT * FROM logs WHERE type='email-received' AND data->'email'->>'source' NOT LIKE %example.com AND timestamp >= NOW() - INTERVAL '5 minutes';\n\", \"name\" : \"external email\", \"interval\" : \"*/5 * * * *\", \"threshold\" : 1.0800828190461012, \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"threat\" : { \"severity\" : \"high\", \"code\" : \"phishing\", \"technique\" : \"t1566.001\", \"tactic\" : \"ta0001\" }, \"fields\" : [ { \"field\" : \"field\", \"type\" : \"type\" }, { \"field\" : \"field\", \"type\" : \"type\" } ] }, { \"query\" : \"SELECT * FROM logs WHERE type='email-received' AND data->'email'->>'source' NOT LIKE %example.com AND timestamp >= NOW() - INTERVAL '5 minutes';\n\", \"name\" : \"external email\", \"interval\" : \"*/5 * * * *\", \"threshold\" : 1.0800828190461012, \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"threat\" : { \"severity\" : \"high\", \"code\" : \"phishing\", \"technique\" : \"t1566.001\", \"tactic\" : \"ta0001\" }, \"fields\" : [ { \"field\" : \"field\", \"type\" : \"type\" }, { \"field\" : \"field\", \"type\" : \"type\" } ] } ]";
+                    String exampleString = "[ { \"query\" : \"SELECT * FROM logs WHERE type='email-received' AND data->'email'->>'source' NOT LIKE '%example.com' AND timestamp >= NOW() - INTERVAL '5 minutes';\n\", \"name\" : \"external email\", \"interval\" : \"*/5 * * * *\", \"threshold\" : \"\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"threat\" : { \"severity\" : \"high\", \"code\" : \"phishing\", \"technique\" : \"t1566.001\", \"tactic\" : \"ta0001\" }, \"fields\" : [ { \"field\" : \"field\", \"type\" : \"type\" }, { \"field\" : \"field\", \"type\" : \"type\" } ], \"group\" : \"\" }, { \"query\" : \"SELECT * FROM logs WHERE type='email-received' AND data->'email'->>'source' NOT LIKE '%example.com' AND timestamp >= NOW() - INTERVAL '5 minutes';\n\", \"name\" : \"external email\", \"interval\" : \"*/5 * * * *\", \"threshold\" : \"\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"threat\" : { \"severity\" : \"high\", \"code\" : \"phishing\", \"technique\" : \"t1566.001\", \"tactic\" : \"ta0001\" }, \"fields\" : [ { \"field\" : \"field\", \"type\" : \"type\" }, { \"field\" : \"field\", \"type\" : \"type\" } ], \"group\" : \"\" } ]";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

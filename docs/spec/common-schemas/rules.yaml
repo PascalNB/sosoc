@@ -19,10 +19,13 @@ components:
           example: >
             SELECT * FROM logs
             WHERE type='email-received'
-            AND data->'email'->>'source' NOT LIKE %example.com
+            AND data->'email'->>'source' NOT LIKE '%example.com'
             AND timestamp >= NOW() - INTERVAL '5 minutes';
         threshold:
-          type: number
+          type: int
+          minimum: 1
+        group:
+          type: int
           minimum: 1
         threat:
           $ref: './alarms.yaml#/components/schemas/Threat'

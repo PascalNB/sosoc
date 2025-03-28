@@ -21,7 +21,7 @@ import jakarta.annotation.Generated;
  * Threat
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-27T17:40:45.413861+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-28T18:16:40.517433400+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
 public class Threat {
 
   private @Nullable String code;
