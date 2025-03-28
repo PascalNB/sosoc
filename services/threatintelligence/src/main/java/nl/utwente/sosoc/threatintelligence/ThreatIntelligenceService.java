@@ -24,9 +24,7 @@ public class ThreatIntelligenceService {
 
     @PostConstruct
     public void init() {
-        UUID uuid = UUID.randomUUID();
-        iocs.put(uuid, new IOC()
-            .id(uuid)
+        createIoc(new IOC()
             .threat(new Threat()
                 .code("phishing")
                 .severity(Severity.HIGH)

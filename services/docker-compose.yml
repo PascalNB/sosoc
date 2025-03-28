@@ -1,0 +1,44 @@
+version: "3"
+services:
+  alertnotify:
+    container_name: alertnotify
+    build:
+      context: ./alertnotify
+      dockerfile: ./Dockerfile
+    image: alertnotify:latest
+  automatedresponse:
+    container_name: automatedresponse
+    build:
+      context: ./automatedresponse
+      dockerfile: ./Dockerfile
+    image: automatedresponse:latest
+  identitymanagement:
+    container_name: identitymanagement
+    build:
+      context: ./identitymanagement
+      dockerfile: ./Dockerfile
+    image: identitymanagement:latest
+  logmonitor:
+    container_name: logmonitor
+    build:
+      context: ./logmonitor
+      dockerfile: ./Dockerfile
+    image: logmonitor:latest
+  playbookmanagement:
+    container_name: playbookmanagement
+    build:
+      context: ./playbookmanagement
+      dockerfile: ./Dockerfile
+    image: playbookmanagement:latest
+  threatintelligence:
+    container_name: threatintelligence
+    build:
+      context: ./threatintelligence
+      dockerfile: ./Dockerfile
+    image: threatintelligence:latest
+  activemq:
+    container_name: activemq
+    image: rmohr/activemq:latest
+    ports:
+      - "61616:61616"
+      - "8161:8161"
