@@ -32,7 +32,7 @@ public class AutomatedResponseService {
         List<ConditionalNext> nextSteps = step.getNext();
 
         String action = step.getAction();
-        System.out.println("Execute action: " + action);
+        System.out.println("Execute dummy action: " + action);
         // TODO: execute automatic step
 
         if (nextSteps.isEmpty()) {

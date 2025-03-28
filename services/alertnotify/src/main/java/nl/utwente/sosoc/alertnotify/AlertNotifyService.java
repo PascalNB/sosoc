@@ -34,7 +34,7 @@ public class AlertNotifyService {
         List<ConditionalNext> nextSteps = step.getNext();
 
         String action = step.getAction();
-        System.out.println("Execute action: " + action);
+        System.out.println("Execute dummy action: " + action);
         // TODO: execute manual step
 
         if (nextSteps.isEmpty()) {

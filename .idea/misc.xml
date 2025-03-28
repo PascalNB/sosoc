@@ -14,6 +14,7 @@
         <option value="$PROJECT_DIR$/services/logmonitor/pom.xml" />
         <option value="$PROJECT_DIR$/services/playbookmanagement/pom.xml" />
         <option value="$PROJECT_DIR$/services/threatintelligence/pom.xml" />
+        <option value="$PROJECT_DIR$/services/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

@@ -25,6 +25,10 @@ services:
     image: logmonitor:latest
     ports:
       - '8080:8083'
+    depends_on:
+      sosoc-db:
+        condition: service_healthy
+        restart: true
   playbookmanagement:
     container_name: playbookmanagement
     build:
@@ -37,21 +41,27 @@ services:
       context: ./threatintelligence
       dockerfile: ./Dockerfile
     image: threatintelligence:latest
-  activemq:
-    container_name: activemq
+  sosoc-mq:
+    container_name: sosoc-mq
     image: rmohr/activemq:latest
     ports:
       - "61616:61616"
       - "8161:8161"
-  postgres:
-    container_name: postgres
+  sosoc-db:
+    container_name: sosoc-db
     image: postgres:latest
     restart: always
     environment:
       POSTGRES_USER: "admin"
       POSTGRES_PASSWORD: "admin"
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data
+      - ../postgres_data:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "psql -U $${POSTGRES_USER} -c 'SELECT 1' || exit 1"]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+      timeout: 10s

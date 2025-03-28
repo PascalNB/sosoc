@@ -15,7 +15,7 @@ import java.time.OffsetDateTime;
 import java.util.*;
 
 @Service
-public class RuleExecutor {
+public class RuleExecutorService {
 
     @Autowired private RestTemplateBuilder restTemplateBuilder;
     @Autowired private AlarmsProducer alarmsProducer;

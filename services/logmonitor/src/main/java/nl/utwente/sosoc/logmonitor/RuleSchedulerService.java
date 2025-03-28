@@ -15,11 +15,11 @@ import java.util.concurrent.ScheduledFuture;
 public class RuleSchedulerService {
 
     @Autowired private ThreadPoolTaskScheduler scheduler;
-    @Autowired private RuleExecutor ruleExecutor;
+    @Autowired private RuleExecutorService ruleExecutorService;
     private final Map<UUID, ScheduledFuture<?>> tasks = new ConcurrentHashMap<>();
 
     public void scheduleRule(Rule rule) {
-        scheduleTask(rule.getId(), () -> ruleExecutor.execute(rule), rule.getInterval());
+        scheduleTask(rule.getId(), () -> ruleExecutorService.execute(rule), rule.getInterval());
     }
 
     public void scheduleTask(UUID taskId, Runnable task, String cronExpression) {

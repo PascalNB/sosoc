@@ -7,6 +7,8 @@
     <file url="file://$PROJECT_DIR$/services/identitymanagement/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/services/logmonitor/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/services/playbookmanagement/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/services/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/services/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/services/threatintelligence/src/main/java" charset="UTF-8" />
   </component>
 </project>
