@@ -1,6 +1,6 @@
 package nl.utwente.sosoc.playbookmanagement.api;
 
-import nl.utwente.sosoc.playbookmanagement.PlaybookManagementService;
+import nl.utwente.sosoc.playbookmanagement.service.PlaybookManagementService;
 import nl.utwente.sosoc.playbookmanagement.model.Playbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

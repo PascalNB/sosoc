@@ -1,6 +1,6 @@
 package nl.utwente.sosoc.identitymanagement.api;
 
-import nl.utwente.sosoc.identitymanagement.IdentityManagementService;
+import nl.utwente.sosoc.identitymanagement.service.IdentityManagementService;
 import nl.utwente.sosoc.identitymanagement.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

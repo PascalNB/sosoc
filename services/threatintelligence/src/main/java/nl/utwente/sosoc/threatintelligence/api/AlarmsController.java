@@ -1,6 +1,6 @@
 package nl.utwente.sosoc.threatintelligence.api;
 
-import nl.utwente.sosoc.threatintelligence.ThreatIntelligenceService;
+import nl.utwente.sosoc.threatintelligence.service.ThreatIntelligenceService;
 import nl.utwente.sosoc.threatintelligence.model.Alarm;
 import nl.utwente.sosoc.threatintelligence.model.IOC;
 import org.springframework.beans.factory.annotation.Autowired;

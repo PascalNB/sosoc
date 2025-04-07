@@ -1,19 +1,14 @@
 package nl.utwente.sosoc.logmonitor.api;
 
-import nl.utwente.sosoc.logmonitor.LogMonitorService;
 import nl.utwente.sosoc.logmonitor.model.LogEntry;
-import nl.utwente.sosoc.logmonitor.repository.DbLogEntry;
 import nl.utwente.sosoc.logmonitor.repository.LogMapper;
 import nl.utwente.sosoc.logmonitor.repository.LogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @RestController
