@@ -4,7 +4,7 @@ info:
   description: Manages user access, authentication, and privileges, as well as end-point devices.
   version: 1.0.0
 servers:
-  - url: 'localhost:8082'
+  - url: 'http://localhost:8082'
 paths:
   /users:
     get:

@@ -4,7 +4,7 @@ info:
   description: Receives logs from endpoints and responds based on automated detection rules.
   version: 1.0.0
 servers:
-  - url: 'localhost:8083'
+  - url: 'http://localhost:8083'
 paths:
   /logs:
     get:
