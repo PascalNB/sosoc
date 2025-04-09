@@ -19,7 +19,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
         "nl.utwente.sosoc.logmonitor.repository"},
     nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class
 )
-@EntityScan("nl.utwente.sosoc.logmonitor.repository")
+@EntityScan("nl.utwente.sosoc.logmonitor.entity")
 @EnableJpaRepositories("nl.utwente.sosoc.logmonitor.repository")
 public class LogMonitorApplication {
 

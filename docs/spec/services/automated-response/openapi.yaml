@@ -5,7 +5,7 @@ info:
     For example, disabling accounts, blocking network sources, or quarantining endpoint devices.
   version: 1.0.0
 servers:
-  - url: 'localhost'
+  - url: 'localhost:8081'
 components:
   schemas:
     WorkflowInstance:

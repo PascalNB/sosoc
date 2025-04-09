@@ -1,10 +1,14 @@
 package nl.utwente.sosoc.threatintelligence.service;
 
 import jakarta.annotation.PostConstruct;
+import nl.utwente.sosoc.threatintelligence.entity.IOCEntity;
 import nl.utwente.sosoc.threatintelligence.model.Alarm;
 import nl.utwente.sosoc.threatintelligence.model.IOC;
 import nl.utwente.sosoc.threatintelligence.model.Severity;
 import nl.utwente.sosoc.threatintelligence.model.Threat;
+import nl.utwente.sosoc.threatintelligence.repository.IOCRepository;
+import nl.utwente.sosoc.threatintelligence.util.EntityMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.EvaluationException;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
@@ -20,11 +24,12 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class ThreatIntelligenceService {
 
-    private final Map<UUID, IOC> iocs = new ConcurrentHashMap<>();
+    @Autowired private IOCRepository iocRepository;
+    @Autowired private EntityMapper entityMapper;
 
     @PostConstruct
     public void init() {
-        createIoc(new IOC()
+        iocRepository.save(entityMapper.to(IOCEntity.class).apply(new IOC()
             .threat(new Threat()
                 .code("phishing")
                 .severity(Severity.HIGH)
@@ -32,7 +37,7 @@ public class ThreatIntelligenceService {
                 .technique("t1566.001")
             )
             .match("Data['email']['source'].contains('malicious.com')")
-        );
+        ));
     }
 
     /**
@@ -45,7 +50,8 @@ public class ThreatIntelligenceService {
     public IOC detectIoc(Alarm alarm) {
         ExpressionParser parser = new SpelExpressionParser();
 
-        for (IOC ioc : iocs.values()) {
+        for (IOCEntity iocEntity : iocRepository.findAll()) {
+            IOC ioc = entityMapper.to(IOC.class).apply(iocEntity);
             String matchString = ioc.getMatch();
 
             if (matchString == null) {
@@ -63,59 +69,6 @@ public class ThreatIntelligenceService {
         }
 
         return null;
-    }
-
-    /**
-     * @return a list of all IOCs
-     */
-    public List<IOC> getIocs() {
-        return new ArrayList<>(iocs.values());
-    }
-
-    /**
-     * Get an IOC entry by ID.
-     *
-     * @param uuid the id
-     * @return the IOC entry
-     */
-    public IOC getIoc(UUID uuid) {
-        return iocs.get(uuid);
-    }
-
-    /**
-     * Create a new IOC entry with a random UUID.
-     *
-     * @param ioc the IOC entry
-     */
-    public void createIoc(IOC ioc) {
-        UUID uuid = UUID.randomUUID();
-        iocs.put(uuid, ioc.id(uuid));
-    }
-
-    /**
-     * Update an existing IOC entry by ID.
-     *
-     * @param uuid the ID
-     * @param ioc the IOC instance
-     * @return whether the IOC for the given ID was found and updated
-     */
-    public boolean updateIoc(UUID uuid, IOC ioc) {
-        if (iocs.containsKey(uuid)) {
-            return false;
-        }
-        // TODO: properly update
-        iocs.put(uuid, ioc);
-        return true;
-    }
-
-    /**
-     * Delete an existing IOC entry by ID.
-     *
-     * @param uuid the ID
-     * @return whether the IOC for the given ID was found and deleted
-     */
-    public boolean deleteIoc(UUID uuid) {
-        return iocs.remove(uuid) != null;
     }
 
 }

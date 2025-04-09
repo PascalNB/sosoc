@@ -23,7 +23,7 @@ docker-compose -f ./services/docker-compose.yml up --build
 
 ## Functionality Testing
 
-Once all services are running, post the following JSON object to `http://localhost:8080/logs`.
+Once all services are running, post the following JSON object to `http://localhost:8083/logs`.
 Ensure that the timestamp is the current time in RFC 3339 and note that the correct time zone has to be set.
 For example:
 ```

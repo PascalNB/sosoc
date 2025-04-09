@@ -4,7 +4,7 @@ info:
   description: CTI manages the collection of intelligence covering existing threads and attacks, as well as previous incidents.
   version: 1.0.0
 servers:
-  - url: 'localhost'
+  - url: 'localhost:8085'
 paths:
   /alarms:
     post:

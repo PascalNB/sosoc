@@ -4,7 +4,7 @@ info:
   description: Generates alerts for detected threats and notifies SOC analysts or IT admins via email, SMS, etc.
   version: 1.0.0
 servers:
-  - url: 'localhost'
+  - url: 'localhost:8080'
 components:
   schemas:
     WorkflowInstance:

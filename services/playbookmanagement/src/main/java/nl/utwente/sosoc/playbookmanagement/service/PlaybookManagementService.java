@@ -1,8 +1,11 @@
 package nl.utwente.sosoc.playbookmanagement.service;
 
 import jakarta.annotation.PostConstruct;
+import nl.utwente.sosoc.playbookmanagement.entity.PlaybookEntity;
 import nl.utwente.sosoc.playbookmanagement.producers.WorkflowsProducer;
 import nl.utwente.sosoc.playbookmanagement.model.*;
+import nl.utwente.sosoc.playbookmanagement.repository.PlaybookRepository;
+import nl.utwente.sosoc.playbookmanagement.util.EntityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.EvaluationException;
 import org.springframework.expression.Expression;
@@ -14,15 +17,16 @@ import java.util.*;
 
 @Service
 public class PlaybookManagementService {
-    private static Map<UUID, Playbook> playbooks = new HashMap<>();
 
     @Autowired private WorkflowsProducer workflowsProducer;
+    @Autowired private PlaybookRepository playbookRepository;
+    @Autowired private EntityMapper entityMapper;
 
     private Optional<Step> getStep(Playbook playbook, UUID stepId) {
         return Objects.requireNonNull(playbook)
-                .getSteps().stream()
-                .filter(step -> Objects.equals(stepId, step.getId()))
-                .findFirst();
+            .getSteps().stream()
+            .filter(step -> Objects.equals(stepId, step.getId()))
+            .findFirst();
     }
 
     @PostConstruct
@@ -30,34 +34,36 @@ public class PlaybookManagementService {
         UUID uuid = UUID.randomUUID();
         UUID firstStepId = UUID.randomUUID();
         UUID nextStepId = UUID.randomUUID();
-        Playbook playbook = new Playbook()
-                .id(uuid)
-                .name("Phishing Email Playbook")
-                .firstStep(firstStepId)
-                .steps(List.of(
-                        new Step()
-                                .id(firstStepId)
-                                .name("Block Email")
-                                .action("block email")
-                                .type(Step.TypeEnum.AUTO)
-                                .next(List.of(
-                                        new ConditionalNext()
-                                                .condition(Severity.HIGH.getValue())
-                                                .next(nextStepId)
-                                )),
-                        new Step()
-                                .id(nextStepId)
-                                .name("Notify User")
-                                .action("notify user")
-                                .type(Step.TypeEnum.HUMAN)
-                ))
-                .trigger("Threat.Code == 'phishing'");
-        playbooks.put(uuid, playbook);
+        playbookRepository.save(entityMapper.to(PlaybookEntity.class).apply(new Playbook()
+            .id(uuid)
+            .name("Phishing Email Playbook")
+            .description("Block email and then notify user")
+            .firstStep(firstStepId)
+            .steps(List.of(
+                new Step()
+                    .id(firstStepId)
+                    .name("Block Email")
+                    .action("block email")
+                    .type(Step.TypeEnum.AUTO)
+                    .next(List.of(
+                        new ConditionalNext()
+                            .condition(Severity.HIGH.getValue())
+                            .next(nextStepId)
+                    )),
+                new Step()
+                    .id(nextStepId)
+                    .name("Notify User")
+                    .action("notify user")
+                    .type(Step.TypeEnum.HUMAN)
+            ))
+            .trigger("Threat.Code == 'phishing'")
+        ));
     }
 
     public Playbook detectPlaybook(Alarm alarm) {
         ExpressionParser parser = new SpelExpressionParser();
-        for (Playbook playbook : playbooks.values()) {
+        for (PlaybookEntity playbookEntity : playbookRepository.findAll()) {
+            Playbook playbook = entityMapper.to(Playbook.class).apply(playbookEntity);
             String trigger = playbook.getTrigger();
             if (trigger == null) {
                 continue;
@@ -79,10 +85,10 @@ public class PlaybookManagementService {
         if (playbook != null) {
             System.out.println("Triggering playbook: " + playbook.getName());
             Workflow workflow = new Workflow()
-                    .id(UUID.randomUUID())
-                    .playbook(playbook)
-                    .alarm(alarm)
-                    .nextStep(playbook.getFirstStep());
+                .id(UUID.randomUUID())
+                .playbook(playbook)
+                .alarm(alarm)
+                .nextStep(playbook.getFirstStep());
             Step nextStep = getStep(playbook, playbook.getFirstStep()).orElseThrow();
             if (Step.TypeEnum.AUTO.equals(nextStep.getType())) {
                 workflowsProducer.send("workflow.auto", workflow);
@@ -92,38 +98,5 @@ public class PlaybookManagementService {
             }
         }
     }
-    /**
-     * Get a playbook by its ID.
-     * @param id the ID of the playbook
-     * @return the playbook with the given ID
-     */
-    public Playbook getPlaybookById(UUID id) {
-        return playbooks.get(id);
-    }
 
-    /**
-     * Get all playbooks.
-     * @return a list of all playbooks.
-     */
-    public List<Playbook> getPlaybooks() {
-        return playbooks.values().stream().toList();
-    }
-
-    /**
-     * Save a new playbook with a randomID.
-     * @param playbook the playbook to save.
-     */
-    public void savePlaybook(Playbook playbook) {
-        UUID newId = UUID.randomUUID();
-        playbook.setId(newId);
-        playbooks.put(newId, playbook);
-    }
-
-    /**
-     * Remove a given playbook.
-     * @param id of the playbook to remove.
-     */
-    public void deletePlaybook(UUID id) {
-        playbooks.remove(id);
-    }
 }

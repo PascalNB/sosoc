@@ -4,7 +4,7 @@ info:
   description: Manages the collection of incident response workflows for different kinds of incidents.
   version: 1.0.0
 servers:
-  - url: 'localhost'
+  - url: 'localhost:8084'
 paths:
   /playbooks:
     get:

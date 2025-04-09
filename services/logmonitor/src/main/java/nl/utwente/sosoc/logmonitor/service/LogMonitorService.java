@@ -1,7 +1,10 @@
 package nl.utwente.sosoc.logmonitor.service;
 
 import jakarta.annotation.PostConstruct;
+import nl.utwente.sosoc.logmonitor.entity.RuleEntity;
 import nl.utwente.sosoc.logmonitor.model.*;
+import nl.utwente.sosoc.logmonitor.repository.RuleRepository;
+import nl.utwente.sosoc.logmonitor.util.EntityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
@@ -12,12 +15,13 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class LogMonitorService {
 
-    @Autowired private ApplicationContext context;
-    private static Map<UUID, Rule> rules = new ConcurrentHashMap<>();
+    @Autowired private RuleRepository ruleRepository;
+    @Autowired private EntityMapper entityMapper;
+    @Autowired private RuleSchedulerService ruleSchedulerService;
 
     @PostConstruct
     public void init() {
-        saveRule(new Rule()
+        Rule rule = new Rule()
             .id(UUID.randomUUID())
             .name("External email")
             .interval("0 */1 * * * *")
@@ -38,44 +42,9 @@ public class LogMonitorService {
                 new RuleFieldsInner()
                     .field("email")
                     .type("object")
-            ))
-        );
+            ));
+        ruleRepository.save(entityMapper.to(RuleEntity.class).apply(rule));
+        ruleSchedulerService.scheduleRule(rule);
     }
 
-
-    /**
-     * Get a rule by its id.
-     * @param id The id of the rule.
-     * @return The rule.
-     */
-    public Rule getRuleById(UUID id) {
-        return rules.get(id);
-    }
-
-    /**
-     * Get all rules.
-     * @return A list of all rules.
-     */
-    public List<Rule> getRules() {
-        return rules.values().stream().toList();
-    }
-
-    /**
-     * Save a rule with a random id.
-     * @param rule The rule to save.
-     */
-    public void saveRule(Rule rule) {
-        UUID newId = UUID.randomUUID();
-        rules.put(newId, rule.id(newId));
-        context.getBean(RuleSchedulerService.class).scheduleRule(rule);
-    }
-
-    /**
-     * Delete a rule by its id.
-     * @param id of the rule to be deleted.
-     */
-    public void deleteRule(UUID id) {
-        rules.remove(id);
-        context.getBean(RuleSchedulerService.class).cancelTask(id);
-    }
 }
