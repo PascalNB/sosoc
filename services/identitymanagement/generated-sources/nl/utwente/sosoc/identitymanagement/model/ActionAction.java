@@ -23,7 +23,7 @@ import jakarta.annotation.Generated;
  */
 
 @JsonTypeName("Action_action")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-28T18:16:32.443035500+01:00[Europe/Amsterdam]", comments = "Generator version: 7.11.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-10T02:09:03.239854500+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 public class ActionAction {
 
   private @Nullable String code;
