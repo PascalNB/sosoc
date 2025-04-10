@@ -9,3 +9,5 @@ components:
   schemas:
     WorkflowInstance:
       $ref: '../../common-schemas/workflows.yaml#/components/schemas/Workflow'
+    UserInstance:
+      $ref: '../../common-schemas/users.yaml#/components/schemas/User'

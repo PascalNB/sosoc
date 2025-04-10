@@ -19,7 +19,7 @@ public class WorkflowsConsumer {
     @JmsListener(destination = "workflow.human")
     public void receiveMessage(Workflow workflow) {
         System.out.println("Received workflow: " + workflow.getId() + " " + workflow.getPlaybook().getName());
-        alertNotifyService.execute(workflow);
+        alertNotifyService.executeWorkflow(workflow);
     }
 
 }

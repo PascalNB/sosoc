@@ -1,5 +1,6 @@
 package nl.utwente.sosoc.alertnotify.service;
 
+import nl.utwente.sosoc.alertnotify.model.Alarm;
 import nl.utwente.sosoc.alertnotify.producers.WorkflowsProducer;
 import nl.utwente.sosoc.alertnotify.model.ConditionalNext;
 import nl.utwente.sosoc.alertnotify.model.Step;
@@ -7,35 +8,32 @@ import nl.utwente.sosoc.alertnotify.model.Workflow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class AlertNotifyService {
 
     @Autowired private WorkflowsProducer workflowsProducer;
+    @Autowired private ActionExecutorService actionExecutorService;
 
-    private Optional<Step> getStep(Workflow workflow, UUID stepId) {
-        return Objects.requireNonNull(workflow.getPlaybook())
-            .getSteps().stream()
-            .filter(step -> Objects.equals(stepId, step.getId()))
-            .findFirst();
+    private Map<UUID, Step> getSteps(Workflow workflow) {
+        return Objects.requireNonNull(workflow.getPlaybook()).getSteps().stream()
+            .collect(Collectors.toMap(Step::getId, step -> step));
     }
 
-    public void execute(Workflow workflow) {
+    public void executeWorkflow(Workflow workflow) {
         UUID nextStepId = workflow.getNextStep();
-        Optional<Step> currentStep = getStep(workflow, nextStepId);
-        if (currentStep.isEmpty()) {
+        Map<UUID, Step> steps = getSteps(workflow);
+        Step currentStep = steps.get(nextStepId);
+        if (currentStep == null) {
             return;
         }
-        Step step = currentStep.get();
-        List<ConditionalNext> nextSteps = step.getNext();
+        List<ConditionalNext> nextSteps = currentStep.getNext();
+        String[] action = currentStep.getAction() == null ? null : currentStep.getAction().split(" +");
+        System.out.println("Execute dummy action: " + Arrays.toString(action));
 
-        String action = step.getAction();
-        System.out.println("Execute dummy action: " + action);
-        // TODO: execute manual step
+        executeAction(action, workflow.getAlarm());
 
         if (nextSteps.isEmpty()) {
             System.out.println("Workflow " + workflow.getId() + " ended");
@@ -44,19 +42,29 @@ public class AlertNotifyService {
 
         Step nextStep;
         if (nextSteps.size() == 1) {
-            nextStep = getStep(workflow, nextSteps.get(0).getNext()).orElseThrow();
+            nextStep = steps.get(nextSteps.get(0).getNext());
         } else {
             // TODO: select step based on condition
-            nextStep = getStep(workflow, nextSteps.get(0).getNext()).orElseThrow();
+            nextStep = steps.get(nextSteps.get(0).getNext());
         }
 
-        workflow.nextStep(nextStep.getId());
+        workflow.setNextStep(nextStep.getId());
 
         if (Step.TypeEnum.AUTO.equals(nextStep.getType())) {
             workflowsProducer.send("workflow.auto", workflow);
 
         } else if (Step.TypeEnum.HUMAN.equals(nextStep.getType())) {
             workflowsProducer.send("workflow.human", workflow);
+        }
+    }
+
+    public void executeAction(String[] action, Alarm alarm) {
+        if (action == null || action.length == 0) {
+            return;
+        }
+        switch (action[0]) {
+            case "notify" -> actionExecutorService.notify(action, alarm);
+            default -> {}
         }
     }
 

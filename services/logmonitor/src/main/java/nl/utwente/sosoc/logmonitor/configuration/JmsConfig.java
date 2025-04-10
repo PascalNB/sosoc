@@ -45,25 +45,25 @@ public class JmsConfig {
     }
 
     @Bean
-    public DefaultJmsListenerContainerFactory jmsListenerContainerFactory(ActiveMQConnectionFactory connectionFactory) {
+    public DefaultJmsListenerContainerFactory jmsListenerContainerFactory(ActiveMQConnectionFactory connectionFactory,
+        ObjectMapper objectMapper) {
+
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
-        factory.setMessageConverter(jacksonMessageConverter());  // Set the custom message converter
+        factory.setMessageConverter(jacksonMessageConverter(objectMapper));  // Set the custom message converter
         return factory;
     }
 
     @Bean
-    public MessageConverter jacksonMessageConverter() {
+    public MessageConverter jacksonMessageConverter(ObjectMapper objectMapper) {
         MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
         converter.setTargetType(MessageType.TEXT);
         converter.setTypeIdPropertyName("JMSType");
         converter.setTypeIdMappings(Map.of(
             "alarm", Alarm.class
         ));
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.setDateFormat(RFC3339DateFormat.getInstance());
-        objectMapper.registerModule(new JavaTimeModule());
         converter.setObjectMapper(objectMapper);
         return converter;
     }
+
 }

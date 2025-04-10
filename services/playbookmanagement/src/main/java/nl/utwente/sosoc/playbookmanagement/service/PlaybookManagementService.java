@@ -22,13 +22,6 @@ public class PlaybookManagementService {
     @Autowired private PlaybookRepository playbookRepository;
     @Autowired private EntityMapper entityMapper;
 
-    private Optional<Step> getStep(Playbook playbook, UUID stepId) {
-        return Objects.requireNonNull(playbook)
-            .getSteps().stream()
-            .filter(step -> Objects.equals(stepId, step.getId()))
-            .findFirst();
-    }
-
     @PostConstruct
     public void init() {
         UUID uuid = UUID.randomUUID();
@@ -52,12 +45,19 @@ public class PlaybookManagementService {
                     )),
                 new Step()
                     .id(nextStepId)
-                    .name("Notify User")
-                    .action("notify user")
+                    .name("Notify Analysts")
+                    .action("notify analyst")
                     .type(Step.TypeEnum.HUMAN)
             ))
             .trigger("Threat.Code == 'phishing'")
         ));
+    }
+
+    private Optional<Step> getStep(Playbook playbook, UUID stepId) {
+        return Objects.requireNonNull(playbook)
+            .getSteps().stream()
+            .filter(step -> Objects.equals(stepId, step.getId()))
+            .findFirst();
     }
 
     public Playbook detectPlaybook(Alarm alarm) {

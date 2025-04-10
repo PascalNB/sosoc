@@ -1,8 +1,8 @@
-.openapi-generator-ignore
 README.md
 nl/utwente/sosoc/alertnotify/api/ApiUtil.java
 nl/utwente/sosoc/alertnotify/model/Alarm.java
 nl/utwente/sosoc/alertnotify/model/ConditionalNext.java
+nl/utwente/sosoc/alertnotify/model/Endpoint.java
 nl/utwente/sosoc/alertnotify/model/IOC.java
 nl/utwente/sosoc/alertnotify/model/Playbook.java
 nl/utwente/sosoc/alertnotify/model/Rule.java
@@ -10,5 +10,6 @@ nl/utwente/sosoc/alertnotify/model/RuleFieldsInner.java
 nl/utwente/sosoc/alertnotify/model/Severity.java
 nl/utwente/sosoc/alertnotify/model/Step.java
 nl/utwente/sosoc/alertnotify/model/Threat.java
+nl/utwente/sosoc/alertnotify/model/User.java
 nl/utwente/sosoc/alertnotify/model/Workflow.java
 pom.xml
