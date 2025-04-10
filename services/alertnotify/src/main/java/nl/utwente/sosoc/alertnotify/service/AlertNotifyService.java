@@ -40,14 +40,8 @@ public class AlertNotifyService {
             return;
         }
 
-        Step nextStep;
-        if (nextSteps.size() == 1) {
-            nextStep = steps.get(nextSteps.get(0).getNext());
-        } else {
-            // TODO: select step based on condition
-            nextStep = steps.get(nextSteps.get(0).getNext());
-        }
-
+        // no conditions for human action
+        Step nextStep = steps.get(nextSteps.get(0).getNext());
         workflow.setNextStep(nextStep.getId());
 
         if (Step.TypeEnum.AUTO.equals(nextStep.getType())) {

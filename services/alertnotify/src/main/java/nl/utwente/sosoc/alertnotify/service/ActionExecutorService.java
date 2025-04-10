@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
 import java.util.List;
 
@@ -16,14 +18,15 @@ public class ActionExecutorService {
     @Autowired private RestTemplateBuilder restTemplateBuilder;
     @Autowired private EmailSenderService emailSenderService;
     @Autowired private ObjectMapper objectMapper;
+    @Autowired private TemplateEngine templateEngine;
 
     public void notify(String[] action, Alarm alarm) {
         String role = action[1];
         List<User> users;
         try {
             RestTemplate restTemplate = restTemplateBuilder.build();
-            String url = "http://identitymanagement:8082/users?role=" + role;
-            String jsonResponse = restTemplate.getForEntity(url, String.class).getBody();
+            String url = "http://identitymanagement:8082/users?role={role}";
+            String jsonResponse = restTemplate.getForEntity(url, String.class, role).getBody();
             users = objectMapper.readerForListOf(User.class).readValue(jsonResponse);
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -39,16 +42,24 @@ public class ActionExecutorService {
         }
         String[] recipients = emails.toArray(new String[0]);
         String subject = "ALERT: " + alarm.getThreat().getCode() + " (" + alarm.getRule().getName() + ")";
-        String body;
 
+        Context context = new Context();
+        context.setVariable("alarm", alarm);
+
+        String data;
         try {
-            body = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(alarm);
+            data = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(alarm.getData());
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return;
+            data = "";
         }
-
-        emailSenderService.sendEmail(recipients, subject, body);
+        context.setVariable("data", data);
+        String body = templateEngine.process("soc-alert-email", context);
+        try {
+            emailSenderService.sendEmail(recipients, subject, body);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
     }
 
 }

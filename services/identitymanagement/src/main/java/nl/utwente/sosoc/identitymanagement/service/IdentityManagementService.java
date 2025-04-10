@@ -27,11 +27,11 @@ public class IdentityManagementService {
             .email("p.n.bakker@student.utwente.nl")
             .role("analyst")
         ));
-        userRepository.save(entityMapper.to(UserEntity.class).apply(new User()
-            .name("Matei")
-            .email("m.obrocea@student.utwente.nl")
-            .role("analyst")
-        ));
+//        userRepository.save(entityMapper.to(UserEntity.class).apply(new User()
+//            .name("Matei")
+//            .email("m.obrocea@student.utwente.nl")
+//            .role("analyst")
+//        ));
     }
 
 }

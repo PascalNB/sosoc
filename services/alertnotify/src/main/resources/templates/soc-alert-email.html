@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SOC Alert Notification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        h1 {
+            color: #d9534f;
+        }
+        .alert {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .alert-header {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .data-table th, .data-table td {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+        }
+        .data-table th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+        .data-table td {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<h1>SOC Alert Notification</h1>
+
+<div class="alert">
+    <div class="alert-header">New Security Alert - Immediate Attention Required</div>
+    <p><strong>Threat Code:</strong> <span th:text="${alarm.threat.code}"></span></p>
+    <p><strong>Severity:</strong> <span th:text="${alarm.threat.severity}"></span></p>
+</div>
+
+<h2>Alert Details</h2>
+<table class="data-table">
+    <tr>
+        <th>Time</th>
+        <td th:text="${alarm.timestamp}"></td>
+    </tr>
+    <tr>
+        <th>MITRE Tactic</th>
+        <td th:text="${alarm.getThreat().tactic}"></td>
+    </tr>
+    <tr>
+        <th>MITRE Technique</th>
+        <td th:text="${alarm.getThreat().technique}"></td>
+    </tr>
+    <tr>
+        <th>Rule Name</th>
+        <td th:text="${alarm.getRule().name}"></td>
+    </tr>
+    <tr>
+        <th>IOC</th>
+        <td th:text="*{alarm.getIoc().getMatch()}?: '-'"></td>
+    </tr>
+</table>
+
+<h3>Additional Information</h3>
+<pre th:text="${data}">- Additional alarm data or logs here...</pre>
+
+<p><strong>Important: Please investigate this alert immediately and take appropriate action.</strong></p>
+<p>If you need further assistance, please contact the SOC team.</p>
+
+</body>
+</html>
