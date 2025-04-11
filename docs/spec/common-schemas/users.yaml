@@ -6,16 +6,21 @@ components:
         id:
           type: string
           format: uuid
+          nullable: false
         name:
           type: string
+          nullable: false
           example: Firstname Lastname
         email:
           type: string
           format: email
+          nullable: false
         role:
           type: string
+          nullable: false
           example: analyst
         endpoints:
           type: array
           items:
             $ref: './endpoints.yaml#/components/schemas/Endpoint'
+          nullable: false

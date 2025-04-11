@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Gets or Sets Severity
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T03:18:25.223612600+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T15:54:53.413776400+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 public enum Severity {
   
   HIGH("high"),

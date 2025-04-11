@@ -6,44 +6,55 @@ components:
         id:
           type: string
           format: uuid
+          nullable: false
         name:
           type: string
           example: phishing email
+          nullable: false
         description:
           type: string
           example: quarantines endpoint
+          nullable: false
         trigger:
           type: string
           format: SpEL
+          nullable: false
           example: Threat.Code == 'phishing'
         firstStep:
           type: string
           format: uuid
+          nullable: false
         steps:
           type: array
           items:
             $ref: '#/components/schemas/Step'
           minItems: 1
+          nullable: false
     Step:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          nullable: false
         type:
           type: string
           enum:
             - human
             - auto
+          nullable: false
         name:
           type: string
+          nullable: false
           example: await analyst confirmation
         action:
           type: string
+          nullable: false
         next:
           type: array
           items:
             $ref: '#/components/schemas/ConditionalNext'
+          nullable: false
     ConditionalNext:
       type: object
       properties:
@@ -52,6 +63,8 @@ components:
           examples:
             - no threat
             - high threat
+          nullable: false
         next:
           type: string
           format: uuid
+          nullable: true

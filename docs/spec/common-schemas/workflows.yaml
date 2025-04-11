@@ -6,10 +6,13 @@ components:
         id:
           type: string
           format: uuid
+          nullable: false
         alarm:
           $ref: './alarms.yaml#/components/schemas/Alarm'
+          nullable: false
         playbook:
           $ref: './playbooks.yaml#/components/schemas/Playbook'
+          nullable: false
         nextStep:
           type: string
           format: uuid

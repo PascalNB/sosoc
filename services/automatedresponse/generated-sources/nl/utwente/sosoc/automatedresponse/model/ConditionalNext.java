@@ -20,7 +20,7 @@ import jakarta.annotation.Generated;
  * ConditionalNext
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T03:18:20.714461900+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T15:54:48.476034900+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 public class ConditionalNext {
 
   private @Nullable String condition;

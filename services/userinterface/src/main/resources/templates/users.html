@@ -74,12 +74,12 @@
             <div class="row row-cols-lg-auto g-3 align-items-center endpoint-data" id="endpoint-data-0">
                 <div class="col">
                     <label>
-                        <input type="text" class="form-control endpoint-name" name="endpoint-name" placeholder="name">
+                        <input type="text" class="form-control endpoint-name" name="endpoint-name" placeholder="name" required>
                     </label>
                 </div>
                 <div class="col">
                     <label>
-                        <input type="text" class="form-control endpoint-ip" name="endpoint-ip" placeholder="ip address">
+                        <input type="text" class="form-control endpoint-ip" name="endpoint-ip" placeholder="ip address" required>
                     </label>
                 </div>
                 <div class="col">
@@ -143,12 +143,12 @@
         div.id = "endpoint-data-" + endpointId;
         div.innerHTML = "<div class=\"col\">" +
             `<label>` +
-            `<input type=\"text\" class=\"form-control endpoint-name\" name=\"endpoint-name\" placeholder=\"name\">` +
+            `<input type=\"text\" class=\"form-control endpoint-name\" name=\"endpoint-name\" placeholder=\"name\" required>` +
             "</label>" +
             "</div>" +
             "<div class=\"col\">" +
             "<label>" +
-            `<input type=\"text\" class=\"form-control\ endpoint-ip" name=\"endpoint-ip\" placeholder=\"ip address\">` +
+            `<input type=\"text\" class=\"form-control\ endpoint-ip" name=\"endpoint-ip\" placeholder=\"ip address\" required>` +
             "</label>" +
             "</div>" +
             "<div class=\"col\">" +
@@ -167,7 +167,7 @@
     }
 
     function submitRule() {
-        const endpointDataElements = document.getElementsByClassName('endopint-data');
+        const endpointDataElements = document.getElementsByClassName('endpoint-data');
         const endpointsData = []
         for (let endpoint of endpointDataElements) {
             let name = endpoint.getElementsByClassName('endpoint-name')[0].value;
@@ -176,25 +176,25 @@
             endpointsData.push({
                 name: name,
                 ip: ip,
-                host: host
+                host: host === '' ? null : host
             })
         }
 
-        const ruleData = {
+        const userData = {
             name: document.getElementById('name').value,
             email: document.getElementById('email').value,
             role: document.getElementById('role').value,
             endpoints: endpointsData
         };
 
-        console.log(ruleData);
+        console.log(userData);
 
         fetch('/api/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(ruleData)
+            body: JSON.stringify(userData)
         })
             .catch((error) => {
                 console.error('Error:', error);

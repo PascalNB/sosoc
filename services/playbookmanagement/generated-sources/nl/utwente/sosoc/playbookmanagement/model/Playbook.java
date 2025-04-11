@@ -24,7 +24,7 @@ import jakarta.annotation.Generated;
  * Playbook
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T03:18:27.508392900+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T15:54:56.017508600+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 public class Playbook {
 
   private @Nullable String description;

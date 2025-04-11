@@ -6,9 +6,11 @@ components:
         name:
           type: string
           example: client-1
+          nullable: false
         ip:
           type: string
           format: ipv4
+          nullable: false
         host:
           type: string
           format: hostname
