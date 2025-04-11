@@ -16,3 +16,6 @@ python3 ./generate-sources.py ./docs/spec/services/playbook-management/openapi.y
 
 rm -rf "./services/threatintelligence/generated-sources"
 python3 ./generate-sources.py ./docs/spec/services/threat-intelligence/openapi.yaml threatintelligence
+
+rm -rf "./services/userinterface/generated-sources"
+python3 ./generate-sources.py ./docs/spec/services/user-interface/openapi.yaml userinterface

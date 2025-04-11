@@ -33,7 +33,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-10T02:09:03.239854500+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T03:18:22.990415900+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 @Validated
 @Tag(name = "users", description = "the users API")
 public interface UsersApi {
@@ -97,7 +97,7 @@ public interface UsersApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"endpoints\" : [ { \"ip\" : \"ip\", \"host\" : \"host\", \"name\" : \"client-1\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\" }, { \"ip\" : \"ip\", \"host\" : \"host\", \"name\" : \"client-1\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\" } ], \"role\" : \"analyst\", \"name\" : \"Firstname Lastname\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"email\" : \"email\" }";
+                    String exampleString = "{ \"endpoints\" : [ { \"ip\" : \"ip\", \"host\" : \"host\", \"name\" : \"client-1\" }, { \"ip\" : \"ip\", \"host\" : \"host\", \"name\" : \"client-1\" } ], \"role\" : \"analyst\", \"name\" : \"Firstname Lastname\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"email\" : \"email\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -136,7 +136,7 @@ public interface UsersApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "[ { \"endpoints\" : [ { \"ip\" : \"ip\", \"host\" : \"host\", \"name\" : \"client-1\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\" }, { \"ip\" : \"ip\", \"host\" : \"host\", \"name\" : \"client-1\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\" } ], \"role\" : \"analyst\", \"name\" : \"Firstname Lastname\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"email\" : \"email\" }, { \"endpoints\" : [ { \"ip\" : \"ip\", \"host\" : \"host\", \"name\" : \"client-1\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\" }, { \"ip\" : \"ip\", \"host\" : \"host\", \"name\" : \"client-1\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\" } ], \"role\" : \"analyst\", \"name\" : \"Firstname Lastname\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"email\" : \"email\" } ]";
+                    String exampleString = "[ { \"endpoints\" : [ { \"ip\" : \"ip\", \"host\" : \"host\", \"name\" : \"client-1\" }, { \"ip\" : \"ip\", \"host\" : \"host\", \"name\" : \"client-1\" } ], \"role\" : \"analyst\", \"name\" : \"Firstname Lastname\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"email\" : \"email\" }, { \"endpoints\" : [ { \"ip\" : \"ip\", \"host\" : \"host\", \"name\" : \"client-1\" }, { \"ip\" : \"ip\", \"host\" : \"host\", \"name\" : \"client-1\" } ], \"role\" : \"analyst\", \"name\" : \"Firstname Lastname\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"email\" : \"email\" } ]";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

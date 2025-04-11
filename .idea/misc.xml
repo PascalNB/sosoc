@@ -15,11 +15,14 @@
         <option value="$PROJECT_DIR$/services/playbookmanagement/pom.xml" />
         <option value="$PROJECT_DIR$/services/threatintelligence/pom.xml" />
         <option value="$PROJECT_DIR$/services/pom.xml" />
+        <option value="$PROJECT_DIR$/services/frontend/pom.xml" />
+        <option value="$PROJECT_DIR$/services/userinterface/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/logmonitor/pom.xml" />
+        <option value="$PROJECT_DIR$/services/frontend/pom.xml" />
       </set>
     </option>
   </component>

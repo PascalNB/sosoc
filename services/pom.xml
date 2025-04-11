@@ -22,5 +22,6 @@
     <module>logmonitor</module>
     <module>playbookmanagement</module>
     <module>threatintelligence</module>
+    <module>userinterface</module>
   </modules>
 </project>

@@ -1,0 +1,73 @@
+openapi: 3.1.0
+info:
+  title: User Interface service
+  description: Provides the user interface that manages the SOC
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8080'
+paths:
+  /:
+    get:
+      operationId: getDefaultPage
+      description: Retrieves the HTML page to manage the SOC
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                type: string
+  /rules:
+    get:
+      operationId: getRulesPage
+      description: Retrieves the HTML page to manage rules.
+      responses:
+        "200":
+          description: OK
+          content:
+            text/html:
+              schema:
+                type: string
+  /users:
+    get:
+      operationId: getUsersPage
+      description: Retrieves the HTML page to manage users
+      responses:
+        "200":
+          description: OK
+          content:
+            text/html:
+              schema:
+                type: string
+  /iocs:
+    get:
+      operationId: getIocsPage
+      description: Retrieves the HTML page to manage IOCs
+      responses:
+        "200":
+          description: OK
+          content:
+            text/html:
+              schema:
+                type: string
+  /playbooks:
+    get:
+      operationId: getPlaybooksPage
+      description: Retrieves the HTML page to manage playbooks
+      responses:
+        "200":
+          description: OK
+          content:
+            text/html:
+              schema:
+                type: string
+components:
+  schemas:
+    RuleInstance:
+      $ref: '../../common-schemas/rules.yaml#/components/schemas/Rule'
+    UserInstance:
+      $ref: '../../common-schemas/users.yaml#/components/schemas/User'
+    IocInstance:
+      $ref: '../../common-schemas/iocs.yaml#/components/schemas/IOC'
+    PlaybookInstance:
+      $ref: '../../common-schemas/playbooks.yaml#/components/schemas/Playbook'

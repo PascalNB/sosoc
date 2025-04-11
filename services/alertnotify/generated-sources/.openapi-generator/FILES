@@ -1,3 +1,4 @@
+.openapi-generator-ignore
 README.md
 nl/utwente/sosoc/alertnotify/api/ApiUtil.java
 nl/utwente/sosoc/alertnotify/model/Alarm.java

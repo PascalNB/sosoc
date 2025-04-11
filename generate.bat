@@ -15,3 +15,6 @@ python ./generate-sources.py ./docs/spec/services/playbook-management/openapi.ya
 
 rd /s /q "./services/threatintelligence/generated-sources"
 python ./generate-sources.py ./docs/spec/services/threat-intelligence/openapi.yaml threatintelligence
+
+rd /s /q "./services/userinterface/generated-sources"
+python ./generate-sources.py ./docs/spec/services/user-interface/openapi.yaml userinterface

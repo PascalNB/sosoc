@@ -25,7 +25,7 @@ public class ActionExecutorService {
         List<User> users;
         try {
             RestTemplate restTemplate = restTemplateBuilder.build();
-            String url = "http://identitymanagement:8082/users?role={role}";
+            String url = "http://identitymanagement:8080/users?role={role}";
             String jsonResponse = restTemplate.getForEntity(url, String.class, role).getBody();
             users = objectMapper.readerForListOf(User.class).readValue(jsonResponse);
         } catch (Exception e) {

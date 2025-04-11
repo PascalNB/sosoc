@@ -24,7 +24,7 @@ import jakarta.annotation.Generated;
  * User
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-10T02:09:03.239854500+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T03:18:22.990415900+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 public class User {
 
   private @Nullable String email;

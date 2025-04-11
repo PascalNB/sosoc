@@ -1,0 +1,16 @@
+.openapi-generator-ignore
+README.md
+nl/utwente/sosoc/userinterface/api/ApiUtil.java
+nl/utwente/sosoc/userinterface/api/DefaultApi.java
+nl/utwente/sosoc/userinterface/model/Alarm.java
+nl/utwente/sosoc/userinterface/model/ConditionalNext.java
+nl/utwente/sosoc/userinterface/model/Endpoint.java
+nl/utwente/sosoc/userinterface/model/IOC.java
+nl/utwente/sosoc/userinterface/model/Playbook.java
+nl/utwente/sosoc/userinterface/model/Rule.java
+nl/utwente/sosoc/userinterface/model/RuleFieldsInner.java
+nl/utwente/sosoc/userinterface/model/Severity.java
+nl/utwente/sosoc/userinterface/model/Step.java
+nl/utwente/sosoc/userinterface/model/Threat.java
+nl/utwente/sosoc/userinterface/model/User.java
+pom.xml

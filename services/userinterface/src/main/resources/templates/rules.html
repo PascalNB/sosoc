@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Rules</title>
+    <!--suppress JSUnresolvedLibraryURL -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" type='text/css'>
+    <!--suppress JSUnresolvedLibraryURL -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/"><b>SOSOC</b></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Home</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="/rules" class="nav-link active">Rules</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Playbooks</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">IOCs</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="/users" class="nav-link">Users</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <h1 class="mt-5">Manage Rules</h1>
+
+    <!-- Form to create a new rule -->
+    <form class="mt-4">
+        <h4>Create Rule</h4>
+        <div class="form-group">
+            <label for="name">Rule Name</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="query">Query</label>
+            <textarea class="form-control" id="query" name="query" required></textarea>
+        </div>
+        <div class="form-group row">
+            <div class="col-auto">
+                <label class="sr-only" for="interval">Interval</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Cron:</div>
+                    </div>
+                    <input type="text" class="form-control" id="interval" name="interval" placeholder="0 */5 * * * *" required>
+                </div>
+            </div>
+            <div class="col-auto">
+                <label for="threshold">Threshold</label>
+                <input type="number" class="form-control" id="threshold" name="threshold" placeholder="1" min="1" step="1" value="1" required>
+            </div>
+            <div class="col-auto">
+                <label for="group">Group</label>
+                <input type="number" class="form-control" id="group" name="interval" placeholder="1" min="1" step="1" value="1" required>
+            </div>
+        </div>
+        <h5 class="mt-2">Threat</h5>
+        <div class="form-group row">
+            <div class="col-auto">
+                <label for="severity">Severity</label>
+                <select class="form-control" id="severity" name="severity" required>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </div>
+            <div class="col-auto">
+                <label for="tactic">Tactic</label>
+                <input type="text" class="form-control" id="tactic" name="tactic" required>
+            </div>
+            <div class="col-auto">
+                <label for="technique">Technique</label>
+                <input type="text" class="form-control" id="technique" name="technique" required>
+            </div>
+        </div>
+        <h5 class="mt-2">Fields</h5>
+        <div id="fields-container">
+            <div class="row row-cols-lg-auto g-3 align-items-center field-data" id="field-data-0">
+                <div class="col">
+                    <label>
+                        <input type="text" class="form-control field-name" name="field-name" placeholder="field">
+                    </label>
+                </div>
+                <div class="col">
+                    <label>
+                        <input type="text" class="form-control field-type" name="field-type" placeholder="type">
+                    </label>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-outline-success" id="add-field" onclick="addField();">
+                        Add
+                    </button>
+                </div>
+            </div>
+        </div>
+        <button type="button" onclick="submitRule();" class="btn btn-primary mt-3">Create Rule</button>
+    </form>
+
+    <hr>
+
+    <h3 class="mt-5">All Rules</h3>
+    <table class="table mt-3">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Query</th>
+            <th>Interval</th>
+            <th>Threshold</th>
+            <th>Group</th>
+            <th>Severity</th>
+            <th>Tactic</th>
+            <th>Technique</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Loop through the list of rules -->
+        <tr th:each="rule : ${rules}">
+            <td th:text="${rule.name}"></td>
+            <td th:text="${rule.query}"></td>
+            <td th:text="${rule.interval}"></td>
+            <td th:text="${rule.threshold}"></td>
+            <td th:text="${rule.group}"></td>
+
+            <td th:text="${rule.getThreat().severity}"></td>
+            <td th:text="${rule.getThreat().technique}"></td>
+            <td th:text="${rule.getThreat().tactic}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    let fieldId = 0;
+
+    function addField() {
+        fieldId++;
+        let container = document.getElementById("fields-container");
+        let div = document.createElement("div");
+        div.setAttribute("class", "row row-cols-lg-auto g-3 align-items-center mt-0 field-data");
+        div.id = "field-data-" + fieldId;
+        div.innerHTML = "<div class=\"col\">" +
+            `<label>` +
+            `<input type=\"text\" class=\"form-control field-name\" name=\"field-name\" placeholder=\"field\">` +
+            "</label>" +
+            "</div>" +
+            "<div class=\"col\">" +
+            "<label>" +
+            `<input type=\"text\" class=\"form-control\ field-type" name=\"field-type\" placeholder=\"type\">` +
+            "</label>" +
+            "</div>" +
+            "<div class=\"col\">" +
+            `<button type=\"button\" class=\"btn btn-outline-danger\" id=\"remove-field\" onclick=\"removeField(${fieldId});\">Remove</button>` +
+            "</div>";
+        container.appendChild(div);
+    }
+
+    function removeField(id) {
+        document.getElementById('field-data-' + id).remove();
+    }
+
+    function submitRule() {
+        const threatData = {
+            severity: document.getElementById('severity').value,
+            tactic: document.getElementById('tactic').value,
+            technique: document.getElementById('technique').value,
+        }
+
+        const fieldDataElements = document.getElementsByClassName('field-data');
+        const fieldsData = []
+        for (let field of fieldDataElements) {
+            let fieldName = field.getElementsByClassName('field-name')[0].value;
+            let fieldType = field.getElementsByClassName('field-type')[0].value;
+            fieldsData.push({
+                field: fieldName,
+                type: fieldType,
+            })
+        }
+
+        const ruleData = {
+            name: document.getElementById('name').value,
+            query: document.getElementById('query').value,
+            interval: document.getElementById('interval').value,
+            threshold: document.getElementById('threshold').value,
+            group: document.getElementById('threshold').value,
+            threat: threatData,
+            fields: fieldsData
+        };
+
+        console.log(ruleData);
+
+        fetch('/api/rules', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(ruleData)
+        })
+            .catch((error) => {
+                console.error('Error:', error);
+            })
+            .then(data => {
+                console.log('Rule created:', data);
+                // Optionally, reload the page or update the rule list dynamically
+                window.location.reload();
+            });
+    }
+</script>
+</body>
+</html>

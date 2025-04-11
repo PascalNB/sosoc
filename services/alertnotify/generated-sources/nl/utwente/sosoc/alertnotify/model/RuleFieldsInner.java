@@ -21,7 +21,7 @@ import jakarta.annotation.Generated;
  */
 
 @JsonTypeName("Rule_fields_inner")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-10T17:24:52.875681700+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T03:18:18.289419200+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 public class RuleFieldsInner {
 
   private @Nullable String field;

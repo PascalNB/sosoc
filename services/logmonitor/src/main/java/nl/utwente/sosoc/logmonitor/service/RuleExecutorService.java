@@ -93,7 +93,7 @@ public class RuleExecutorService {
 
     private Alarm enrichAlarm(Alarm alarm) {
         RestTemplate restTemplate = restTemplateBuilder.build();
-        String url = "http://threatintelligence:8085/alarms";
+        String url = "http://threatintelligence:8080/alarms";
         RequestEntity<Alarm> requestEntity = RequestEntity.post(url).body(alarm);
         IOC ioc;
         try {

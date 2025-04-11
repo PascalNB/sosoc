@@ -5,74 +5,94 @@ services:
       context: ./alertnotify
       dockerfile: ./Dockerfile
     image: alertnotify:latest
+    expose:
+      - '8080'
     environment:
       - SPRING_MAIL_HOST=${SPRING_MAIL_HOST}
       - SPRING_MAIL_PORT=${SPRING_MAIL_PORT}
       - SPRING_MAIL_PASSWORD=${SPRING_MAIL_PASSWORD}
       - SPRING_MAIL_USERNAME=${SPRING_MAIL_USERNAME}
+
   automatedresponse:
     container_name: automatedresponse
     build:
       context: ./automatedresponse
       dockerfile: ./Dockerfile
     image: automatedresponse:latest
+
   identitymanagement:
     container_name: identitymanagement
     build:
       context: ./identitymanagement
       dockerfile: ./Dockerfile
     image: identitymanagement:latest
-    ports:
-      - '8082:8082'
+    expose:
+      - '8080'
     depends_on:
       sosoc-db:
         condition: service_healthy
         restart: true
+
   logmonitor:
     container_name: logmonitor
     build:
       context: ./logmonitor
       dockerfile: ./Dockerfile
     image: logmonitor:latest
-    ports:
-      - '8083:8083'
+    expose:
+      - '8080'
     depends_on:
       sosoc-db:
         condition: service_healthy
         restart: true
+
   playbookmanagement:
     container_name: playbookmanagement
     build:
       context: ./playbookmanagement
       dockerfile: ./Dockerfile
     image: playbookmanagement:latest
-    ports:
-      - '8084:8084'
+    expose:
+      - '8080'
     depends_on:
       sosoc-db:
         condition: service_healthy
         restart: true
+
   threatintelligence:
     container_name: threatintelligence
     build:
       context: ./threatintelligence
       dockerfile: ./Dockerfile
     image: threatintelligence:latest
-    ports:
-      - '8085:8085'
+    expose:
+      - '8080'
     depends_on:
       sosoc-db:
         condition: service_healthy
         restart: true
+
+  userinterface:
+    container_name: userinterface
+    build:
+      context: ./userinterface
+      dockerfile: ./Dockerfile
+    image: userinterface:latest
+    ports:
+      - '8080:8080'
+
   sosoc-mq:
     container_name: sosoc-mq
     image: rmohr/activemq:latest
-    ports:
-      - "61616:61616"
-      - "8161:8161"
+    expose:
+      - '61616'
+      - '8161'
+
   sosoc-db:
     container_name: sosoc-db
     image: postgres:latest
+    expose:
+      - '5432'
     restart: always
     environment:
       - POSTGRES_USER=admin
@@ -80,10 +100,8 @@ services:
     volumes:
       - ../postgres_data:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    ports:
-      - "5432:5432"
     healthcheck:
-      test: ["CMD-SHELL", "psql -U $${POSTGRES_USER} -c 'SELECT 1' || exit 1"]
+      test: [ "CMD-SHELL", "psql -U $${POSTGRES_USER} -c 'SELECT 1' || exit 1" ]
       interval: 10s
       retries: 10
       start_period: 20s
