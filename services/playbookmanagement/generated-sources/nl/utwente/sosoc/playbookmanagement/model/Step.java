@@ -25,14 +25,14 @@ import jakarta.annotation.Generated;
  * Step
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T15:54:56.017508600+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T16:31:13.226633300+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 public class Step {
 
-  private @Nullable String action;
+  private String action;
 
   private @Nullable UUID id;
 
-  private @Nullable String name;
+  private String name;
 
   @Valid
   private List<@Valid ConditionalNext> next = new ArrayList<>();
@@ -72,7 +72,21 @@ public class Step {
     }
   }
 
-  private @Nullable TypeEnum type;
+  private TypeEnum type;
+
+  public Step() {
+    super();
+  }
+
+  /**
+   * Constructor with only required parameters
+   */
+  public Step(String action, String name, List<@Valid ConditionalNext> next, TypeEnum type) {
+    this.action = action;
+    this.name = name;
+    this.next = next;
+    this.type = type;
+  }
 
   public Step action(String action) {
     this.action = action;
@@ -83,8 +97,8 @@ public class Step {
    * Get action
    * @return action
    */
-  
-  @Schema(name = "action", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "action", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("action")
   public String getAction() {
     return action;
@@ -123,8 +137,8 @@ public class Step {
    * Get name
    * @return name
    */
-  
-  @Schema(name = "name", example = "await analyst confirmation", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "name", example = "await analyst confirmation", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("name")
   public String getName() {
     return name;
@@ -151,8 +165,8 @@ public class Step {
    * Get next
    * @return next
    */
-  @Valid 
-  @Schema(name = "next", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull @Valid 
+  @Schema(name = "next", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("next")
   public List<@Valid ConditionalNext> getNext() {
     return next;
@@ -171,8 +185,8 @@ public class Step {
    * Get type
    * @return type
    */
-  
-  @Schema(name = "type", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "type", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("type")
   public TypeEnum getType() {
     return type;

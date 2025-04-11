@@ -54,7 +54,7 @@ public class DefaultController {
     }
 
     private <T> List<T> retrieveAll(Class<T> type, String uri) throws JsonProcessingException {
-        RestTemplate restTemplate = restTemplateBuilder.rootUri("http://localhost:" + port).build();
+        RestTemplate restTemplate = restTemplateBuilder.rootUri("http://gateway:" + port).build();
         String json = restTemplate.getForObject(uri, String.class);
         return objectMapper.readerForListOf(type).readValue(json);
     }

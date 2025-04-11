@@ -6,25 +6,25 @@ components:
         id:
           type: string
           format: uuid
-          nullable: false
         timestamp:
           type: string
           format: date-time
-          nullable: false
         threat:
           $ref: '#/components/schemas/Threat'
-          nullable: false
         rule:
           $ref: './rules.yaml#/components/schemas/Rule'
-          nullable: false
         data:
           type: object
           additionalProperties: true
-          nullable: false
         ioc:
           type: object
           $ref: './iocs.yaml#/components/schemas/IOC'
-          nullable: true
+      required:
+        - id
+        - timestamp
+        - threat
+        - rule
+        - data
     Severity:
       type: string
       enum:
@@ -38,15 +38,14 @@ components:
         code:
           type: string
           example: phishing
-          nullable: false
         severity:
           $ref: '#/components/schemas/Severity'
-          nullable: false
         tactic:
           type: string
           example: ta0001
-          nullable: true
         technique:
           type: string
           example: t1566.001
-          nullable: true
+      required:
+        - code
+        - severity

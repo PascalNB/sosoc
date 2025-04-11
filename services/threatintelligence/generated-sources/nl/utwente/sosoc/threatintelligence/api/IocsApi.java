@@ -33,7 +33,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T15:54:58.629416100+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T16:31:16.059063900+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 @Validated
 @Tag(name = "iocs", description = "the iocs API")
 public interface IocsApi {

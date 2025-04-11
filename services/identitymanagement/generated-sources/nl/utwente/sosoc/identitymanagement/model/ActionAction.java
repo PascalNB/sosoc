@@ -23,13 +23,25 @@ import jakarta.annotation.Generated;
  */
 
 @JsonTypeName("Action_action")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T15:54:50.960313800+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T16:31:07.134605400+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 public class ActionAction {
 
-  private @Nullable String code;
+  private String code;
 
   @Valid
   private Map<String, Object> data = new HashMap<>();
+
+  public ActionAction() {
+    super();
+  }
+
+  /**
+   * Constructor with only required parameters
+   */
+  public ActionAction(String code, Map<String, Object> data) {
+    this.code = code;
+    this.data = data;
+  }
 
   public ActionAction code(String code) {
     this.code = code;
@@ -40,8 +52,8 @@ public class ActionAction {
    * Get code
    * @return code
    */
-  
-  @Schema(name = "code", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "code", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("code")
   public String getCode() {
     return code;
@@ -68,8 +80,8 @@ public class ActionAction {
    * Get data
    * @return data
    */
-  
-  @Schema(name = "data", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "data", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("data")
   public Map<String, Object> getData() {
     return data;

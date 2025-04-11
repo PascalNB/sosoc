@@ -6,12 +6,12 @@ components:
         id:
           type: string
           format: uuid
-          nullable: false
         threat:
           $ref: './alarms.yaml#/components/schemas/Threat'
-          nullable: false
         match:
           type: string
           format: SpEL
-          nullable: false
           example: Data['email']['source'].contains('malicious.com')
+      required:
+        - threat
+        - match

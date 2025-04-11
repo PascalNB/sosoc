@@ -10,8 +10,12 @@ components:
           properties:
             code:
               type: string
-              nullable: false
             data:
               type: object
               additionalProperties: true
-              nullable: false
+          required:
+            - code
+            - data
+      required:
+        - user
+        - action

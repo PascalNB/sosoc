@@ -25,7 +25,7 @@ import jakarta.annotation.Generated;
  * Rule
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T15:54:58.629416100+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T16:31:16.059063900+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 public class Rule {
 
   @Valid
@@ -35,15 +35,32 @@ public class Rule {
 
   private @Nullable UUID id;
 
-  private @Nullable String interval;
+  private String interval;
 
-  private @Nullable String name;
+  private String name;
 
-  private @Nullable String query;
+  private String query;
 
-  private @Nullable Threat threat;
+  private Threat threat;
 
   private Integer threshold = null;
+
+  public Rule() {
+    super();
+  }
+
+  /**
+   * Constructor with only required parameters
+   */
+  public Rule(List<@Valid RuleFieldsInner> fields, Integer group, String interval, String name, String query, Threat threat, Integer threshold) {
+    this.fields = fields;
+    this.group = group;
+    this.interval = interval;
+    this.name = name;
+    this.query = query;
+    this.threat = threat;
+    this.threshold = threshold;
+  }
 
   public Rule fields(List<@Valid RuleFieldsInner> fields) {
     this.fields = fields;
@@ -62,8 +79,8 @@ public class Rule {
    * Get fields
    * @return fields
    */
-  @Valid 
-  @Schema(name = "fields", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull @Valid 
+  @Schema(name = "fields", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("fields")
   public List<@Valid RuleFieldsInner> getFields() {
     return fields;
@@ -82,8 +99,8 @@ public class Rule {
    * Get group
    * @return group
    */
-  
-  @Schema(name = "group", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "group", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("group")
   public Integer getGroup() {
     return group;
@@ -122,8 +139,8 @@ public class Rule {
    * Get interval
    * @return interval
    */
-  
-  @Schema(name = "interval", example = "*_/5 * * * *", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "interval", example = "*_/5 * * * *", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("interval")
   public String getInterval() {
     return interval;
@@ -142,8 +159,8 @@ public class Rule {
    * Get name
    * @return name
    */
-  
-  @Schema(name = "name", example = "external email", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "name", example = "external email", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("name")
   public String getName() {
     return name;
@@ -162,8 +179,8 @@ public class Rule {
    * Get query
    * @return query
    */
-  
-  @Schema(name = "query", example = "SELECT * FROM logs WHERE type='email-received' AND data->'email'->>'source' NOT LIKE '%example.com' AND timestamp >= NOW() - INTERVAL '5 minutes'; ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "query", example = "SELECT * FROM logs WHERE type='email-received' AND data->'email'->>'source' NOT LIKE '%example.com' AND timestamp >= NOW() - INTERVAL '5 minutes'; ", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("query")
   public String getQuery() {
     return query;
@@ -182,8 +199,8 @@ public class Rule {
    * Get threat
    * @return threat
    */
-  @Valid 
-  @Schema(name = "threat", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull @Valid 
+  @Schema(name = "threat", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("threat")
   public Threat getThreat() {
     return threat;
@@ -202,8 +219,8 @@ public class Rule {
    * Get threshold
    * @return threshold
    */
-  
-  @Schema(name = "threshold", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "threshold", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("threshold")
   public Integer getThreshold() {
     return threshold;

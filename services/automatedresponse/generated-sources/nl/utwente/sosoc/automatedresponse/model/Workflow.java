@@ -22,16 +22,29 @@ import jakarta.annotation.Generated;
  * Workflow
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T15:54:48.476034900+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T16:31:03.872441400+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 public class Workflow {
 
-  private @Nullable Alarm alarm;
+  private Alarm alarm;
 
-  private @Nullable UUID id;
+  private UUID id;
 
   private @Nullable UUID nextStep;
 
-  private @Nullable Playbook playbook;
+  private Playbook playbook;
+
+  public Workflow() {
+    super();
+  }
+
+  /**
+   * Constructor with only required parameters
+   */
+  public Workflow(Alarm alarm, UUID id, Playbook playbook) {
+    this.alarm = alarm;
+    this.id = id;
+    this.playbook = playbook;
+  }
 
   public Workflow alarm(Alarm alarm) {
     this.alarm = alarm;
@@ -42,8 +55,8 @@ public class Workflow {
    * Get alarm
    * @return alarm
    */
-  @Valid 
-  @Schema(name = "alarm", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull @Valid 
+  @Schema(name = "alarm", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("alarm")
   public Alarm getAlarm() {
     return alarm;
@@ -62,8 +75,8 @@ public class Workflow {
    * Get id
    * @return id
    */
-  @Valid 
-  @Schema(name = "id", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull @Valid 
+  @Schema(name = "id", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("id")
   public UUID getId() {
     return id;
@@ -102,8 +115,8 @@ public class Workflow {
    * Get playbook
    * @return playbook
    */
-  @Valid 
-  @Schema(name = "playbook", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull @Valid 
+  @Schema(name = "playbook", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("playbook")
   public Playbook getPlaybook() {
     return playbook;

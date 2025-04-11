@@ -20,12 +20,24 @@ import jakarta.annotation.Generated;
  * ConditionalNext
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T15:54:45.082297400+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T16:31:00.055928600+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 public class ConditionalNext {
 
-  private @Nullable String condition;
+  private String condition;
 
-  private @Nullable UUID next;
+  private UUID next;
+
+  public ConditionalNext() {
+    super();
+  }
+
+  /**
+   * Constructor with only required parameters
+   */
+  public ConditionalNext(String condition, UUID next) {
+    this.condition = condition;
+    this.next = next;
+  }
 
   public ConditionalNext condition(String condition) {
     this.condition = condition;
@@ -36,8 +48,8 @@ public class ConditionalNext {
    * Get condition
    * @return condition
    */
-  
-  @Schema(name = "condition", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "condition", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("condition")
   public String getCondition() {
     return condition;
@@ -56,8 +68,8 @@ public class ConditionalNext {
    * Get next
    * @return next
    */
-  @Valid 
-  @Schema(name = "next", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull @Valid 
+  @Schema(name = "next", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("next")
   public UUID getNext() {
     return next;

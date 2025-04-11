@@ -6,19 +6,18 @@ components:
         id:
           type: string
           format: uuid
-          nullable: false
         timestamp:
           type: string
           format: date-time
-          nullable: false
         event:
           type: string
           example: email-received
-          nullable: false
         endpoint:
           $ref: './endpoints.yaml#/components/schemas/Endpoint'
-          nullable: false
         data:
           type: object
           additionalProperties: true
-          nullable: false
+      required:
+        - event
+        - endpoint
+        - data

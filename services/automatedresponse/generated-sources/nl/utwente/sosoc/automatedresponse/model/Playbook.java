@@ -24,21 +24,36 @@ import jakarta.annotation.Generated;
  * Playbook
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T15:54:48.476034900+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T16:31:03.872441400+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 public class Playbook {
 
-  private @Nullable String description;
+  private String description;
 
-  private @Nullable UUID firstStep;
+  private UUID firstStep;
 
   private @Nullable UUID id;
 
-  private @Nullable String name;
+  private String name;
 
   @Valid
   private List<@Valid Step> steps = new ArrayList<>();
 
-  private @Nullable String trigger;
+  private String trigger;
+
+  public Playbook() {
+    super();
+  }
+
+  /**
+   * Constructor with only required parameters
+   */
+  public Playbook(String description, UUID firstStep, String name, List<@Valid Step> steps, String trigger) {
+    this.description = description;
+    this.firstStep = firstStep;
+    this.name = name;
+    this.steps = steps;
+    this.trigger = trigger;
+  }
 
   public Playbook description(String description) {
     this.description = description;
@@ -49,8 +64,8 @@ public class Playbook {
    * Get description
    * @return description
    */
-  
-  @Schema(name = "description", example = "quarantines endpoint", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "description", example = "quarantines endpoint", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("description")
   public String getDescription() {
     return description;
@@ -69,8 +84,8 @@ public class Playbook {
    * Get firstStep
    * @return firstStep
    */
-  @Valid 
-  @Schema(name = "firstStep", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull @Valid 
+  @Schema(name = "firstStep", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("firstStep")
   public UUID getFirstStep() {
     return firstStep;
@@ -109,8 +124,8 @@ public class Playbook {
    * Get name
    * @return name
    */
-  
-  @Schema(name = "name", example = "phishing email", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "name", example = "phishing email", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("name")
   public String getName() {
     return name;
@@ -137,8 +152,8 @@ public class Playbook {
    * Get steps
    * @return steps
    */
-  @Valid @Size(min = 1) 
-  @Schema(name = "steps", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull @Valid @Size(min = 1) 
+  @Schema(name = "steps", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("steps")
   public List<@Valid Step> getSteps() {
     return steps;
@@ -157,8 +172,8 @@ public class Playbook {
    * Get trigger
    * @return trigger
    */
-  
-  @Schema(name = "trigger", example = "Threat.Code == 'phishing'", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "trigger", example = "Threat.Code == 'phishing'", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("trigger")
   public String getTrigger() {
     return trigger;
