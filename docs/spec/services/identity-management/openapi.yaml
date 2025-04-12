@@ -85,18 +85,3 @@ paths:
       responses:
         '200':
           description: OK
-  /actions:
-    post:
-      operationId: postAction
-      tags:
-        - actions
-      summary: Create a new action
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '../../common-schemas/actions.yaml#/components/schemas/Action'
-        required: true
-      responses:
-        '200':
-          description: OK
