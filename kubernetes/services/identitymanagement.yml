@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: identitymanagement
+  namespace: soa-project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: identitymanagement
+  template:
+    metadata:
+      labels:
+        app: identitymanagement
+    spec:
+      containers:
+        - name: identitymanagement
+          image: identitymanagement:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: identitymanagement
+spec:
+  selector:
+    app: identitymanagement
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
