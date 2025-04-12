@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sosoc-db
+  namespace: soa-project
+spec:
+  selector:
+    app: sosoc-db
+  ports:
+    - port: 5432
+      targetPort: 5432
+  type: ClusterIP

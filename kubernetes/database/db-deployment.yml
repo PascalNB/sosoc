@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sosoc-db
+  namespace: soa-project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sosoc-db
+  template:
+    metadata:
+      labels:
+        app: sosoc-db
+    spec:
+      containers:
+        - name: sosoc-db
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: admin
+            - name: POSTGRES_PASSWORD
+              value: admin
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-storage
+            - mountPath: /docker-entrypoint-initdb.d/init.sql
+              subPath: init.sql
+              name: postgres-init-script
+          readinessProbe:
+            exec:
+              command:
+                - psql
+                - -U
+                - admin
+                - -c
+                - SELECT 1
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 10
+      volumes:
+        - name: postgres-storage
+          persistentVolumeClaim:
+            claimName: postgres-pvc
+        - name: postgres-init-script
+          configMap:
+            name: sosoc-db-init-sql
