@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sosoc-db-init-sql
+  namespace: soa-project
+data:
+  init.sql: |
+    CREATE DATABASE logmonitor;
+    CREATE DATABASE playbookmanagement;
+    CREATE DATABASE identitymanagement;
+    CREATE DATABASE threatintelligence;
