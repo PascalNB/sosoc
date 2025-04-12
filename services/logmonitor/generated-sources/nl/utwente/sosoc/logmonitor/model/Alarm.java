@@ -27,7 +27,7 @@ import jakarta.annotation.Generated;
  * Alarm
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T16:31:10.074879100+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-12T04:03:28.164520700+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 public class Alarm {
 
   @Valid

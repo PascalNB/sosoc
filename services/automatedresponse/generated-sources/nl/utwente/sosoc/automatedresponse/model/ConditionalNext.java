@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import java.util.UUID;
 import org.springframework.lang.Nullable;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
@@ -20,12 +19,12 @@ import jakarta.annotation.Generated;
  * ConditionalNext
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T16:31:03.872441400+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-12T01:46:58.689696100+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 public class ConditionalNext {
 
   private String condition;
 
-  private UUID next;
+  private String name;
 
   public ConditionalNext() {
     super();
@@ -34,9 +33,9 @@ public class ConditionalNext {
   /**
    * Constructor with only required parameters
    */
-  public ConditionalNext(String condition, UUID next) {
+  public ConditionalNext(String condition, String name) {
     this.condition = condition;
-    this.next = next;
+    this.name = name;
   }
 
   public ConditionalNext condition(String condition) {
@@ -59,24 +58,24 @@ public class ConditionalNext {
     this.condition = condition;
   }
 
-  public ConditionalNext next(UUID next) {
-    this.next = next;
+  public ConditionalNext name(String name) {
+    this.name = name;
     return this;
   }
 
   /**
-   * Get next
-   * @return next
+   * Get name
+   * @return name
    */
-  @NotNull @Valid 
-  @Schema(name = "next", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("next")
-  public UUID getNext() {
-    return next;
+  @NotNull 
+  @Schema(name = "name", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("name")
+  public String getName() {
+    return name;
   }
 
-  public void setNext(UUID next) {
-    this.next = next;
+  public void setName(String name) {
+    this.name = name;
   }
 
   @Override
@@ -89,12 +88,12 @@ public class ConditionalNext {
     }
     ConditionalNext conditionalNext = (ConditionalNext) o;
     return Objects.equals(this.condition, conditionalNext.condition) &&
-        Objects.equals(this.next, conditionalNext.next);
+        Objects.equals(this.name, conditionalNext.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(condition, next);
+    return Objects.hash(condition, name);
   }
 
   @Override
@@ -102,7 +101,7 @@ public class ConditionalNext {
     StringBuilder sb = new StringBuilder();
     sb.append("class ConditionalNext {\n");
     sb.append("    condition: ").append(toIndentedString(condition)).append("\n");
-    sb.append("    next: ").append(toIndentedString(next)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("}");
     return sb.toString();
   }

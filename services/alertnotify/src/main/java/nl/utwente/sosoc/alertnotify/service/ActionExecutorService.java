@@ -20,7 +20,17 @@ public class ActionExecutorService {
     @Autowired private ObjectMapper objectMapper;
     @Autowired private TemplateEngine templateEngine;
 
-    public void notify(String[] action, Alarm alarm) {
+    public void execute(String[] action, Alarm alarm) {
+        if (action == null || action.length == 0) {
+            return;
+        }
+        switch (action[0]) {
+            case "notify" -> notify(action, alarm);
+            default -> {}
+        }
+    }
+
+    private void notify(String[] action, Alarm alarm) {
         String role = action[1];
         List<User> users;
         try {

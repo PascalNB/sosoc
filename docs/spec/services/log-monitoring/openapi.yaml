@@ -4,7 +4,7 @@ info:
   description: Receives logs from endpoints and responds based on automated detection rules.
   version: 1.0.0
 servers:
-  - url: 'http://localhost:8083'
+  - url: 'localhost'
 paths:
   /logs:
     get:
@@ -12,6 +12,13 @@ paths:
       tags:
         - logs
       summary: Get all log entries
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: The maximum amount of logs returned
+          required: false
       responses:
         '200':
           description: OK

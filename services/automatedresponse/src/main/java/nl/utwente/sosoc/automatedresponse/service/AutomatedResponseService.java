@@ -5,30 +5,26 @@ import nl.utwente.sosoc.automatedresponse.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class AutomatedResponseService {
 
     @Autowired private WorkflowsProducer workflowsProducer;
 
-    private Optional<Step> getStep(Workflow workflow, UUID stepId) {
-        return Objects.requireNonNull(workflow.getPlaybook())
-            .getSteps().stream()
-            .filter(step -> Objects.equals(stepId, step.getId()))
-            .findFirst();
+    private Map<String, Step> getSteps(Workflow workflow) {
+        return Objects.requireNonNull(workflow.getPlaybook()).getSteps().stream()
+            .collect(Collectors.toMap(Step::getName, step -> step));
     }
 
     public void execute(Workflow workflow) {
-        UUID nextStepId = workflow.getNextStep();
-        Optional<Step> currentStep = getStep(workflow, nextStepId);
-        if (currentStep.isEmpty()) {
+        String currentStepName = workflow.getNextStep();
+        Map<String, Step> steps = getSteps(workflow);
+        Step step = steps.get(currentStepName);
+        if (step == null) {
             return;
         }
-        Step step = currentStep.get();
         List<ConditionalNext> nextSteps = step.getNext();
 
         String action = step.getAction();
@@ -42,22 +38,35 @@ public class AutomatedResponseService {
 
         Step nextStep;
         if (nextSteps.size() == 1) {
-            nextStep = getStep(workflow, nextSteps.get(0).getNext()).orElseThrow();
+            nextStep = steps.get(nextSteps.getFirst().getName());
         } else {
             Severity severity = workflow.getAlarm().getThreat().getSeverity();
             // find step that matches severity
-            nextStep = getStep(
-                workflow, nextSteps.stream()
-                    .filter(conditionalStep ->
-                        severity.equals(Severity.fromValue(conditionalStep.getCondition()))
-                    )
+            Optional<String> candidateStepName = nextSteps.stream()
+                .filter(conditionalStep ->
+                    severity.equals(Severity.fromValue(conditionalStep.getCondition()))
+                )
+                .map(ConditionalNext::getName)
+                .findFirst();
+            if (candidateStepName.isPresent()) {
+                nextStep = steps.get(candidateStepName.get());
+            } else {
+                // find default step
+                nextStep = nextSteps.stream()
+                    .filter(conditionalStep -> "default".equals(conditionalStep.getCondition()))
+                    .map(ConditionalNext::getName)
                     .findFirst()
-                    .orElseThrow()
-                    .getNext()
-            ).orElseThrow();
+                    .map(steps::get)
+                    .orElse(null);
+            }
         }
 
-        workflow.nextStep(nextStep.getId());
+        if (nextStep == null) {
+            System.out.println("Workflow " + workflow.getId() + " ended: next step not found");
+            return;
+        }
+
+        workflow.nextStep(nextStep.getName());
 
         if (Step.TypeEnum.AUTO.equals(nextStep.getType())) {
             workflowsProducer.send("workflow.auto", workflow);

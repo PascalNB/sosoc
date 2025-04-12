@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 import nl.utwente.sosoc.automatedresponse.model.ConditionalNext;
 import org.springframework.lang.Nullable;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -25,12 +24,10 @@ import jakarta.annotation.Generated;
  * Step
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T16:31:03.872441400+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-12T01:46:58.689696100+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 public class Step {
 
   private String action;
-
-  private @Nullable UUID id;
 
   private String name;
 
@@ -106,26 +103,6 @@ public class Step {
 
   public void setAction(String action) {
     this.action = action;
-  }
-
-  public Step id(UUID id) {
-    this.id = id;
-    return this;
-  }
-
-  /**
-   * Get id
-   * @return id
-   */
-  @Valid 
-  @Schema(name = "id", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("id")
-  public UUID getId() {
-    return id;
-  }
-
-  public void setId(UUID id) {
-    this.id = id;
   }
 
   public Step name(String name) {
@@ -206,7 +183,6 @@ public class Step {
     }
     Step step = (Step) o;
     return Objects.equals(this.action, step.action) &&
-        Objects.equals(this.id, step.id) &&
         Objects.equals(this.name, step.name) &&
         Objects.equals(this.next, step.next) &&
         Objects.equals(this.type, step.type);
@@ -214,7 +190,7 @@ public class Step {
 
   @Override
   public int hashCode() {
-    return Objects.hash(action, id, name, next, type);
+    return Objects.hash(action, name, next, type);
   }
 
   @Override
@@ -222,7 +198,6 @@ public class Step {
     StringBuilder sb = new StringBuilder();
     sb.append("class Step {\n");
     sb.append("    action: ").append(toIndentedString(action)).append("\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    next: ").append(toIndentedString(next)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");

@@ -30,12 +30,12 @@
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a href="/" class="nav-link">Playbooks</a>
+                    <a href="/playbooks" class="nav-link">Playbooks</a>
                 </li>
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a href="/" class="nav-link">IOCs</a>
+                    <a href="/iocs" class="nav-link">IOCs</a>
                 </li>
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0">
@@ -43,11 +43,17 @@
                     <a href="/users" class="nav-link active">Users</a>
                 </li>
             </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="/logs" class="nav-link">Logs</a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
 <div class="container">
     <h1 class="mt-5">Manage Users</h1>
+    <hr>
 
     <!-- Form to create a new rule -->
     <form class="mt-4">
@@ -94,7 +100,7 @@
                 </div>
             </div>
         </div>
-        <button type="button" onclick="submitRule();" class="btn btn-primary mt-3">Create User</button>
+        <button type="button" onclick="submitUser();" class="btn btn-primary mt-3">Create User</button>
     </form>
 
     <hr>
@@ -166,7 +172,7 @@
         document.getElementById('endpoint-data-' + id).remove();
     }
 
-    function submitRule() {
+    function submitUser() {
         const endpointDataElements = document.getElementsByClassName('endpoint-data');
         const endpointsData = []
         for (let endpoint of endpointDataElements) {
@@ -200,8 +206,7 @@
                 console.error('Error:', error);
             })
             .then(data => {
-                console.log('Rule created:', data);
-                // Optionally, reload the page or update the rule list dynamically
+                console.log('User created:', data);
                 window.location.reload();
             });
     }

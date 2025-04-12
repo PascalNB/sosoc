@@ -22,14 +22,14 @@ import jakarta.annotation.Generated;
  * Workflow
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T16:31:03.872441400+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-12T01:46:58.689696100+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 public class Workflow {
 
   private Alarm alarm;
 
   private UUID id;
 
-  private @Nullable UUID nextStep;
+  private @Nullable String nextStep;
 
   private Playbook playbook;
 
@@ -86,7 +86,7 @@ public class Workflow {
     this.id = id;
   }
 
-  public Workflow nextStep(UUID nextStep) {
+  public Workflow nextStep(String nextStep) {
     this.nextStep = nextStep;
     return this;
   }
@@ -95,14 +95,14 @@ public class Workflow {
    * Get nextStep
    * @return nextStep
    */
-  @Valid 
+  
   @Schema(name = "nextStep", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("nextStep")
-  public UUID getNextStep() {
+  public String getNextStep() {
     return nextStep;
   }
 
-  public void setNextStep(UUID nextStep) {
+  public void setNextStep(String nextStep) {
     this.nextStep = nextStep;
   }
 

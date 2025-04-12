@@ -20,7 +20,6 @@ public class UserInterfaceConfiguration {
 
     @Bean
     public RestTemplateBuilder restTemplateBuilder() {
-        // @RestTemplateAutoConfiguration does not work with webflux
         return new RestTemplateBuilder();
     }
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOSOC</title>
+    <title>View Logs</title>
     <!--suppress JSUnresolvedLibraryURL -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" type='text/css'>
     <!--suppress JSUnresolvedLibraryURL -->
@@ -20,7 +20,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a href="/" class="nav-link active">Home</a>
+                    <a href="/" class="nav-link">Home</a>
                 </li>
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0">
@@ -45,15 +45,48 @@
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a href="/logs" class="nav-link">Logs</a>
+                    <a href="/logs" class="nav-link active">Logs</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 <div class="container">
-    <h1 class="mt-5">Alerts</h1>
-    TODO
+    <h1 class="mt-5">View Logs</h1>
+    <hr>
+    <h5 class="mt-2">Last 100:</h5>
+    <hr>
+    <table class="table mt-3">
+        <thead>
+        <tr>
+            <th>Time</th>
+            <th>Event</th>
+            <th>Endpoint</th>
+            <th>Data</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="log : ${logs}">
+            <td th:text="${log.time()}"></td>
+            <td th:text="${log.event()}"></td>
+            <td>
+                <table class="table">
+                    <tr>
+                        <th>Name</th>
+                        <th>IP</th>
+                        <th>Host</th>
+                    </tr>
+                    <tr>
+                        <td th:text="${log.endpoint().name}"></td>
+                        <td th:text="${log.endpoint().ip}"></td>
+                        <td th:text="${log.endpoint().host}"></td>
+                    </tr>
+                </table>
+            </td>
+            <td th:text="${log.data()}"></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

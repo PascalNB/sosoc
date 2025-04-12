@@ -31,7 +31,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T16:31:18.596481600+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-12T03:55:38.149133400+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 @Validated
 @Tag(name = "Default", description = "the Default API")
 public interface DefaultApi {
@@ -99,6 +99,35 @@ public interface DefaultApi {
 
 
     /**
+     * GET /logs
+     * Retrieves the HTML page to view logs
+     *
+     * @return OK (status code 200)
+     */
+    @Operation(
+        operationId = "getLogsPage",
+        description = "Retrieves the HTML page to view logs",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "OK", content = {
+                @Content(mediaType = "text/html", schema = @Schema(implementation = String.class))
+            })
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/logs",
+        produces = { "text/html" }
+    )
+    
+    default ResponseEntity<String> getLogsPage(
+        
+    ) {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
      * GET /playbooks
      * Retrieves the HTML page to manage playbooks
      *
@@ -129,13 +158,13 @@ public interface DefaultApi {
 
     /**
      * GET /rules
-     * Retrieves the HTML page to manage rules.
+     * Retrieves the HTML page to manage rules
      *
      * @return OK (status code 200)
      */
     @Operation(
         operationId = "getRulesPage",
-        description = "Retrieves the HTML page to manage rules.",
+        description = "Retrieves the HTML page to manage rules",
         responses = {
             @ApiResponse(responseCode = "200", description = "OK", content = {
                 @Content(mediaType = "text/html", schema = @Schema(implementation = String.class))

@@ -24,12 +24,12 @@ import jakarta.annotation.Generated;
  * Playbook
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T16:31:13.226633300+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-12T01:47:05.623188300+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 public class Playbook {
 
   private String description;
 
-  private UUID firstStep;
+  private String firstStep;
 
   private @Nullable UUID id;
 
@@ -47,7 +47,7 @@ public class Playbook {
   /**
    * Constructor with only required parameters
    */
-  public Playbook(String description, UUID firstStep, String name, List<@Valid Step> steps, String trigger) {
+  public Playbook(String description, String firstStep, String name, List<@Valid Step> steps, String trigger) {
     this.description = description;
     this.firstStep = firstStep;
     this.name = name;
@@ -75,7 +75,7 @@ public class Playbook {
     this.description = description;
   }
 
-  public Playbook firstStep(UUID firstStep) {
+  public Playbook firstStep(String firstStep) {
     this.firstStep = firstStep;
     return this;
   }
@@ -84,14 +84,14 @@ public class Playbook {
    * Get firstStep
    * @return firstStep
    */
-  @NotNull @Valid 
+  @NotNull 
   @Schema(name = "firstStep", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("firstStep")
-  public UUID getFirstStep() {
+  public String getFirstStep() {
     return firstStep;
   }
 
-  public void setFirstStep(UUID firstStep) {
+  public void setFirstStep(String firstStep) {
     this.firstStep = firstStep;
   }
 
