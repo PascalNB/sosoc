@@ -21,14 +21,26 @@ import jakarta.annotation.Generated;
  * IOC
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T03:18:25.223612600+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-12T04:03:28.164520700+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 public class IOC {
 
   private @Nullable UUID id;
 
-  private @Nullable String match;
+  private String match;
 
-  private @Nullable Threat threat;
+  private Threat threat;
+
+  public IOC() {
+    super();
+  }
+
+  /**
+   * Constructor with only required parameters
+   */
+  public IOC(String match, Threat threat) {
+    this.match = match;
+    this.threat = threat;
+  }
 
   public IOC id(UUID id) {
     this.id = id;
@@ -59,8 +71,8 @@ public class IOC {
    * Get match
    * @return match
    */
-  
-  @Schema(name = "match", example = "Data['email']['source'].contains('malicious.com')", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "match", example = "Data['email']['source'].contains('malicious.com')", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("match")
   public String getMatch() {
     return match;
@@ -79,8 +91,8 @@ public class IOC {
    * Get threat
    * @return threat
    */
-  @Valid 
-  @Schema(name = "threat", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull @Valid 
+  @Schema(name = "threat", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("threat")
   public Threat getThreat() {
     return threat;

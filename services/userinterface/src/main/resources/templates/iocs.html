@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage IOCs</title>
+    <!--suppress JSUnresolvedLibraryURL -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" type='text/css'>
+    <!--suppress JSUnresolvedLibraryURL -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/"><b>SOSOC</b></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Home</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="/rules" class="nav-link">Rules</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="/playbooks" class="nav-link">Playbooks</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="/iocs" class="nav-link active">IOCs</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="/users" class="nav-link">Users</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="/logs" class="nav-link">Logs</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <h1 class="mt-5">Manage IOCs</h1>
+    <hr>
+
+    <!-- Form to create a new rule -->
+    <form class="mt-4">
+        <h4>Create IOC</h4>
+        <div class="form-group row">
+            <div class="col-auto">
+                <label for="code">Code</label>
+                <input type="text" class="form-control" id="code" name="code" required>
+            </div>
+            <div class="col-auto">
+                <label for="severity">Severity</label>
+                <select class="form-control" id="severity" name="severity" required>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </div>
+            <div class="col-auto">
+                <label for="tactic">Tactic</label>
+                <input type="text" class="form-control" id="tactic" name="tactic">
+            </div>
+            <div class="col-auto">
+                <label for="technique">Technique</label>
+                <input type="text" class="form-control" id="technique" name="technique">
+            </div>
+        </div>
+        <h5 class="mt-2">Match</h5>
+        <div class="form-group row">
+            <label for="match">
+                <textarea class="form-control" id="match" name="match" required></textarea>
+            </label>
+        </div>
+        <button type="button" onclick="submitIoc();" class="btn btn-primary mt-3">Create IOC</button>
+    </form>
+
+    <hr>
+
+    <h3 class="mt-5">All IOCs</h3>
+    <table class="table mt-3">
+        <thead>
+        <tr>
+            <th>Code</th>
+            <th>Severity</th>
+            <th>Match</th>
+            <th>Tactic</th>
+            <th>Technique</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="ioc : ${iocs}">
+            <td th:text="${ioc.getThreat().code}"></td>
+            <td th:text="${ioc.getThreat().severity}"></td>
+            <td th:text="${ioc.match}"></td>
+            <td th:text="${ioc.getThreat().tactic}"></td>
+            <td th:text="${ioc.getThreat().technique}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    function submitIoc() {
+        let ta = document.getElementById('technique').value
+        let t = document.getElementById('technique').value
+        const iocData = {
+            code: document.getElementById('code').value,
+            threat: {
+                severity: document.getElementById('severity').value,
+                tactic: ta === '' ? null : ta,
+                technique: t === '' ? null : t,
+            },
+            match: document.getElementById('match').value,
+        };
+
+        console.log(iocData);
+
+        fetch('/api/iocs', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(iocData)
+        })
+            .catch((error) => {
+                console.error('Error:', error);
+            })
+            .then(data => {
+                console.log('IOC created:', data);
+                window.location.reload();
+            });
+    }
+</script>
+</body>
+</html>

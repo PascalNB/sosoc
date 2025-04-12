@@ -2,8 +2,7 @@ package nl.utwente.sosoc.userinterface.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import nl.utwente.sosoc.userinterface.model.Rule;
-import nl.utwente.sosoc.userinterface.model.User;
+import nl.utwente.sosoc.userinterface.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -53,8 +52,57 @@ public class DefaultController {
         return "rules";
     }
 
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/iocs",
+        produces = {"text/html"}
+    )
+    public String getIocsPage(Model model) throws JsonProcessingException {
+        List<IOC> iocs = retrieveAll(IOC.class, "/api/iocs");
+        model.addAttribute("iocs", iocs);
+        return "iocs";
+    }
+
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/playbooks",
+        produces = {"text/html"}
+    )
+    public String getPlaybooksPage(Model model) throws JsonProcessingException {
+        List<Playbook> playbooks = retrieveAll(Playbook.class, "/api/playbooks");
+        model.addAttribute("playbooks", playbooks);
+        return "playbooks";
+    }
+
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/logs",
+        produces = {"text/html"}
+    )
+    public String getLogsPage(Model model) throws JsonProcessingException {
+        List<LogEntry> logs = retrieveAll(LogEntry.class, "/api/logs?limit=100");
+        List<PrettyLogEntry> prettyLogs = logs.stream()
+            .map(logEntry -> {
+                String prettyData;
+                try {
+                    prettyData = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(logEntry.getData());
+                } catch (JsonProcessingException e) {
+                    prettyData = "{}";
+                }
+                return new PrettyLogEntry(
+                    logEntry.getTimestamp(),
+                    logEntry.getEvent(),
+                    logEntry.getEndpoint(),
+                    prettyData
+                );
+            })
+            .toList();
+        model.addAttribute("logs", prettyLogs);
+        return "logs";
+    }
+
     private <T> List<T> retrieveAll(Class<T> type, String uri) throws JsonProcessingException {
-        RestTemplate restTemplate = restTemplateBuilder.rootUri("http://localhost:" + port).build();
+        RestTemplate restTemplate = restTemplateBuilder.rootUri("http://gateway:" + port).build();
         String json = restTemplate.getForObject(uri, String.class);
         return objectMapper.readerForListOf(type).readValue(json);
     }

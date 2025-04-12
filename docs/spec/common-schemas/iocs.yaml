@@ -12,3 +12,6 @@ components:
           type: string
           format: SpEL
           example: Data['email']['source'].contains('malicious.com')
+      required:
+        - threat
+        - match

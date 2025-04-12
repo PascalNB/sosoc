@@ -12,5 +12,7 @@ components:
           $ref: './playbooks.yaml#/components/schemas/Playbook'
         nextStep:
           type: string
-          format: uuid
-          nullable: true
+      required:
+        - id
+        - alarm
+        - playbook

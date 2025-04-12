@@ -23,21 +23,12 @@ docker-compose -f ./services/docker-compose.yml up --build
 
 ## Functionality Testing
 
-Once all services are running, post the following JSON object to `http://localhost:8083/logs`.
-Ensure that the timestamp is the current time in RFC 3339 and note that the correct time zone has to be set.
-For example:
-```
-2025-03-28T18:03:30.553+01:00
-```
-
-You can use https://it-tools.tech/date-converter to quickly obtain the current time in the correct format.
+Once all services are running, post the following JSON object to `http://localhost:8080/api/logs`.
 
 ```json
 {
-  "timestamp": "<timestamp>",
   "event": "email-received",
   "endpoint": {
-    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
     "name": "client-1",
     "ip": "198.51.100.42",
     "host": "example.com"

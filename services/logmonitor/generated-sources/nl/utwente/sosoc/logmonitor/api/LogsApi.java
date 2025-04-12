@@ -33,7 +33,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T03:18:25.223612600+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-12T04:03:28.164520700+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 @Validated
 @Tag(name = "logs", description = "the logs API")
 public interface LogsApi {
@@ -84,6 +84,7 @@ public interface LogsApi {
     /**
      * GET /logs : Get all log entries
      *
+     * @param limit The maximum amount of logs returned (optional)
      * @return OK (status code 200)
      */
     @Operation(
@@ -103,7 +104,7 @@ public interface LogsApi {
     )
     
     default ResponseEntity<List<LogEntry>> getLogs(
-        
+        @Parameter(name = "limit", description = "The maximum amount of logs returned", in = ParameterIn.QUERY) @Valid @RequestParam(value = "limit", required = false) Integer limit
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {

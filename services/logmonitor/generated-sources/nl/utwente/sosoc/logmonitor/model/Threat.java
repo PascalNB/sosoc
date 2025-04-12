@@ -21,16 +21,28 @@ import jakarta.annotation.Generated;
  * Threat
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T03:18:25.223612600+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-12T04:03:28.164520700+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 public class Threat {
 
-  private @Nullable String code;
+  private String code;
 
-  private @Nullable Severity severity;
+  private Severity severity;
 
   private @Nullable String tactic;
 
   private @Nullable String technique;
+
+  public Threat() {
+    super();
+  }
+
+  /**
+   * Constructor with only required parameters
+   */
+  public Threat(String code, Severity severity) {
+    this.code = code;
+    this.severity = severity;
+  }
 
   public Threat code(String code) {
     this.code = code;
@@ -41,8 +53,8 @@ public class Threat {
    * Get code
    * @return code
    */
-  
-  @Schema(name = "code", example = "phishing", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "code", example = "phishing", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("code")
   public String getCode() {
     return code;
@@ -61,8 +73,8 @@ public class Threat {
    * Get severity
    * @return severity
    */
-  @Valid 
-  @Schema(name = "severity", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull @Valid 
+  @Schema(name = "severity", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("severity")
   public Severity getSeverity() {
     return severity;

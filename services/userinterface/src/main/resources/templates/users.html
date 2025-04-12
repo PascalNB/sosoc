@@ -30,12 +30,12 @@
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a href="/" class="nav-link">Playbooks</a>
+                    <a href="/playbooks" class="nav-link">Playbooks</a>
                 </li>
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a href="/" class="nav-link">IOCs</a>
+                    <a href="/iocs" class="nav-link">IOCs</a>
                 </li>
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0">
@@ -43,11 +43,17 @@
                     <a href="/users" class="nav-link active">Users</a>
                 </li>
             </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="/logs" class="nav-link">Logs</a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
 <div class="container">
     <h1 class="mt-5">Manage Users</h1>
+    <hr>
 
     <!-- Form to create a new rule -->
     <form class="mt-4">
@@ -74,12 +80,12 @@
             <div class="row row-cols-lg-auto g-3 align-items-center endpoint-data" id="endpoint-data-0">
                 <div class="col">
                     <label>
-                        <input type="text" class="form-control endpoint-name" name="endpoint-name" placeholder="name">
+                        <input type="text" class="form-control endpoint-name" name="endpoint-name" placeholder="name" required>
                     </label>
                 </div>
                 <div class="col">
                     <label>
-                        <input type="text" class="form-control endpoint-ip" name="endpoint-ip" placeholder="ip address">
+                        <input type="text" class="form-control endpoint-ip" name="endpoint-ip" placeholder="ip address" required>
                     </label>
                 </div>
                 <div class="col">
@@ -94,7 +100,7 @@
                 </div>
             </div>
         </div>
-        <button type="button" onclick="submitRule();" class="btn btn-primary mt-3">Create User</button>
+        <button type="button" onclick="submitUser();" class="btn btn-primary mt-3">Create User</button>
     </form>
 
     <hr>
@@ -143,12 +149,12 @@
         div.id = "endpoint-data-" + endpointId;
         div.innerHTML = "<div class=\"col\">" +
             `<label>` +
-            `<input type=\"text\" class=\"form-control endpoint-name\" name=\"endpoint-name\" placeholder=\"name\">` +
+            `<input type=\"text\" class=\"form-control endpoint-name\" name=\"endpoint-name\" placeholder=\"name\" required>` +
             "</label>" +
             "</div>" +
             "<div class=\"col\">" +
             "<label>" +
-            `<input type=\"text\" class=\"form-control\ endpoint-ip" name=\"endpoint-ip\" placeholder=\"ip address\">` +
+            `<input type=\"text\" class=\"form-control\ endpoint-ip" name=\"endpoint-ip\" placeholder=\"ip address\" required>` +
             "</label>" +
             "</div>" +
             "<div class=\"col\">" +
@@ -166,8 +172,8 @@
         document.getElementById('endpoint-data-' + id).remove();
     }
 
-    function submitRule() {
-        const endpointDataElements = document.getElementsByClassName('endopint-data');
+    function submitUser() {
+        const endpointDataElements = document.getElementsByClassName('endpoint-data');
         const endpointsData = []
         for (let endpoint of endpointDataElements) {
             let name = endpoint.getElementsByClassName('endpoint-name')[0].value;
@@ -176,32 +182,31 @@
             endpointsData.push({
                 name: name,
                 ip: ip,
-                host: host
+                host: host === '' ? null : host
             })
         }
 
-        const ruleData = {
+        const userData = {
             name: document.getElementById('name').value,
             email: document.getElementById('email').value,
             role: document.getElementById('role').value,
             endpoints: endpointsData
         };
 
-        console.log(ruleData);
+        console.log(userData);
 
         fetch('/api/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(ruleData)
+            body: JSON.stringify(userData)
         })
             .catch((error) => {
                 console.error('Error:', error);
             })
             .then(data => {
-                console.log('Rule created:', data);
-                // Optionally, reload the page or update the rule list dynamically
+                console.log('User created:', data);
                 window.location.reload();
             });
     }

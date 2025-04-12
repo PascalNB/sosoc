@@ -1,4 +1,4 @@
-package nl.utwente.sosoc.userinterface.configuration;
+package nl.utwente.sosoc.gateway.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.route.RouteLocator;
@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ProxyConfiguration {
+public class GatewayConfiguration {
 
     @Value("${services.logmonitor}")
     private String logmonitorUrl;
@@ -17,6 +17,8 @@ public class ProxyConfiguration {
     private String playbookmanagementUrl;
     @Value("${services.threatintelligence}")
     private String threatintelligenceUrl;
+    @Value("${services.userinterface}")
+    private String userinterfaceUrl;
 
     @Bean
     public RouteLocator customRoutes(RouteLocatorBuilder builder) {
@@ -36,6 +38,7 @@ public class ProxyConfiguration {
             .route(r -> r.path("/api/iocs/**")
                 .filters(f -> f.stripPrefix(1))
                 .uri(threatintelligenceUrl))
+            .route(r -> r.alwaysTrue().uri(userinterfaceUrl))
             .build();
     }
 

@@ -13,6 +13,7 @@
         <module name="logmonitor" />
         <module name="userinterface" />
         <module name="identitymanagement" />
+        <module name="gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -25,6 +26,7 @@
       <module name="alertnotify" options="-parameters" />
       <module name="automatedresponse" options="-parameters" />
       <module name="frontend" options="-parameters" />
+      <module name="gateway" options="-parameters" />
       <module name="identitymanagement" options="-parameters" />
       <module name="logmonitor" options="-parameters" />
       <module name="openapi-spring" options="-parameters" />

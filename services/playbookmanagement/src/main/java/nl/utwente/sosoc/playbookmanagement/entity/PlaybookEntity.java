@@ -1,8 +1,6 @@
 package nl.utwente.sosoc.playbookmanagement.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,11 +20,12 @@ import java.util.UUID;
 public class PlaybookEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String name;
     private String description;
     private String trigger;
-    private UUID firstStep;
+    private String firstStep;
     @JdbcTypeCode(SqlTypes.JSON)
     private List<Step> steps;
 

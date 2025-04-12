@@ -24,19 +24,33 @@ import jakarta.annotation.Generated;
  * User
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T03:18:32.323068900+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-12T03:55:38.149133400+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 public class User {
 
-  private @Nullable String email;
+  private String email;
 
   @Valid
   private List<@Valid Endpoint> endpoints = new ArrayList<>();
 
   private @Nullable UUID id;
 
-  private @Nullable String name;
+  private String name;
 
-  private @Nullable String role;
+  private String role;
+
+  public User() {
+    super();
+  }
+
+  /**
+   * Constructor with only required parameters
+   */
+  public User(String email, List<@Valid Endpoint> endpoints, String name, String role) {
+    this.email = email;
+    this.endpoints = endpoints;
+    this.name = name;
+    this.role = role;
+  }
 
   public User email(String email) {
     this.email = email;
@@ -47,8 +61,8 @@ public class User {
    * Get email
    * @return email
    */
-  @jakarta.validation.constraints.Email 
-  @Schema(name = "email", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull @jakarta.validation.constraints.Email 
+  @Schema(name = "email", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("email")
   public String getEmail() {
     return email;
@@ -75,8 +89,8 @@ public class User {
    * Get endpoints
    * @return endpoints
    */
-  @Valid 
-  @Schema(name = "endpoints", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull @Valid 
+  @Schema(name = "endpoints", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("endpoints")
   public List<@Valid Endpoint> getEndpoints() {
     return endpoints;
@@ -115,8 +129,8 @@ public class User {
    * Get name
    * @return name
    */
-  
-  @Schema(name = "name", example = "Firstname Lastname", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "name", example = "Firstname Lastname", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("name")
   public String getName() {
     return name;
@@ -135,8 +149,8 @@ public class User {
    * Get role
    * @return role
    */
-  
-  @Schema(name = "role", example = "analyst", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "role", example = "analyst", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("role")
   public String getRole() {
     return role;

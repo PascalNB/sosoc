@@ -25,20 +25,33 @@ import jakarta.annotation.Generated;
  * LogEntry
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T03:18:25.223612600+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-12T04:03:28.164520700+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 public class LogEntry {
 
   @Valid
   private Map<String, Object> data = new HashMap<>();
 
-  private @Nullable Endpoint endpoint;
+  private Endpoint endpoint;
 
-  private @Nullable String event;
+  private String event;
 
   private @Nullable UUID id;
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private @Nullable OffsetDateTime timestamp;
+
+  public LogEntry() {
+    super();
+  }
+
+  /**
+   * Constructor with only required parameters
+   */
+  public LogEntry(Map<String, Object> data, Endpoint endpoint, String event) {
+    this.data = data;
+    this.endpoint = endpoint;
+    this.event = event;
+  }
 
   public LogEntry data(Map<String, Object> data) {
     this.data = data;
@@ -57,8 +70,8 @@ public class LogEntry {
    * Get data
    * @return data
    */
-  
-  @Schema(name = "data", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "data", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("data")
   public Map<String, Object> getData() {
     return data;
@@ -77,8 +90,8 @@ public class LogEntry {
    * Get endpoint
    * @return endpoint
    */
-  @Valid 
-  @Schema(name = "endpoint", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull @Valid 
+  @Schema(name = "endpoint", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("endpoint")
   public Endpoint getEndpoint() {
     return endpoint;
@@ -97,8 +110,8 @@ public class LogEntry {
    * Get event
    * @return event
    */
-  
-  @Schema(name = "event", example = "email-received", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "event", example = "email-received", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("event")
   public String getEvent() {
     return event;

@@ -17,3 +17,7 @@ components:
         data:
           type: object
           additionalProperties: true
+      required:
+        - event
+        - endpoint
+        - data

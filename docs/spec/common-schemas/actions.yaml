@@ -13,3 +13,9 @@ components:
             data:
               type: object
               additionalProperties: true
+          required:
+            - code
+            - data
+      required:
+        - user
+        - action

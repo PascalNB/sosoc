@@ -6,6 +6,7 @@ import nl.utwente.sosoc.logmonitor.util.EntityMapper;
 import nl.utwente.sosoc.logmonitor.repository.LogRepository;
 import org.modelmapper.spi.DestinationSetter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,10 +30,22 @@ public class LogsController implements LogsApi {
     }
 
     @Override
-    public ResponseEntity<List<LogEntry>> getLogs() {
-        List<LogEntry> logEntries = StreamSupport.stream(logRepository.findAll().spliterator(), false)
-            .map(entityMapper.to(LogEntry.class))
-            .toList();
+    public ResponseEntity<List<LogEntry>> getLogs(Integer limit) {
+        List<LogEntry> logEntries;
+        if (limit == null) {
+            logEntries = StreamSupport.stream(logRepository.findAll().spliterator(), false)
+                .map(entityMapper.to(LogEntry.class))
+                .toList();
+        } else {
+            PageRequest pageRequest = PageRequest.of(0, limit);
+            logEntries = StreamSupport.stream(
+                    logRepository.findAllByOrderByTimestampDesc(pageRequest).spliterator(),
+                    false
+                )
+                .map(entityMapper.to(LogEntry.class))
+                .toList();
+        }
+
         return ResponseEntity.ok(logEntries);
     }
 

@@ -21,12 +21,24 @@ import jakarta.annotation.Generated;
  * Action
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T03:18:22.990415900+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-12T01:47:00.931679200+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 public class Action {
 
-  private @Nullable ActionAction action;
+  private ActionAction action;
 
-  private @Nullable User user;
+  private User user;
+
+  public Action() {
+    super();
+  }
+
+  /**
+   * Constructor with only required parameters
+   */
+  public Action(ActionAction action, User user) {
+    this.action = action;
+    this.user = user;
+  }
 
   public Action action(ActionAction action) {
     this.action = action;
@@ -37,8 +49,8 @@ public class Action {
    * Get action
    * @return action
    */
-  @Valid 
-  @Schema(name = "action", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull @Valid 
+  @Schema(name = "action", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("action")
   public ActionAction getAction() {
     return action;
@@ -57,8 +69,8 @@ public class Action {
    * Get user
    * @return user
    */
-  @Valid 
-  @Schema(name = "user", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull @Valid 
+  @Schema(name = "user", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("user")
   public User getUser() {
     return user;

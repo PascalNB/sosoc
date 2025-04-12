@@ -20,7 +20,7 @@ paths:
   /rules:
     get:
       operationId: getRulesPage
-      description: Retrieves the HTML page to manage rules.
+      description: Retrieves the HTML page to manage rules
       responses:
         "200":
           description: OK
@@ -61,6 +61,17 @@ paths:
             text/html:
               schema:
                 type: string
+  /logs:
+    get:
+      operationId: getLogsPage
+      description: Retrieves the HTML page to view logs
+      responses:
+        "200":
+          description: OK
+          content:
+            text/html:
+              schema:
+                type: string
 components:
   schemas:
     RuleInstance:
@@ -71,3 +82,5 @@ components:
       $ref: '../../common-schemas/iocs.yaml#/components/schemas/IOC'
     PlaybookInstance:
       $ref: '../../common-schemas/playbooks.yaml#/components/schemas/Playbook'
+    LogEntryInstance:
+      $ref: '../../common-schemas/logs.yaml#/components/schemas/LogEntry'

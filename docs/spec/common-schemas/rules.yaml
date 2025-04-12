@@ -38,3 +38,11 @@ components:
                 type: string
               type:
                 type: string
+      required:
+        - name
+        - interval
+        - query
+        - threshold
+        - group
+        - threat
+        - fields

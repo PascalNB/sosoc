@@ -19,3 +19,8 @@ components:
           type: array
           items:
             $ref: './endpoints.yaml#/components/schemas/Endpoint'
+      required:
+        - name
+        - email
+        - role
+        - endpoints

@@ -19,7 +19,12 @@ components:
         ioc:
           type: object
           $ref: './iocs.yaml#/components/schemas/IOC'
-          nullable: true
+      required:
+        - id
+        - timestamp
+        - threat
+        - rule
+        - data
     Severity:
       type: string
       enum:
@@ -41,3 +46,6 @@ components:
         technique:
           type: string
           example: t1566.001
+      required:
+        - code
+        - severity

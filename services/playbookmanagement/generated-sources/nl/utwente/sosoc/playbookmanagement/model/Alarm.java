@@ -27,22 +27,37 @@ import jakarta.annotation.Generated;
  * Alarm
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T03:18:27.508392900+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-12T01:47:05.623188300+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 public class Alarm {
 
   @Valid
   private Map<String, Object> data = new HashMap<>();
 
-  private @Nullable UUID id;
+  private UUID id;
 
   private @Nullable IOC ioc;
 
-  private @Nullable Rule rule;
+  private Rule rule;
 
-  private @Nullable Threat threat;
+  private Threat threat;
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-  private @Nullable OffsetDateTime timestamp;
+  private OffsetDateTime timestamp;
+
+  public Alarm() {
+    super();
+  }
+
+  /**
+   * Constructor with only required parameters
+   */
+  public Alarm(Map<String, Object> data, UUID id, Rule rule, Threat threat, OffsetDateTime timestamp) {
+    this.data = data;
+    this.id = id;
+    this.rule = rule;
+    this.threat = threat;
+    this.timestamp = timestamp;
+  }
 
   public Alarm data(Map<String, Object> data) {
     this.data = data;
@@ -61,8 +76,8 @@ public class Alarm {
    * Get data
    * @return data
    */
-  
-  @Schema(name = "data", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "data", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("data")
   public Map<String, Object> getData() {
     return data;
@@ -81,8 +96,8 @@ public class Alarm {
    * Get id
    * @return id
    */
-  @Valid 
-  @Schema(name = "id", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull @Valid 
+  @Schema(name = "id", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("id")
   public UUID getId() {
     return id;
@@ -121,8 +136,8 @@ public class Alarm {
    * Get rule
    * @return rule
    */
-  @Valid 
-  @Schema(name = "rule", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull @Valid 
+  @Schema(name = "rule", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("rule")
   public Rule getRule() {
     return rule;
@@ -141,8 +156,8 @@ public class Alarm {
    * Get threat
    * @return threat
    */
-  @Valid 
-  @Schema(name = "threat", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull @Valid 
+  @Schema(name = "threat", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("threat")
   public Threat getThreat() {
     return threat;
@@ -161,8 +176,8 @@ public class Alarm {
    * Get timestamp
    * @return timestamp
    */
-  @Valid 
-  @Schema(name = "timestamp", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull @Valid 
+  @Schema(name = "timestamp", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("timestamp")
   public OffsetDateTime getTimestamp() {
     return timestamp;

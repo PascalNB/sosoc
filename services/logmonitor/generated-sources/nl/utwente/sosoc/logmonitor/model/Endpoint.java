@@ -19,14 +19,26 @@ import jakarta.annotation.Generated;
  * Endpoint
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-11T03:18:25.223612600+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-12T04:03:28.164520700+02:00[Europe/Amsterdam]", comments = "Generator version: 7.12.0")
 public class Endpoint {
 
   private @Nullable String host;
 
-  private @Nullable String ip;
+  private String ip;
 
-  private @Nullable String name;
+  private String name;
+
+  public Endpoint() {
+    super();
+  }
+
+  /**
+   * Constructor with only required parameters
+   */
+  public Endpoint(String ip, String name) {
+    this.ip = ip;
+    this.name = name;
+  }
 
   public Endpoint host(String host) {
     this.host = host;
@@ -57,8 +69,8 @@ public class Endpoint {
    * Get ip
    * @return ip
    */
-  
-  @Schema(name = "ip", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "ip", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("ip")
   public String getIp() {
     return ip;
@@ -77,8 +89,8 @@ public class Endpoint {
    * Get name
    * @return name
    */
-  
-  @Schema(name = "name", example = "client-1", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "name", example = "client-1", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("name")
   public String getName() {
     return name;

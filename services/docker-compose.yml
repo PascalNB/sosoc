@@ -78,6 +78,15 @@ services:
       context: ./userinterface
       dockerfile: ./Dockerfile
     image: userinterface:latest
+    expose:
+      - '8080'
+
+  gateway:
+    container_name: gateway
+    build:
+      context: ./gateway
+      dockerfile: ./Dockerfile
+    image: gateway:latest
     ports:
       - '8080:8080'
 

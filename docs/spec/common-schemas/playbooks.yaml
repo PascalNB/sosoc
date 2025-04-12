@@ -18,32 +18,39 @@ components:
           example: Threat.Code == 'phishing'
         firstStep:
           type: string
-          format: uuid
         steps:
           type: array
           items:
             $ref: '#/components/schemas/Step'
           minItems: 1
+      required:
+        - name
+        - description
+        - trigger
+        - firstStep
+        - steps
     Step:
       type: object
       properties:
-        id:
+        name:
           type: string
-          format: uuid
+          example: await analyst confirmation
         type:
           type: string
           enum:
             - human
             - auto
-        name:
-          type: string
-          example: await analyst confirmation
         action:
           type: string
         next:
           type: array
           items:
             $ref: '#/components/schemas/ConditionalNext'
+      required:
+        - name
+        - type
+        - action
+        - next
     ConditionalNext:
       type: object
       properties:
@@ -52,6 +59,8 @@ components:
           examples:
             - no threat
             - high threat
-        next:
+        name:
           type: string
-          format: uuid
+      required:
+        - condition
+        - name
