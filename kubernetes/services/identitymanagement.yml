@@ -25,10 +25,10 @@ apiVersion: v1
 kind: Service
 metadata:
   name: identitymanagement
+  namespace: soa-project
 spec:
   selector:
     app: identitymanagement
-    namespace: soa-project
   ports:
     - protocol: TCP
       port: 8080

@@ -25,6 +25,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: threatintelligence
+  namespace: soa-project
 spec:
   selector:
     app: threatintelligence

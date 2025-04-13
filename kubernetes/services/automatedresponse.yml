@@ -14,6 +14,7 @@ spec:
         app: automatedresponse
     spec:
       initContainers:
+         # ToDO: wait for DB to be up for all services and remove this
         - name: wait-for-db
           image: busybox
           command:
