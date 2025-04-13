@@ -1,36 +1,36 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: playbookmanagement
+  name: gateway
   namespace: soa-project
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: playbookmanagement
+      app: gateway
   template:
     metadata:
       labels:
-        app: playbookmanagement
+        app: gateway
     spec:
       containers:
-        - name: playbookmanagement
-          image: playbookmanagement:latest
+        - name: gateway
+          image: gateway:latest
           imagePullPolicy: Never
           ports:
             - containerPort: 8080
-
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: playbookmanagement
+  name: gateway
+  namespace: soa-project
 spec:
-  # type: ToDO: loadbalancer for all
+  type: NodePort # ToDo: consider loadbalancer
   selector:
-    app: playbookmanagement
+    app: gateway
   ports:
     - protocol: TCP
       port: 8080
       targetPort: 8080
-  type: ClusterIP
+      nodePort: 30080
