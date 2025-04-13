@@ -28,6 +28,7 @@ metadata:
 spec:
   selector:
     app: identitymanagement
+    namespace: soa-project
   ports:
     - protocol: TCP
       port: 8080
