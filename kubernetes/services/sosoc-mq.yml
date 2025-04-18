@@ -1,9 +1,10 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: sosoc-mq
   namespace: soa-project
 spec:
+  serviceName: sosoc-mq-headless
   replicas: 1
   selector:
     matchLabels:
@@ -19,14 +20,25 @@ spec:
           ports:
             - containerPort: 61616
             - containerPort: 8161
+          volumeMounts:
+            - name: data
+              mountPath: /opt/activemq/data
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 1Gi
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: sosoc-mq
+  name: sosoc-mq-headless
   namespace: soa-project
 spec:
-  type: ClusterIP
+  clusterIP: None # enables DNS
   selector:
     app: sosoc-mq
   ports:
