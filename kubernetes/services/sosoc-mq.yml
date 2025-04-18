@@ -26,6 +26,7 @@ metadata:
   name: sosoc-mq
   namespace: soa-project
 spec:
+  type: ClusterIP
   selector:
     app: sosoc-mq
   ports:
@@ -35,4 +36,4 @@ spec:
     - name: web
       port: 8161
       targetPort: 8161
-  type: ClusterIP
+

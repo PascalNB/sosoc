@@ -35,11 +35,11 @@ metadata:
   name: userinterface
   namespace: soa-project
 spec:
-  # type: ToDO: loadbalancer for all
+  type: ClusterIP
   selector:
     app: userinterface
   ports:
     - protocol: TCP
       port: 8080
       targetPort: 8080
-  type: ClusterIP
+

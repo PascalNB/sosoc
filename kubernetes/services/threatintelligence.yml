@@ -13,6 +13,16 @@ spec:
       labels:
         app: threatintelligence
     spec:
+      initContainers:
+        - name: wait-for-db
+          image: busybox
+          command:
+            - sh
+            - -c
+            - |
+              until nc -z sosoc-db 5432; do
+                echo "Waiting for DB"; sleep 2; 
+              done;
       containers:
         - name: threatintelligence
           image: threatintelligence:latest
@@ -27,10 +37,11 @@ metadata:
   name: threatintelligence
   namespace: soa-project
 spec:
+  type: ClusterIP
   selector:
     app: threatintelligence
   ports:
     - protocol: TCP
       port: 8080
       targetPort: 8080
-  type: ClusterIP
+

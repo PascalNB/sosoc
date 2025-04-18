@@ -13,17 +13,6 @@ spec:
       labels:
         app: automatedresponse
     spec:
-      initContainers:
-         # ToDO: wait for DB to be up for all services and remove this
-        - name: wait-for-db
-          image: busybox
-          command:
-            - sh
-            - -c
-            - |
-              until nc -z sosoc-db 5432; do
-                echo "Waiting for DB"; sleep 2; 
-              done;
       containers:
         - name: automatedresponse
           image: automatedresponse:latest
