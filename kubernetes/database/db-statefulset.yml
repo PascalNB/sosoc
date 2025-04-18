@@ -1,9 +1,10 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: sosoc-db
   namespace: soa-project
 spec:
+  serviceName: sosoc-db
   replicas: 1
   selector:
     matchLabels:

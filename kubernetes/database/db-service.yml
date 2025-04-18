@@ -4,9 +4,10 @@ metadata:
   name: sosoc-db
   namespace: soa-project
 spec:
+  type: ClusterIP
   selector:
     app: sosoc-db
   ports:
     - port: 5432
       targetPort: 5432
-  type: ClusterIP
+

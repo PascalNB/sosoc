@@ -4,7 +4,7 @@ metadata:
   name: sosoc-mq
   namespace: soa-project
 spec:
-  serviceName: sosoc-mq-headless
+  serviceName: sosoc-mq
   replicas: 1
   selector:
     matchLabels:
@@ -27,7 +27,8 @@ spec:
     - metadata:
         name: data
       spec:
-        accessModes: [ "ReadWriteOnce" ]
+        accessModes:
+          - ReadWriteOnce
         resources:
           requests:
             storage: 1Gi
@@ -35,10 +36,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: sosoc-mq-headless
+  name: sosoc-mq
   namespace: soa-project
 spec:
-  clusterIP: None # enables DNS
+  type: ClusterIP
   selector:
     app: sosoc-mq
   ports:
