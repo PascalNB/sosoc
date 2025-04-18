@@ -98,12 +98,14 @@ public class RuleExecutorService {
         IOC ioc;
         try {
             ioc = restTemplate.postForObject(url, requestEntity, IOC.class);
-        } catch (Exception ignored) {
+        } catch (Exception ignored) { // catches 404
             ioc = null;
         }
 
         alarm.setIoc(ioc);
-        if (ioc != null) {
+        // Only set threat if IOC are found and severity higher (ordinal lower) or equal to rule threat
+        if (ioc != null
+            && ioc.getThreat().getSeverity().ordinal() <= alarm.getRule().getThreat().getSeverity().ordinal()) {
             alarm.setThreat(ioc.getThreat());
         }
         return alarm;

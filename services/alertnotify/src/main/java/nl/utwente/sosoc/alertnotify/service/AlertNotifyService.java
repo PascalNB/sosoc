@@ -1,6 +1,5 @@
 package nl.utwente.sosoc.alertnotify.service;
 
-import nl.utwente.sosoc.alertnotify.model.Alarm;
 import nl.utwente.sosoc.alertnotify.producers.WorkflowsProducer;
 import nl.utwente.sosoc.alertnotify.model.ConditionalNext;
 import nl.utwente.sosoc.alertnotify.model.Step;

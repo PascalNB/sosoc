@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 <head>
-<!--    TODO: STEP TYPES-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Playbooks</title>
@@ -90,26 +89,36 @@
                 </div>
                 <div class="col-auto">
                     <label>
+                        <select class="form-control step-type" name="type" required>
+                            <option value="auto">Auto</option>
+                            <option value="human">Human</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="col-auto">
+                    <label>
                         <input type="text" class="form-control step-action" name="step-action" placeholder="action" required>
                     </label>
                 </div>
                 <div>
-                    Next:
-                </div>
-                <div id="next-container-0">
-                    <div class="row g-2 align-items-center next-data" id="next-data-0">
-                        <div class="col-auto">
-                            <label>
-                                <input type="text" class="form-control next-condition" name="next-condition" placeholder="condition">
-                            </label>
-                        </div>
-                        <div class="col-auto">
-                            <label>
-                                <input type="text" class="form-control next-name" name="next-name" placeholder="name">
-                            </label>
-                        </div>
-                        <div class="col-auto">
-                            <button type="button" class="btn btn-outline-success" onclick="addNext(0);">Add</button>
+                    <div>
+                        Next:
+                    </div>
+                    <div id="next-container-0">
+                        <div class="row g-2 align-items-center next-data" id="next-data-0">
+                            <div class="col-auto">
+                                <label>
+                                    <input type="text" class="form-control next-condition" name="next-condition" placeholder="condition">
+                                </label>
+                            </div>
+                            <div class="col-auto">
+                                <label>
+                                    <input type="text" class="form-control next-name" name="next-name" placeholder="name">
+                                </label>
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-outline-success" onclick="addNext(0);">Add</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -194,6 +203,14 @@
                 </div>
                 <div class="col-auto">
                     <label>
+                        <select class="form-control step-type" name="type" required>
+                            <option value="auto">Auto</option>
+                            <option value="human">Human</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="col-auto">
+                    <label>
                         <input type="text" class="form-control step-action" name="step-action" placeholder="action" required>
                     </label>
                 </div>
@@ -273,6 +290,7 @@
             stepsData.push({
                 name: stepElement.getElementsByClassName("step-name")[0].value,
                 action: stepElement.getElementsByClassName("step-action")[0].value,
+                type: stepElement.getElementsByClassName("step-type")[0].value,
                 next: nextData
             })
         }
@@ -287,20 +305,20 @@
 
         console.log(playbookData);
 
-        // fetch('/api/playbooks', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(playbookData)
-        // })
-        //     .catch((error) => {
-        //         console.error('Error:', error);
-        //     })
-        //     .then(data => {
-        //         console.log('Playbook created:', data);
-        //         window.location.reload();
-        //     });
+        fetch('/api/playbooks', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(playbookData)
+        })
+            .catch((error) => {
+                console.error('Error:', error);
+            })
+            .then(data => {
+                console.log('Playbook created:', data);
+                window.location.reload();
+            });
     }
 </script>
 </body>
